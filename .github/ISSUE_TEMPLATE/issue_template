@@ -1,5 +1,5 @@
 ---
-name: '프로젝트 단위로 제목 작성 (ex: 마이페이지)'
+name: 'issue_template'
 about: 해당 이슈 템플릿을 사용하여 이슈를 생성해주세요.
 title: ''
 labels: ''
