@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@yoopta/action-menu-list": "^1.9.16-rc",
+    "@yoopta/code": "^1.9.15-rc",
     "@yoopta/editor": "^1.9.18-rc",
     "@yoopta/link-tool": "^1.9.9-rc",
     "@yoopta/paragraph": "^1.9.17-rc",
