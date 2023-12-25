@@ -17,7 +17,8 @@
     "react": "^18",
     "react-dom": "^18",
     "slate": "^0.101.4",
-    "slate-react": "^0.101.3"
+    "slate-react": "^0.101.3",
+    "style-dictionary": "^3.9.1"
   },
   "devDependencies": {
     "@types/node": "^20",
