@@ -1,28 +1,11 @@
 'use client';
 
-import ActionMenuList from '@yoopta/action-menu-list';
-import YooptaEditor from '@yoopta/editor';
-import LinkTool from '@yoopta/link-tool';
-import Paragraph from '@yoopta/paragraph';
-import { useState } from 'react';
+import Navigation from '@/components/navigation';
 
-const plugins = [Paragraph];
-const TOOLS = {
-  ActionMenu: <ActionMenuList />,
-  LinkTool: <LinkTool />,
-};
-
-export default function Home() {
-  const [value, setValue] = useState([]);
+export default function RootPage() {
   return (
-    <div style={{ padding: '100px' }}>
-      <YooptaEditor
-        value={value}
-        onChange={(val) => setValue(val)}
-        plugins={plugins}
-        tools={TOOLS}
-        placeholder='Type text..'
-      />
-    </div>
+    <>
+      <div> RootPage</div>
+    </>
   );
 }
