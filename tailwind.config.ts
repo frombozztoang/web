@@ -58,24 +58,25 @@ const config: Config = {
       fontFamily: {
         pretendard: 'var(--font-families-pretendard)',
       },
-      lineHeight: {
-        '0': 'var(--line-heights-0)',
-        '1': 'var(--line-heights-1)',
-        '2': 'var(--line-heights-2)',
-      },
+      // lineHeight, fontSize 중복 선언으로 우선 디자인 시스템 토큰은 주석 처리했습니다.
+      // lineHeight: {
+      //   '0': 'var(--line-heights-0)',
+      //   '1': 'var(--line-heights-1)',
+      //   '2': 'var(--line-heights-2)',
+      // },
       fontWeight: {
         '0': 'var(--font-weights-pretendard-0)',
         '1': 'var(--font-weights-pretendard-1)',
         '2': 'var(--font-weights-pretendard-2)',
       },
-      fontSize: {
-        '0': 'var(--font-size-0)',
-        '1': 'var(--font-size-1)',
-        '2': 'var(--font-size-2)',
-        '3': 'var(--font-size-3)',
-        '4': 'var(--font-size-4)',
-        '5': 'var(--font-size-5)',
-      },
+      // fontSize: {
+      //   '0': 'var(--font-size-0)',
+      //   '1': 'var(--font-size-1)',
+      //   '2': 'var(--font-size-2)',
+      //   '3': 'var(--font-size-3)',
+      //   '4': 'var(--font-size-4)',
+      //   '5': 'var(--font-size-5)',
+      // } ,
       letterSpacing: {
         '0': 'var(--letter-spacing-0)',
       },
@@ -86,4 +87,5 @@ const config: Config = {
   },
   plugins: [require('tailwindcss'), require('autoprefixer')],
 };
+
 export default config;

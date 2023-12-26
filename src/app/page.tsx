@@ -1,7 +1,7 @@
 export default function RootPage() {
   return (
     <>
-      <div className='main'> RootPage</div>
+      <div className='bg-mainLevel500'> RootPage</div>
     </>
   );
 }
