@@ -57,6 +57,7 @@ const config: Config = {
       },
       fontFamily: {
         pretendard: 'var(--font-families-pretendard)',
+        teneda: 'Tenada, sans-serif',
       },
       // lineHeight, fontSize 중복 선언으로 우선 디자인 시스템 토큰은 주석 처리했습니다.
       // lineHeight: {
