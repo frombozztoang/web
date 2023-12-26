@@ -57,7 +57,7 @@ const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave }: TM
       <Link href={menuItem.href}>{menuItem.name}</Link>
       {/* 서브 메뉴 */}
       {activeMenu === menuItem.name && menuItem.subMenu && (
-        <div className='shadow-lg rounded-tl-0 rounded-xl w-120 absolute top-full left-0 px-10 pt-10 pb-5 text-center font-pretendard'>
+        <div className='shadow-lg rounded-tl-0 rounded-xl w-120 absolute top-full left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
           {menuItem.subMenu.map((subItem) => (
             <div
               className=' mb-10  box-border flex-nowrap gap-10 text-16 text-primary font-semibold '
