@@ -40,16 +40,16 @@ const FinanceToggle: React.FC<TFinanceToggle> = ({ activeToggle, size, toggleFn 
   };
 
   return size === 'Large' ? (
-    <div className='flex relative items-center w-383 h-50 bg-[#EAEAEA] rounded-54'>
+    <div className='flex relative items-center w-383 h-50 bg-border01 rounded-54'>
       <div
-        className={`absolute w-137 h-54 bg-[#048848] rounded-43 transition-all ${getBackgroundPositionClass(
+        className={`absolute w-137 h-54 bg-main rounded-43 transition-all ${getBackgroundPositionClass(
           activeToggle,
         )}`}
       ></div>
       {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
-          className={`flex-1 text-[#6B6B6B] z-10 h-50 ${activeToggle === value ? 'text-[#fff]' : ''}`}
+          className={`flex-1 text-typoSecondary z-10 h-50 font-teneda text-26 font-extrabold pt-6 ${activeToggle === value ? 'text-typoTertiary' : ''}`}
           onClick={() => toggleFn(value)}
         >
           {label}
@@ -57,16 +57,16 @@ const FinanceToggle: React.FC<TFinanceToggle> = ({ activeToggle, size, toggleFn 
       ))}
     </div>
   ) : (
-    <div className='flex relative items-center w-287 h-37 bg-[#EAEAEA] rounded-32'>
+    <div className='flex relative items-center w-287 h-37 bg-border01 rounded-32'>
       <div
-        className={`absolute w-102 h-40 bg-[#048848] rounded-32 transition-all ${getBackgroundPositionClass(
+        className={`absolute w-102 h-40 bg-main rounded-32 transition-all ${getBackgroundPositionClass(
           activeToggle,
         )}`}
       ></div>
       {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
-          className={`flex-1 text-[#6B6B6B] z-10 h-37 ${activeToggle === value ? 'text-[#fff]' : ''}`}
+          className={`flex-1 text-typoSecondary z-10 h-37 font-teneda text-19 font-extrabold pt-6 ${activeToggle === value ? 'text-typoTertiary' : ''}`}
           onClick={() => toggleFn(value)}
         >
           {label}

@@ -9,13 +9,13 @@ type TFilterResult = {
 
 const FilterResult: React.FC<TFilterResult> = ({ text, size, toggleFn }) => {
   return size === 'Large' ? (
-    <div className='inline-flex px-14 py-3 items-center bg-[#36A06D] rounded-27'>
-      <span className='text-[#fff] mr-6'>{text}</span>
+    <div className='inline-flex px-14 py-3 items-center bg-mainLevel400 rounded-27'>
+      <span className='text-secondary mr-6 font-pretendard text-16 font-normal leading-25'>{text}</span>
       <Close className='cursor-pointer w-16 h-16' onClick={toggleFn} />
     </div>
   ) : (
-    <div className='inline-flex px-10 py-2 items-center bg-[#36A06D] rounded-21'>
-      <span className='text-[#fff] mr-4'>{text}</span>
+    <div className='inline-flex px-10 py-2 items-center bg-mainLevel400 rounded-21'>
+      <span className='text-secondary mr-4 font-pretendard text-12 font-normal leading-19'>{text}</span>
       <Close className='cursor-pointer w-12 h-12' onClick={toggleFn} />
     </div>
   );
