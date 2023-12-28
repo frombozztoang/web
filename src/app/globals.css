@@ -8,13 +8,39 @@
   --background-end-rgb: 255, 255, 255;
 } */
 
+/* 기본 스타일 */
+@import '../styles/variables-light.css';
+
+/* 다크 모드일 때 추가로 로드할 스타일 */
 @media (prefers-color-scheme: dark) {
-  /* :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  } */
+  @import '../styles/variables-dark.css';
+}
+
+@font-face {
+  font-family: 'Tenada';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Tenada.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/fonts/Pretendard-Regular.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/fonts/Pretendard-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/fonts/Pretendard-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
 }
 
 body {
+  font-family: 'Pretendard', sans-serif;
 }
