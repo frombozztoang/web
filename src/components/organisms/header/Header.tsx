@@ -4,6 +4,7 @@ import Image from 'next/image';
 import logoLight from '@/public/logos/logo_light.png';
 import React, { useState } from 'react';
 import MenuItem, { menuItems } from './MenuItem';
+import { usePathname } from '../../../../node_modules/next/navigation';
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -15,6 +16,8 @@ const Header = () => {
   const handleMenuLeave = () => {
     setActiveMenu(null);
   };
+
+  const pathname = usePathname();
 
   return (
     <nav className='z-50  font-teneda py-12 px-200 bg-white text-18'>
@@ -28,6 +31,7 @@ const Header = () => {
           {menuItems.map((menuItem) => (
             <MenuItem
               key={menuItem.name}
+              pathname={pathname}
               menuItem={menuItem}
               activeMenu={activeMenu}
               handleMenuHover={handleMenuHover}

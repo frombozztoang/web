@@ -10,15 +10,16 @@ type TMenuItemProps = {
   activeMenu: string | null;
   handleMenuHover: (menuName: string) => void;
   handleMenuLeave: () => void;
+  pathname: string;
 };
 
-type MenuItems = {
+type TMenuItems = {
   name: string;
   href: string;
-  subMenu?: MenuItems[];
+  subMenu?: TMenuItems[];
 };
 
-export const menuItems: MenuItems[] = [
+export const menuItems: TMenuItems[] = [
   {
     name: '서비스 소개',
     href: '/introduction',
@@ -44,13 +45,14 @@ export const menuItems: MenuItems[] = [
       { name: '금융 뉴스', href: '#' },
     ],
   },
-  { name: '금융, 고마워!', href: '/ThankYou', subMenu: [{ name: '청년 금융 정책', href: '#' }] },
+  { name: '금융, 고마워!', href: '/thankYou', subMenu: [{ name: '청년 금융 정책', href: '#' }] },
 ];
 
-const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave }: TMenuItemProps) => {
+const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave, pathname }: TMenuItemProps) => {
+  const isActive = menuItem.href === pathname;
   return (
     <li
-      className='p-10 mr-10 relative'
+      className={`p-10 mr-10 transition relative active:text-main hover:text-main ${isActive ? 'text-main' : ''}`}
       onMouseEnter={() => handleMenuHover(menuItem.name)}
       onMouseLeave={handleMenuLeave}
     >
