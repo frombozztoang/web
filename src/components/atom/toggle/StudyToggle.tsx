@@ -32,7 +32,7 @@ const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) =>
       {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
-          className={`flex-1 text-typoSecondary z-10 h-50 font-teneda text-26 font-extrabold pt-6 ${
+          className={`flex-1 text-typoSecondary z-toggle h-50 font-teneda text-26 font-extrabold pt-6 ${
             activeToggle === value ? 'text-typoTertiary' : ''
           }`}
           onClick={() => toggleFn(value)}

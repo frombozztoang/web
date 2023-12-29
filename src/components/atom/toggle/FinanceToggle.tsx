@@ -47,7 +47,7 @@ const FinanceToggle: React.FC<TFinanceToggleProps> = ({ activeToggle, size, togg
       {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
-          className={`flex-1 text-typoSecondary z-10 h-50 font-teneda text-26 font-extrabold pt-6 ${
+          className={`flex-1 text-typoSecondary z-toggle h-50 font-teneda text-26 font-extrabold pt-6 ${
             activeToggle === value ? 'text-typoTertiary' : ''
           }`}
           onClick={() => toggleFn(value)}
@@ -64,7 +64,7 @@ const FinanceToggle: React.FC<TFinanceToggleProps> = ({ activeToggle, size, togg
       {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
-          className={`flex-1 text-typoSecondary z-10 h-37 font-teneda text-19 font-extrabold pt-6 ${
+          className={`flex-1 text-typoSecondary z-toggle h-37 font-teneda text-19 font-extrabold pt-6 ${
             activeToggle === value ? 'text-typoTertiary' : ''
           }`}
           onClick={() => toggleFn(value)}
