@@ -84,6 +84,9 @@ const config: Config = {
       paragraphSpacing: {
         '0': 'var(--paragraph-spacing-0)',
       },
+      zIndex: {
+        toggle: '1',
+      },
     },
   },
   plugins: [require('tailwindcss'), require('autoprefixer')],
