@@ -1,13 +1,13 @@
 import React from 'react';
 import Close from '../../public/icons/close.svg';
 
-type TFilterResult = {
+type TFilterResultProps = {
   text: string;
   size: 'Large' | 'Small';
   toggleFn: () => void;
 };
 
-const FilterResult: React.FC<TFilterResult> = ({ text, size, toggleFn }) => {
+const FilterResult: React.FC<TFilterResultProps> = ({ text, size, toggleFn }) => {
   return size === 'Large' ? (
     <div className='inline-flex px-14 py-3 items-center bg-mainLevel400 rounded-27'>
       <span className='text-secondary mr-6 font-pretendard text-16 font-normal leading-25'>{text}</span>

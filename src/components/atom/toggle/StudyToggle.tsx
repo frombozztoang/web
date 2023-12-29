@@ -1,11 +1,11 @@
 import React from 'react';
 
-type TStudyToggle = {
+type TStudyToggleProps = {
   activeToggle: number;
   toggleFn: (toggleId: number) => void;
 };
 
-const StudyToggle: React.FC<TStudyToggle> = ({ activeToggle, toggleFn }) => {
+const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) => {
   const toggleOptions = [
     { label: 'text', value: 1 },
     { label: 'text', value: 2 },
@@ -32,7 +32,9 @@ const StudyToggle: React.FC<TStudyToggle> = ({ activeToggle, toggleFn }) => {
       {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
-          className={`flex-1 text-typoSecondary z-10 h-50 font-teneda text-26 font-extrabold pt-6 ${activeToggle === value ? 'text-typoTertiary' : ''}`}
+          className={`flex-1 text-typoSecondary z-10 h-50 font-teneda text-26 font-extrabold pt-6 ${
+            activeToggle === value ? 'text-typoTertiary' : ''
+          }`}
           onClick={() => toggleFn(value)}
         >
           {label}

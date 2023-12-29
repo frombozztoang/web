@@ -1,10 +1,10 @@
 import React from 'react';
 
-type TMainBtn = {
+type TMainBtnProps = {
   text: string;
 };
 
-const MainBtn: React.FC<TMainBtn & React.HTMLAttributes<HTMLButtonElement>> = ({ text, ...props }) => {
+const MainBtn: React.FC<TMainBtnProps & React.HTMLAttributes<HTMLButtonElement>> = ({ text, ...props }) => {
   return (
     <button
       {...props}
