@@ -86,6 +86,7 @@ const config: Config = {
       },
     },
   },
+  darkMode: 'class',
   plugins: [require('tailwindcss'), require('autoprefixer')],
 };
 
