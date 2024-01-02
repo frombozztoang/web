@@ -86,6 +86,7 @@ const config: Config = {
       },
       zIndex: {
         toggle: '1',
+        header: '50',
       },
     },
   },
