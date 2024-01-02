@@ -8,6 +8,80 @@
   --background-end-rgb: 255, 255, 255;
 } */
 
+@layer utilities {
+  .paragraph-large {
+    font-family: Pretendard;
+    font-size: 21.328px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+  }
+
+  .paragraph-medium {
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 25.6px */
+  }
+
+  .paragraph-small {
+    font-family: Pretendard;
+    font-size: 12.003px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 19.205px */
+  }
+
+  .label-large {
+    font-family: Pretendard;
+    font-size: 21.328px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 31.992px */
+  }
+
+  .label-medium {
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 24px */
+  }
+
+  .label-small {
+    font-family: Pretendard;
+    font-size: 12.003px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 18.005px */
+  }
+
+  .heading-xl {
+    font-family: Pretendard;
+    font-size: 28.43px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 39.802px */
+  }
+
+  .heading-large {
+    font-family: Pretendard;
+    font-size: 21.328px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 29.859px */
+  }
+
+  .heading-medium {
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 22.4px */
+  }
+}
+
 /* 기본 스타일 */
 @import '../styles/variables-light.css';
 

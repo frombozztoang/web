@@ -8,7 +8,7 @@ import depthLogo from '@/public/logos/logo_DEPth.png';
 
 const Footer = () => {
   return (
-    <div className='bg-mainFooter fixed bottom-0 w-full p-64 gap-4 text-12'>
+    <div className='bottom-0  bg-mainFooter  w-full p-64 gap-4 text-12 '>
       <Image src={logoLight} alt='Logo Light' />
       <div className='mt-32 flex'>
         <Link className='mr-50 flex items-center' href='https://www.google.com' target='_blank' passHref>

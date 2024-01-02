@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body>
         <Header />
-        {children}
+        <div className='relative min-h-screen'>{children}</div>
         <Footer />
       </body>
     </html>
