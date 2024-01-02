@@ -1,7 +1,7 @@
 import React from 'react';
 import { cls } from '@/utils/cls';
-import Light from '../../public/icons/light.svg';
-import Dark from '../../public/icons/dark.svg';
+import Light from '@/public/icons/light.svg';
+import Dark from '@/public/icons/dark.svg';
 
 type THeaderSwitchProps = {
   isOn: boolean;

@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Link from 'next/link';
 
@@ -10,7 +11,6 @@ type TMenuItemProps = {
   activeMenu: string | null;
   handleMenuHover: (menuName: string) => void;
   handleMenuLeave: () => void;
-  pathname: string;
 };
 
 type TMenuItems = {
@@ -48,18 +48,17 @@ export const menuItems: TMenuItems[] = [
   { name: '금융, 고마워!', href: '/thankYou', subMenu: [{ name: '청년 금융 정책', href: '#' }] },
 ];
 
-const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave, pathname }: TMenuItemProps) => {
-  const isActive = menuItem.href === pathname;
+const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave }: TMenuItemProps) => {
   return (
     <li
-      className={`p-10 mr-10 transition relative active:text-main hover:text-main ${isActive ? 'text-main' : ''}`}
+      className={'p-10 mr-10 text-black transition relative active:text-main hover:text-main z-header'}
       onMouseEnter={() => handleMenuHover(menuItem.name)}
       onMouseLeave={handleMenuLeave}
     >
       <Link href={menuItem.href}>{menuItem.name}</Link>
       {/* 서브 메뉴 */}
       {activeMenu === menuItem.name && menuItem.subMenu && (
-        <div className='shadow-lg rounded-tl-0 rounded-xl w-120 absolute top-full left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
+        <div className='shadow-lg rounded-tl-0 rounded-xl w-120 absolute  left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
           {menuItem.subMenu.map((subItem) => (
             <div
               className=' mb-10  box-border flex-nowrap gap-10 text-16 text-primary font-semibold '
