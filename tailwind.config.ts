@@ -86,9 +86,11 @@ const config: Config = {
       },
       zIndex: {
         toggle: '1',
+        header: '50',
       },
     },
   },
+  darkMode: 'class',
   plugins: [require('tailwindcss'), require('autoprefixer')],
 };
 

@@ -4,9 +4,11 @@ import Image from 'next/image';
 import logoLight from '@/public/logos/logo_light.png';
 import React, { useState } from 'react';
 import MenuItem, { menuItems } from './MenuItem';
+import HeaderSwitch from '@/components/atom/header/HeaderSwitch';
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [headerSwitch, setHeaderSwitch] = useState(true);
 
   const handleMenuHover = (menuName: string) => {
     setActiveMenu(menuName);
@@ -16,8 +18,12 @@ const Header = () => {
     setActiveMenu(null);
   };
 
+  const handleHeaderSwitch = () => {
+    setHeaderSwitch(!headerSwitch);
+  };
+
   return (
-    <nav className='z-50  font-teneda py-12 px-200 bg-white text-18'>
+    <nav className='z-header font-teneda py-12 px-200 bg-white text-18'>
       <ul className='flex justify-between px-64'>
         <div className='flex items-center justify-center '>
           <li className='mr-64'>
@@ -36,8 +42,8 @@ const Header = () => {
           ))}
         </div>
         <div className='flex items-center justify-center'>
-          <li className='mr-26'>
-            <Link href='/learnWithUs'>모드설정버튼</Link>
+          <li className='mr-26' onClick={handleHeaderSwitch}>
+            <HeaderSwitch isOn={headerSwitch} />
           </li>
           <li className='text-main text-22'>
             <Link href='/myPage'>MY</Link>
