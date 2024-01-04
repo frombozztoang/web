@@ -1,16 +1,15 @@
 'use client';
 import StudyToggle from '@/components/atom/toggle/StudyToggle';
 import PolicyItem from '@/components/molecules/mypage/PolicyItem';
-import Accordian from '@/components/organisms/Accordian';
-import SubHeader from '@/components/templates/myPage/SubHeader';
+import Accordian from '@/components/organisms/myPage/Accordian';
+import Setting from '@/components/templates/myPage/Setting';
+import SubHeader from '@/components/organisms/myPage/SubHeader';
+import Favorites from '@/components/templates/myPage/Favorites';
 import React, { useState } from 'react';
 
 const page = () => {
-  const [toggle, setToggle] = useState(1);
-  const toggleOption = [
-    { label: '즐겨찾기', value: 1 },
-    { label: '계정설정', value: 2 },
-  ];
+  const [toggle, setToggle] = useState(0);
+
   const toggleFn = (toggleId: number) => {
     setToggle(toggleId);
   };
@@ -20,8 +19,10 @@ const page = () => {
       <div className='my-63'>
         <StudyToggle activeToggle={toggle} toggleFn={toggleFn} />
       </div>
-      <div>
-        <SubHeader />
+      <div>{toggle === 0 ? <Favorites /> : <Setting />}</div>
+
+      {/* <div>
+        <Favorites />
       </div>
       <div>
         <Accordian />
@@ -35,7 +36,7 @@ const page = () => {
           }
           like={false}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

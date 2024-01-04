@@ -7,15 +7,15 @@ type TStudyToggleProps = {
 
 const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) => {
   const toggleOptions = [
-    { label: '즐겨찾기', value: 1 },
-    { label: '계정설정', value: 2 },
+    { label: '즐겨찾기', value: 0 },
+    { label: '계정설정', value: 1 },
   ];
 
   const getBackgroundPositionClass = (active: number) => {
     switch (active) {
-      case 1:
+      case 0:
         return 'transform translate-x-0 ';
-      case 2:
+      case 1:
         return 'transform translate-x-full';
       default:
         return '';
