@@ -21,7 +21,7 @@ const FinanceToggle: React.FC<TFinanceToggleProps> = ({ activeToggle, size, togg
         case 2:
           return 'left-[126.18px]';
         case 3:
-          return 'right-0';
+          return 'left-[253px]';
         default:
           return '';
       }
@@ -32,7 +32,7 @@ const FinanceToggle: React.FC<TFinanceToggleProps> = ({ activeToggle, size, togg
         case 2:
           return 'left-[94.63px]';
         case 3:
-          return 'right-0';
+          return 'left-[189.26px]';
         default:
           return '';
       }
@@ -42,12 +42,14 @@ const FinanceToggle: React.FC<TFinanceToggleProps> = ({ activeToggle, size, togg
   return size === 'Large' ? (
     <div className='flex relative items-center w-383 h-50 bg-border01 rounded-54'>
       <div
-        className={`absolute w-137 h-54 bg-main rounded-43 transition-all ${getBackgroundPositionClass(activeToggle)}`}
+        className={`absolute w-130 h-54 bg-main rounded-43 transition-all duration-300 ease-in-out ${getBackgroundPositionClass(
+          activeToggle,
+        )}`}
       ></div>
       {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
-          className={`flex-1 text-typoSecondary z-toggle h-50 font-teneda text-26 font-extrabold pt-6 ${
+          className={`flex-1 text-typoSecondary z-toggle h-50 font-teneda text-26 font-extrabold pt-8 ${
             activeToggle === value ? 'text-typoTertiary' : ''
           }`}
           onClick={() => toggleFn(value)}
@@ -59,12 +61,14 @@ const FinanceToggle: React.FC<TFinanceToggleProps> = ({ activeToggle, size, togg
   ) : (
     <div className='flex relative items-center w-287 h-37 bg-border01 rounded-32'>
       <div
-        className={`absolute w-102 h-40 bg-main rounded-32 transition-all ${getBackgroundPositionClass(activeToggle)}`}
+        className={`absolute w-98 h-40 bg-main rounded-32 transition-all duration-300 ease-in-out ${getBackgroundPositionClass(
+          activeToggle,
+        )}`}
       ></div>
       {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
-          className={`flex-1 text-typoSecondary z-toggle h-37 font-teneda text-19 font-extrabold pt-6 ${
+          className={`flex-1 text-typoSecondary z-toggle h-37 font-teneda text-19 font-extrabold pt-8 ${
             activeToggle === value ? 'text-typoTertiary' : ''
           }`}
           onClick={() => toggleFn(value)}
