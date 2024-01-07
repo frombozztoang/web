@@ -22,30 +22,30 @@ type TMenuItems = {
 export const menuItems: TMenuItems[] = [
   {
     name: '서비스 소개',
-    href: '/introduction',
+    href: '/intro',
     subMenu: [
-      { name: '서비스 소개', href: '#' },
-      { name: '공지사항', href: '#' },
+      { name: '서비스 소개', href: '/intro' },
+      { name: '공지사항', href: '/notice' },
     ],
   },
   {
     name: '금융, 뭐하지?',
-    href: '/whatToDo',
+    href: '/financial-products/deposits',
     subMenu: [
-      { name: '예금', href: '#' },
-      { name: '적금', href: '#' },
-      { name: 'CMA', href: '#' },
+      { name: '예금', href: '/financial-products/deposits' },
+      { name: '적금', href: '/financial-products/savings' },
+      { name: 'CMA', href: '/financial-products/cma' },
     ],
   },
   {
     name: '금융, 배우자!',
-    href: '/learnWithUs',
+    href: '/educations',
     subMenu: [
-      { name: '금융 교육', href: '#' },
-      { name: '금융 뉴스', href: '#' },
+      { name: '금융 교육', href: '/educations' },
+      { name: '금융 뉴스', href: '/news' },
     ],
   },
-  { name: '금융, 고마워!', href: '/thankYou', subMenu: [{ name: '청년 금융 정책', href: '#' }] },
+  { name: '금융, 고마워!', href: '/policies', subMenu: [{ name: '청년 금융 정책', href: '/policies' }] },
 ];
 
 const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave }: TMenuItemProps) => {
