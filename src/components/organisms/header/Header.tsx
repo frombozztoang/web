@@ -69,7 +69,7 @@ const Header = () => {
             <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
           </li>
           <li className='mr-12 text-main text-22'>
-            <Link href='/myPage'>MY</Link>
+            <Link href='/mypage'>MY</Link>
           </li>
           <li className='flex tablet:hidden '>
             <MobileHeader darkMode={darkMode} setDarkMode={setDarkMode} />
@@ -81,4 +81,3 @@ const Header = () => {
 };
 
 export default Header;
-<div className=''></div>;

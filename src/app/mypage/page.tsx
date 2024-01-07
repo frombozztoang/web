@@ -1,9 +1,9 @@
 'use client';
 import StudyToggle from '@/components/atom/toggle/StudyToggle';
 import PolicyItem from '@/components/molecules/mypage/PolicyItem';
-import Accordian from '@/components/organisms/myPage/Accordian';
+import Accordian from '@/components/organisms/mypage/Accordian';
 import Setting from '@/components/templates/myPage/Setting';
-import SubHeader from '@/components/organisms/myPage/SubHeader';
+import SubHeader from '@/components/organisms/mypage/SubHeader';
 import Favorites from '@/components/templates/myPage/Favorites';
 import React, { useState } from 'react';
 
