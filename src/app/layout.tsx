@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Navigation from '@/components/navigation';
-import Footer from '@/components/footer';
+import Footer from '@/components/organisms/footer/Footer';
+import Header from '@/components/organisms/header/Header';
 import Chatbot from '@/components/templates/chatbot';
 
 export const metadata: Metadata = {
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='ko'>
-      <body className='h-screen relative'>
-        <Navigation />
+    <html lang='en'>
+      <body>
+        <Header />
         {children}
         <Chatbot />
 

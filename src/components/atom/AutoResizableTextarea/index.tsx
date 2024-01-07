@@ -1,4 +1,3 @@
-import { parse } from 'path';
 import { ChangeEventHandler, ForwardedRef, TextareaHTMLAttributes } from 'react';
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {

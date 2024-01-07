@@ -2,7 +2,7 @@
 
 import ChatBubble from '@/components/atom/ChatBubble';
 import React, { useRef, useState } from 'react';
-import ChatbotProfileIcon from '@/public/icons/chatbot-profile.svg';
+// import ChatbotProfileIcon from '@/public/icons/chatbot-profile.svg';
 import AutoResizableTextarea from '@/components/atom/AutoResizableTextarea';
 
 type TChatData = {
@@ -20,11 +20,7 @@ type TChatData = {
 //   //   },
 // ];
 
-const ChatbotProfile = () => (
-  <div className='w-50 h-50 bg-white rounded-full'>
-    <ChatbotProfileIcon />
-  </div>
-);
+const ChatbotProfile = () => <div className='w-50 h-50 bg-white rounded-full'>{/* <ChatbotProfileIcon /> */}</div>;
 
 export default function ChatbotUI() {
   const [chatData, setChatData] = useState<TChatData[]>([

@@ -1,0 +1,65 @@
+/**
+ * Do not edit directly
+ * Generated on Tue, 26 Dec 2023 15:27:47 GMT
+ */
+
+:root {
+  --primary: #d6d6d6;
+  --secondary: #343434;
+  --main: #048848;
+  --negative: #e11900;
+  --bg-blind: #000000b8;
+  --contents-secondary: #fffbf4;
+  --typo-secondary: #6b6b6b;
+  --typo-primary: #d6d6d6;
+  --typo-tertiary: #d6d6d6;
+  --border-01: #343434;
+  --border-02: #343434;
+  --border-00: #959595;
+  --border-04: #6b6b6b;
+  --main-level-100: #cde7da;
+  --main-level-200: #9bcfb6;
+  --main-level-300: #68b891;
+  --main-level-400: #36a06d;
+  --main-level-500: #048848;
+  --main-level-600: #036d3a;
+  --main-level-700: #02522b;
+  --main-level-800: #02361d;
+  --main-level-900: #011b0e;
+  --main-footer: #222222;
+  --image-base: #6c6c6c;
+  --font-families-pretendard: Pretendard;
+  --line-heights-0: 140%;
+  --line-heights-1: 150%;
+  --line-heights-2: 160%;
+  --font-weights-pretendard-0: Bold;
+  --font-weights-pretendard-1: SemiBold;
+  --font-weights-pretendard-2: Regular;
+  --font-size-0: 12.003;
+  --font-size-1: 16;
+  --font-size-2: 21.328;
+  --font-size-3: 28.43;
+  --font-size-4: 37.897;
+  --font-size-5: 50.517;
+  --letter-spacing-0: 0%;
+  --paragraph-spacing-0: 0;
+  --heading-xxxl: [object Object];
+  --heading-xxl: [object Object];
+  --heading-xl: [object Object];
+  --heading-large: [object Object];
+  --heading-medium: [object Object];
+  --heading-small: [object Object];
+  --label-xxl: [object Object];
+  --label-xl: [object Object];
+  --label-large: [object Object];
+  --label-medium: [object Object];
+  --label-small: [object Object];
+  --paragraph-xl: [object Object];
+  --paragraph-large: [object Object];
+  --paragraph-medium: [object Object];
+  --paragraph-small: [object Object];
+  --text-case-none: none;
+  --text-decoration-none: none;
+  --paragraph-indent-0: 0px;
+  --bg: #222222;
+}
