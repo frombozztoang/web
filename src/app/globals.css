@@ -85,10 +85,7 @@
 /* 기본 스타일 */
 @import '../styles/variables-light.css';
 
-/* 다크 모드일 때 추가로 로드할 스타일 */
-@media (prefers-color-scheme: dark) {
-  @import '../styles/variables-dark.css';
-}
+@import '../styles/variables-dark.css';
 
 @font-face {
   font-family: 'Tenada';
