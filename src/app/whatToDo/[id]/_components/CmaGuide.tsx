@@ -4,14 +4,14 @@ import HeartClick from '@/public/icons/heartclick.svg';
 
 type TCmaGuideProps = {
   size: 'Large' | 'Small';
-  isHeart: boolean;
+  isLiked: boolean;
   productName: string;
   bankName: string;
   rate: string;
   onHeartClick: () => void;
 };
 
-const CmaGuide: React.FC<TCmaGuideProps> = ({ isHeart, productName, bankName, rate, onHeartClick, size }) => {
+const CmaGuide: React.FC<TCmaGuideProps> = ({ isLiked, productName, bankName, rate, onHeartClick, size }) => {
   return size === 'Large' ? (
     <div className='flex w-855 px-33 py-40 justify-between items-center rounded-20 border-2 border-border02 bg-secondary'>
       <div className='flex flex-row items-center'>
@@ -26,7 +26,7 @@ const CmaGuide: React.FC<TCmaGuideProps> = ({ isHeart, productName, bankName, ra
           <div className='label-large text-main'>수익률 {rate}%</div>
         </div>
         <button className='ml-60' onClick={onHeartClick}>
-          {isHeart ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
+          {isLiked ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
         </button>
       </div>
     </div>
@@ -44,7 +44,7 @@ const CmaGuide: React.FC<TCmaGuideProps> = ({ isHeart, productName, bankName, ra
           <div className='label-small text-main'>수익률 {rate}%</div>
         </div>
         <button className='ml-17' onClick={onHeartClick}>
-          {isHeart ? <Heart className='w-25 h-25' /> : <HeartClick className='w-25 h-25' />}
+          {isLiked ? <Heart className='w-25 h-25' /> : <HeartClick className='w-25 h-25' />}
         </button>
       </div>
     </div>

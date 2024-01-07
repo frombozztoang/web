@@ -4,7 +4,7 @@ import HeartClick from '@/public/icons/heartclick.svg';
 import Link from 'next/link';
 
 type TDepositSavingProps = {
-  isHeart: boolean;
+  isLiked: boolean;
   productName: string;
   bankName: string;
   maxInterestRate: string;
@@ -16,7 +16,7 @@ type TDepositSavingProps = {
 };
 
 const DepositSaving: React.FC<TDepositSavingProps & React.HTMLAttributes<HTMLDivElement>> = ({
-  isHeart,
+  isLiked,
   productName,
   bankName,
   maxInterestRate,
@@ -50,11 +50,11 @@ const DepositSaving: React.FC<TDepositSavingProps & React.HTMLAttributes<HTMLDiv
         </div>
         <div className='flex flex-row items-center'>
           <div className='flex flex-col text-right'>
-            <div className='label-large text-main'>{maxInterestRate}</div>
-            <div className='mt-5 paragraph-medium text-typoPrimary'>{interestRate}</div>
+            <div className='label-large text-main'>최고 {maxInterestRate}%</div>
+            <div className='mt-5 paragraph-medium text-typoPrimary'>기본 {interestRate}%</div>
           </div>
           <button className='ml-19' onClick={onHeartClick}>
-            {isHeart ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
+            {isLiked ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
           </button>
         </div>
       </div>
@@ -73,11 +73,11 @@ const DepositSaving: React.FC<TDepositSavingProps & React.HTMLAttributes<HTMLDiv
       </div>
       <div className='flex flex-row items-center'>
         <div className='flex flex-col text-right'>
-          <div className='label-medium text-main'>{maxInterestRate}</div>
-          <div className='mt-5 paragraph-small text-typoPrimary'>{interestRate}</div>
+          <div className='label-medium text-main'>최고 {maxInterestRate}%</div>
+          <div className='mt-5 paragraph-small text-typoPrimary'>기본 {interestRate}%</div>
         </div>
         <button className='ml-10' onClick={onHeartClick}>
-          {isHeart ? <Heart className='w-25 h-25' /> : <HeartClick className='w-25 h-25' />}
+          {isLiked ? <Heart className='w-25 h-25' /> : <HeartClick className='w-25 h-25' />}
         </button>
       </div>
     </div>

@@ -19,7 +19,7 @@ const Des = () => {
     bankName: '우리은행',
     maxInterestRate: '3.7',
     interestRate: '3.7',
-    isHeart: false,
+    isLiked: false,
     savingTerms: [1, 3, 6, 12, 24, 36],
     maxLimit: null,
     joinMember: '실명의 개인',
@@ -31,7 +31,7 @@ const Des = () => {
     productName: 'WON플러스예금',
     bankName: '우리은행',
     rate: '3.7',
-    isHeart: false,
+    isLiked: false,
     string1: '연 3.15% (12개월, 세전) 기준일에 따라 수익률 변동 가능',
     string2: '연 3.15% (12개월, 세전) 기준일에 따라 수익률 변동 가능',
     string3: '연 3.15% (12개월, 세전) 기준일에 따라 수익률 변동 가능',
@@ -51,7 +51,7 @@ const Des = () => {
       {num === 1 ? (
         <div className='flex flex-col justify-center items-center'>
           <DepositSavingGuide
-            isHeart={DepositData.isHeart}
+            isLiked={DepositData.isLiked}
             productName={DepositData.productName}
             bankName={DepositData.bankName}
             maxInterestRate={DepositData.maxInterestRate}
@@ -73,7 +73,7 @@ const Des = () => {
       ) : num === 2 ? (
         <div className='flex flex-col justify-center items-center'>
           <DepositSavingGuide
-            isHeart={DepositData.isHeart}
+            isLiked={DepositData.isLiked}
             productName={DepositData.productName}
             bankName={DepositData.bankName}
             maxInterestRate={DepositData.maxInterestRate}
@@ -95,7 +95,7 @@ const Des = () => {
       ) : (
         <div className='flex flex-col justify-center items-center'>
           <CmaGuide
-            isHeart={CmaData.isHeart}
+            isLiked={CmaData.isLiked}
             productName={CmaData.productName}
             bankName={CmaData.bankName}
             rate={CmaData.rate}

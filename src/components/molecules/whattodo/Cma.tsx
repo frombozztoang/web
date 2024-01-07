@@ -4,7 +4,7 @@ import HeartClick from '@/public/icons/heartclick.svg';
 import Link from 'next/link';
 
 type TCmaProps = {
-  isHeart: boolean;
+  isLiked: boolean;
   productName: string;
   description: string;
   rate: string;
@@ -15,7 +15,7 @@ type TCmaProps = {
 };
 
 const Cma: React.FC<TCmaProps & React.HTMLAttributes<HTMLDivElement>> = ({
-  isHeart,
+  isLiked,
   productName,
   description,
   rate,
@@ -47,9 +47,9 @@ const Cma: React.FC<TCmaProps & React.HTMLAttributes<HTMLDivElement>> = ({
           </div>
         </div>
         <div className='flex flex-row items-center'>
-          <div className='label-large text-main'>{rate}</div>
+          <div className='label-large text-main'>수익률 {rate}%</div>
           <button className='ml-19' onClick={onHeartClick}>
-            {isHeart ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
+            {isLiked ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
           </button>
         </div>
       </div>
@@ -67,9 +67,9 @@ const Cma: React.FC<TCmaProps & React.HTMLAttributes<HTMLDivElement>> = ({
         </div>
       </div>
       <div className='flex flex-row items-center'>
-        <div className='label-medium text-main'>{rate}</div>
+        <div className='label-medium text-main'>수익률 {rate}%</div>
         <button className='ml-10' onClick={onHeartClick}>
-          {isHeart ? <Heart className='w-25 h-25' /> : <HeartClick className='w-25 h-25' />}
+          {isLiked ? <Heart className='w-25 h-25' /> : <HeartClick className='w-25 h-25' />}
         </button>
       </div>
     </div>

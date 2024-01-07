@@ -149,6 +149,7 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
           closeModal();
         }}
         text='적용'
+        isOn={!(selectedBank.length === 0 && selectedBank2.length === 0)}
       />
       <Close className='absolute top-21 right-20 cursor-pointer' onClick={() => closeModal()} />
     </div>

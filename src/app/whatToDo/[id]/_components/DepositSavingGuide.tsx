@@ -4,7 +4,7 @@ import HeartClick from '@/public/icons/heartclick.svg';
 
 type TDepositSavingGuideProps = {
   size: 'Large' | 'Small';
-  isHeart: boolean;
+  isLiked: boolean;
   productName: string;
   bankName: string;
   maxInterestRate: string;
@@ -13,7 +13,7 @@ type TDepositSavingGuideProps = {
 };
 
 const DepositSavingGuide: React.FC<TDepositSavingGuideProps> = ({
-  isHeart,
+  isLiked,
   productName,
   bankName,
   maxInterestRate,
@@ -41,7 +41,7 @@ const DepositSavingGuide: React.FC<TDepositSavingGuideProps> = ({
           <div className='label-large text-main'>연 {interestRate}%</div>
         </div>
         <button className='ml-60' onClick={onHeartClick}>
-          {isHeart ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
+          {isLiked ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
         </button>
       </div>
     </div>
@@ -65,7 +65,7 @@ const DepositSavingGuide: React.FC<TDepositSavingGuideProps> = ({
           <div className='label-small text-main'>연 {interestRate}%</div>
         </div>
         <button className='ml-17' onClick={onHeartClick}>
-          {isHeart ? <Heart className='w-25 h-25' /> : <HeartClick className='w-25 h-25' />}
+          {isLiked ? <Heart className='w-25 h-25' /> : <HeartClick className='w-25 h-25' />}
         </button>
       </div>
     </div>
