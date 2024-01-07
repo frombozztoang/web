@@ -12,6 +12,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  mode: 'jit',
   theme: {
     extend: {
       borderWidth: px0_10,
@@ -82,6 +83,7 @@ const config: Config = {
           imageBase: 'var(--dark-image-base)',
           bg: 'var(--dark-bg)',
         },
+        darkComponent: 'var(--dark-component)',
       },
       fontFamily: {
         pretendard: 'var(--font-families-pretendard)',

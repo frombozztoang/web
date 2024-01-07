@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import '../styles/globals.css';
 import Footer from '@/components/organisms/footer/Footer';
 import Header from '@/components/organisms/header/Header';
+import Chatbot from '@/components/templates/chatbot';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className='bg-bg dark:bg-dark-bg'>
         <Header />
         <main className='min-h-screen px-24 tablet:px-0 box-border'>{children}</main>
+        <Chatbot />
         <Footer />
       </body>
     </html>
