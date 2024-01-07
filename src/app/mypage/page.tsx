@@ -16,14 +16,11 @@ const page = () => {
 
   return (
     <div className='flex flex-col items-center justify-start min-h-screen min-w-full'>
-      <div className='my-63'>
+      <div className=''>
         <StudyToggle activeToggle={toggle} toggleFn={toggleFn} />
       </div>
       <div>{toggle === 0 ? <Favorites /> : <Setting />}</div>
 
-      {/* <div>
-        <Favorites />
-      </div>
       <div>
         <Accordian />
       </div>
@@ -36,7 +33,7 @@ const page = () => {
           }
           like={false}
         />
-      </div> */}
+      </div>
     </div>
   );
 };

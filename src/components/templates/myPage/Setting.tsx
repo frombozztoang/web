@@ -15,7 +15,7 @@ const Setting = () => {
 
   return (
     <div className='flex flex-col items-center'>
-      <div className='heading-xl mb-10'>계정 설정</div>
+      <div className='heading-xl mb-10 dark:text-dark-primary'>계정 설정</div>
 
       <div className='flex'>
         {setBtnItems.map((i) => (

@@ -8,9 +8,9 @@ type TMenuItemProps = {
     href: string;
     subMenu?: { name: string; href: string }[];
   };
-  activeMenu: string | null;
-  handleMenuHover: (menuName: string) => void;
-  handleMenuLeave: () => void;
+  activeMenu?: string | null;
+  handleMenuHover?: (menuName: string) => void;
+  handleMenuLeave?: () => void;
 };
 
 type TMenuItems = {
@@ -48,28 +48,33 @@ export const menuItems: TMenuItems[] = [
   { name: '금융, 고마워!', href: '/thankYou', subMenu: [{ name: '청년 금융 정책', href: '#' }] },
 ];
 
-const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave }: TMenuItemProps) => {
+const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave, ...props }: TMenuItemProps) => {
   return (
-    <li
-      className={'p-10 mr-10 text-black transition relative active:text-main hover:text-main z-header'}
-      onMouseEnter={() => handleMenuHover(menuItem.name)}
-      onMouseLeave={handleMenuLeave}
+    <div
+      {...props}
+      className={
+        'mb-7 tablet:p-10 tablet:mr-10 text-black transition-all relative active:text-main hover:text-main z-header'
+      }
+      onMouseEnter={() => handleMenuHover && handleMenuHover(menuItem.name)}
+      onMouseLeave={handleMenuLeave && (() => handleMenuLeave())}
     >
-      <Link href={menuItem.href}>{menuItem.name}</Link>
+      <Link className=' tablet:text-18 tablet:min-w-max whitespace-nowrap ' href={menuItem.href}>
+        {menuItem.name}
+      </Link>
       {/* 서브 메뉴 */}
       {activeMenu === menuItem.name && menuItem.subMenu && (
-        <div className='shadow-lg rounded-tl-0 rounded-xl w-120 absolute  left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
+        <ul className='hidden tablet:block shadow-lg rounded-tl-0 rounded-xl w-120 absolute  left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
           {menuItem.subMenu.map((subItem) => (
-            <div
+            <li
               className=' mb-10  box-border flex-nowrap gap-10 text-16 text-primary font-semibold '
               key={subItem.name}
             >
               <Link href={subItem.href}>{subItem.name}</Link>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </li>
+    </div>
   );
 };
 
