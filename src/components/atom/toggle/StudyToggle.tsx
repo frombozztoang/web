@@ -23,16 +23,16 @@ const StudyToggle: React.FC<TStudyToggleProps> = ({ activeToggle, toggleFn }) =>
   };
 
   return (
-    <div className='flex relative items-center w-307 h-50 bg-border01 rounded-[43.346px]'>
+    <div className='flex relative items-center  bg-border01 w-201 h-38 rounded-[32.5px] tablet:w-307 tablet:h-50 tablet:rounded-[43.346px]'>
       <div
-        className={`absolute  w-158 h-54 bg-main rounded-[43.346px] transition-all duration-300 ease-in-out ${getBackgroundPositionClass(
+        className={`absolute bg-main w-102 h-40 rounded-[32.5px] tablet:w-158  tablet:h-54  tablet:rounded-[43.346px] transition-all duration-300 ease-in-out ${getBackgroundPositionClass(
           activeToggle,
         )}`}
       ></div>
       {toggleOptions.map(({ label, value }) => (
         <button
           key={value}
-          className={`flex-1  text-typoSecondary z-toggle h-50 font-teneda text-26 font-extrabold pt-6 transition-all duration-300 ease-in-out ${
+          className={`flex-1  text-typoSecondary z-toggle h-50 font-teneda text-19 tablet:text-26 font-extrabold pt-6 transition-all duration-300 ease-in-out ${
             activeToggle === value ? 'text-typoTertiary' : ''
           }`}
           onClick={() => toggleFn(value)}

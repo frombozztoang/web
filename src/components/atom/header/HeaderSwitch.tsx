@@ -4,7 +4,7 @@ import { cls } from '@/utils/cls';
 import Light from '@/public/icons/light.svg';
 import Dark from '@/public/icons/dark.svg';
 
-type THeaderSwitchProps = {
+export type THeaderSwitchProps = {
   darkMode: boolean;
   setDarkMode: (arg: boolean) => void;
 };

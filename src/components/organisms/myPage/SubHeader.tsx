@@ -13,17 +13,17 @@ const SubHeader = () => {
     setSubHeaderITem(index);
   };
   return (
-    <div className='flex flex-col w-854 mb-63'>
+    <div className='flex flex-col w-342 tablet:w-854'>
       <div className='heading-large border-b-2 border-black pb-10 mb-10 dark:text-dark-primary dark:border-white '>
         즐겨찾기
       </div>
-      <div className='label-medium flex'>
+      <div className='flex justify-between tablet:justify-start'>
         {subHeaderItems.map((i) => (
           <SubBtn
             key={i.index}
             text={i.label}
             isOn={i.index === subHeaderItem}
-            mr='mr-10'
+            mr='tablet:mr-10'
             onClick={() => handleSubHeaderItem(i.index)}
           />
         ))}
