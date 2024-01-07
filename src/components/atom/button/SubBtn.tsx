@@ -4,15 +4,17 @@ import { cls } from '@/utils/cls';
 type TSubBtnProps = {
   text: string;
   isOn: boolean;
+  mr?: string;
 };
 
-const SubBtn: React.FC<TSubBtnProps & React.HTMLAttributes<HTMLButtonElement>> = ({ text, isOn, ...props }) => {
+const SubBtn: React.FC<TSubBtnProps & React.HTMLAttributes<HTMLButtonElement>> = ({ text, isOn, mr, ...props }) => {
   return (
     <button
       {...props}
       className={cls(
-        'flex justify-center items-center w-108 gap-10 px-36 py-4 rounded-7 border font-pretendard text-16 font-semibold leading-24',
+        'flex justify-center items-center  gap-10 px-36 py-4 rounded-7 border label-medium box-border',
         isOn ? 'bg-main text-typoTertiary border-main' : 'bg-secondary text-typoSecondary border-border01',
+        mr ? mr : '',
       )}
     >
       {text}
