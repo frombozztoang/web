@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import DepositSavingGuide from './_components/DepositSavingGuide';
 import CmaGuide from './_components/CmaGuide';
 import ProductGuide from './_components/ProductGuide';
@@ -9,10 +9,10 @@ import InterestRateGuide from './_components/InterestRateGuide';
 import CmaInfoGuide from './_components/CmaInfoGuide';
 
 const Des = () => {
-  const pathname = usePathname();
-  const productId = Number(pathname.replace('/whatToDo/', ''));
+  const searchParams = useSearchParams();
+  const productId = Number(searchParams.get('id'));
+  const num = Number(searchParams.get('product')); //1:예금, 2:적금, 3:CMA
   const [size, setSize] = useState<'Large' | 'Small'>('Large');
-  const [num, setNum] = useState(1); //1:예금, 2:적금, 3:CMA
 
   const DepositData = {
     productName: 'WON플러스예금',

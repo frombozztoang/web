@@ -1,6 +1,7 @@
 import React from 'react';
 import Heart from '@/public/icons/heart.svg';
 import HeartClick from '@/public/icons/heartclick.svg';
+import Link from 'next/link';
 
 type TDepositSavingProps = {
   isHeart: boolean;
@@ -9,6 +10,8 @@ type TDepositSavingProps = {
   maxInterestRate: string;
   interestRate: string;
   onHeartClick: () => void;
+  productId: number;
+  productNum: number;
   size: 'Large' | 'Small';
 };
 
@@ -19,31 +22,43 @@ const DepositSaving: React.FC<TDepositSavingProps & React.HTMLAttributes<HTMLDiv
   maxInterestRate,
   interestRate,
   onHeartClick,
+  productId,
+  productNum,
   size,
   ...props
 }) => {
   return size === 'Large' ? (
-    <div
-      {...props}
-      className='flex w-855 px-30 py-25 justify-between items-center gap-417 rounded-10 border-2 border-border01 bg-secondary cursor-pointer'
+    <Link
+      href={{
+        pathname: `/whatToDo/${productId}`,
+        query: {
+          id: productId,
+          product: productNum,
+        },
+      }}
     >
-      <div className='flex flex-row items-center'>
-        <div className='w-72 h-72 rounded-13 bg-imageBase'></div>
-        <div className='ml-21'>
-          <div className='label-large text-typoPrimary'>{productName}</div>
-          <div className='mt-5 paragraph-large text-typoPrimary'>{bankName}</div>
+      <div
+        {...props}
+        className='flex w-855 px-30 py-25 justify-between items-center gap-417 rounded-10 border-2 border-border01 bg-secondary cursor-pointer'
+      >
+        <div className='flex flex-row items-center'>
+          <div className='w-72 h-72 rounded-13 bg-imageBase'></div>
+          <div className='ml-21'>
+            <div className='label-large text-typoPrimary'>{productName}</div>
+            <div className='mt-5 paragraph-large text-typoPrimary'>{bankName}</div>
+          </div>
+        </div>
+        <div className='flex flex-row items-center'>
+          <div className='flex flex-col text-right'>
+            <div className='label-large text-main'>{maxInterestRate}</div>
+            <div className='mt-5 paragraph-medium text-typoPrimary'>{interestRate}</div>
+          </div>
+          <button className='ml-19' onClick={onHeartClick}>
+            {isHeart ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
+          </button>
         </div>
       </div>
-      <div className='flex flex-row items-center'>
-        <div className='flex flex-col text-right'>
-          <div className='label-large text-main'>{maxInterestRate}</div>
-          <div className='mt-5 paragraph-medium text-typoPrimary'>{interestRate}</div>
-        </div>
-        <button className='ml-19' onClick={onHeartClick}>
-          {isHeart ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
-        </button>
-      </div>
-    </div>
+    </Link>
   ) : (
     <div
       {...props}

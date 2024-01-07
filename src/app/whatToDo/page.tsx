@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import FinanceToggle from '@/components/atom/toggle/FinanceToggle';
 import Rope from '@/components/molecules/rope/Rope';
 import DepositSaving from '@/components/molecules/whattodo/DepositSaving';
@@ -29,7 +28,6 @@ type TCma = {
 };
 
 const WhatToDoPage = () => {
-  const router = useRouter();
   const [num, setNum] = useState(1); //1:예금, 2:적금, 3:CMA
   const [amount, setAmount] = useState('');
 
@@ -417,8 +415,9 @@ const WhatToDoPage = () => {
                 bankName={data.bankName}
                 maxInterestRate={data.maxInterestRate}
                 interestRate={data.interestRate}
+                productId={data.id}
+                productNum={num}
                 onHeartClick={() => onHeartClick(data.id)}
-                onClick={() => router.push(`/whatToDo/${data.id}`)}
               />
             );
           })}
@@ -498,6 +497,8 @@ const WhatToDoPage = () => {
                 bankName={data.bankName}
                 maxInterestRate={data.maxInterestRate}
                 interestRate={data.interestRate}
+                productId={data.id}
+                productNum={num}
                 onHeartClick={() => onHeartClick(data.id)}
               />
             );
@@ -577,6 +578,8 @@ const WhatToDoPage = () => {
                 productName={data.productName}
                 description={data.description}
                 rate={data.rate}
+                productId={data.id}
+                productNum={num}
                 onHeartClick={() => onHeartClick(data.id)}
               />
             );
