@@ -33,6 +33,7 @@ const WhatToDoPage = () => {
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
   const [size, setSize] = useState<'Large' | 'Small'>('Large');
+  const [sort, setSort] = useState(true); //true:기본금리순, false, 최고금리순
 
   //예금
   const [depAllFin, setDepAllFin] = useState(false);
@@ -66,44 +67,14 @@ const WhatToDoPage = () => {
   const [cmaFilter, setCmaFilter] = useState<string[]>([]); //CMA 필터 데이터
   const DepositTerms = [
     { filter: '기간 및 금액', sub: ['전체', '3개월', '6개월', '12개월', '24개월', '36개월'] },
-    { filter: '상품 유형', sub: ['특판', '방문없이 가입', '누구나 가입'] },
-    {
-      filter: '우대조건',
-      sub: [
-        '비대면 가입',
-        '은행 앱 사용',
-        '급여연동',
-        '연금',
-        '공과금연동',
-        '카드사용',
-        '첫거래',
-        '입출금통장',
-        '재에치',
-      ],
-    },
+    { filter: '상품 유형', sub: ['누구나 가입'] },
   ];
+
   const SavingTerms = [
     { filter: '기간 및 금액', sub: ['전체', '3개월', '6개월', '12개월', '24개월', '36개월'] },
-    {
-      filter: '상품 유형',
-      sub: ['특판', '방문없이 가입', '청년 적금', '군인 적금', '주택 청약', '자유 적금', '정기 적금', '청년 도약 계좌'],
-    },
-    {
-      filter: '우대조건',
-      sub: [
-        '비대면 가입',
-        '은행 앱 사용',
-        '급여연동',
-        '입출금통장',
-        '공과금연동',
-        '카드사용',
-        '첫거래',
-        '청약보유',
-        '추천, 쿠폰',
-        '자동이체/달성',
-      ],
-    },
+    { filter: '상품 유형', sub: ['누구나 가입'] },
   ];
+
   const CmaTerms = [
     { filter: '상품 유형', sub: ['RP형', '종금어음형', '종금형'] },
     { filter: '우대조건', sub: ['비대면 가입', '예금자 보호', '주식 거래 가능', '체크카드 발급', '수수료 해택'] },
@@ -149,40 +120,40 @@ const WhatToDoPage = () => {
       id: 0,
       productName: '상품명',
       bankName: '은행명',
-      maxInterestRate: '최고 0.00%',
-      interestRate: '기본 0.00%',
+      maxInterestRate: '3.23',
+      interestRate: '3.40',
       isHeart: false,
     },
     {
       id: 1,
       productName: '상품명2',
       bankName: '은행명2',
-      maxInterestRate: '최고 0.00%',
-      interestRate: '기본 0.00%',
+      maxInterestRate: '3.30',
+      interestRate: '3.40',
       isHeart: true,
     },
     {
       id: 2,
       productName: '상품명3',
       bankName: '은행명3',
-      maxInterestRate: '최고 0.00%',
-      interestRate: '기본 0.00%',
+      maxInterestRate: '3.23',
+      interestRate: '3.53',
       isHeart: false,
     },
     {
       id: 3,
       productName: '상품명4',
       bankName: '은행명4',
-      maxInterestRate: '최고 0.00%',
-      interestRate: '기본 0.00%',
+      maxInterestRate: '3.23',
+      interestRate: '3.53',
       isHeart: false,
     },
     {
       id: 4,
       productName: '상품명5',
       bankName: '은행명5',
-      maxInterestRate: '최고 0.00%',
-      interestRate: '기본 0.00%',
+      maxInterestRate: '3.56',
+      interestRate: '3.33',
       isHeart: false,
     },
   ];
@@ -250,6 +221,18 @@ const WhatToDoPage = () => {
     setBankDataSaving(Saving);
     setBankDataCma(CmaData);
   }, []);
+
+  useEffect(() => {
+    if (sort) {
+      const sortedDeposit = [...Deposit];
+      sortedDeposit.sort((a, b) => Number(b.maxInterestRate) - Number(a.maxInterestRate));
+      setBankDataDeposit(sortedDeposit);
+    } else {
+      const sortedDeposit = [...Deposit];
+      sortedDeposit.sort((a, b) => Number(b.interestRate) - Number(a.interestRate));
+      setBankDataDeposit(sortedDeposit);
+    }
+  }, [sort]);
 
   const onAllClickBank = () => {
     if (num === 1) {
@@ -390,10 +373,17 @@ const WhatToDoPage = () => {
           {size === 'Large' ? (
             <div className='mt-39 mb-10 flex justify-between w-850'>
               <div className='label-medium text-typoSecondary'>{bankDataDeposit.length}개</div>
-              <div className='flex'>
-                <span className='mr-3 label-medium text-typoSecondary'>최고 금리 순</span>
-                <ArrowDown width='24px' />
-              </div>
+              {sort ? (
+                <button className='flex' onClick={() => setSort(!sort)}>
+                  <span className='mr-3 label-medium text-typoSecondary'>기본 금리 순</span>
+                  <ArrowDown width='24px' />
+                </button>
+              ) : (
+                <button className='flex' onClick={() => setSort(!sort)}>
+                  <span className='mr-3 label-medium text-typoSecondary'>최고 금리 순</span>
+                  <ArrowDown width='24px' />
+                </button>
+              )}
             </div>
           ) : (
             <div className='mt-39 mb-10 flex justify-between w-330'>
@@ -483,7 +473,7 @@ const WhatToDoPage = () => {
           ) : (
             <div className='mt-39 mb-10 flex justify-between w-330'>
               <div>{bankDataSaving.length}개</div>
-              <div>최고 금리 순</div>
+              <button>최고 금리 순</button>
             </div>
           )}
           {bankDataSaving.map((data, index) => {
@@ -565,7 +555,7 @@ const WhatToDoPage = () => {
           ) : (
             <div className='mt-39 mb-10 flex justify-between w-330'>
               <div>{bankDataCma.length}개</div>
-              <div>최고 금리 순</div>
+              <button>최고 금리 순</button>
             </div>
           )}
           {bankDataCma.map((data, index) => {
