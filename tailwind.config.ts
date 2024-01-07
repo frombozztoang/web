@@ -55,6 +55,7 @@ const config: Config = {
         mainLevel900: 'var(--main-level-900)',
         mainFooter: 'var(--main-footer)',
         imageBase: 'var(--image-base)',
+        darkComponent: 'var(--dark-component)',
       },
       fontFamily: {
         pretendard: 'var(--font-families-pretendard)',

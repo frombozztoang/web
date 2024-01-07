@@ -37,11 +37,11 @@ export default function ChatbotUI() {
   return (
     <div className='absolute right-[100px] bottom-[100px] max-h-500 h-full rounded-12 overflow-hidden'>
       {/* header */}
-      <div className=' w-full flex justify-center items-center font-bold text-20 text-white py-10 bg-green-600'>
+      <div className=' w-full flex justify-center items-center heading-large text-white py-10 bg-mainLevel400'>
         금토리에게 물어봐
       </div>
       {/* body */}
-      <div className='pt-18 pb-10 bg-green-200 h-[calc(100%-50px)] flex flex-col justify-between'>
+      <div className='pt-18 pb-10 bg-mainLevel100 h-[calc(100%-50px)] flex flex-col justify-between'>
         {/* chat */}
         <div className='flex flex-col-reverse gap-20 px-20 pb-50 overflow-scroll'>
           {chatData.toReversed().map(({ profile, text }, i) =>
@@ -62,8 +62,9 @@ export default function ChatbotUI() {
           <AutoResizableTextarea
             maxRows={2}
             textareaRef={textareaRef}
+            autoComplete='off'
             // TODO: 글자 크기에 따라 h-47값 변경 필요 (Button도 동일)
-            className=' bg-white rounded-10 py-10 px-13 resize-none outline-none w-350 h-47'
+            className=' bg-white text-darkComponent rounded-10 py-10 px-13 resize-none outline-none w-350 h-47'
             onKeyUp={(event) => {
               if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault();
@@ -71,7 +72,7 @@ export default function ChatbotUI() {
               }
             }}
           ></AutoResizableTextarea>
-          <button className=' bg-black text-white text-16 py-10 px-20 rounded-10 h-47'>전송</button>
+          <button className=' bg-darkComponent text-white text-16 py-10 px-20 rounded-10 h-47'>전송</button>
         </form>
       </div>
     </div>

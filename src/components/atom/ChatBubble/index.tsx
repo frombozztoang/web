@@ -10,8 +10,8 @@ export default function ChatBubble({
     <div
       {...props}
       className={cls(
-        'text-20 font-bold rounded-10 p-12 whitespace-pre-wrap',
-        profile === 'me' ? 'bg-green-600 text-white' : 'bg-white text-black',
+        'label-medium rounded-10 p-12 whitespace-pre-wrap',
+        profile === 'me' ? ' bg-mainLevel400 text-white' : 'bg-white text-darkComponent',
       )}
     >
       {children}
