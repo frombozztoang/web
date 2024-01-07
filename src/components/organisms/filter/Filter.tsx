@@ -3,12 +3,12 @@ import FilterResult from '@/components/atom/filter/FilterResult';
 import FilterSubBtn from '@/components/atom/filter/FilterSubBtn';
 import React from 'react';
 import { cls } from '@/utils/cls';
-//import InputAmount from '@/components/molecules/inputfield/InputAmount';
+import InputAmount from '@/components/molecules/inputfield/InputAmount';
 
 type TFilterProps = {
   size: 'Large' | 'Small';
-  amount: string;
-  onInputAmountHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  amount?: string;
+  onInputAmountHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   activeFilterIndex: number | undefined;
   setActiveFilterIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   subIsOn: string[];
@@ -17,6 +17,7 @@ type TFilterProps = {
     filter: string;
     sub: string[];
   }[];
+  onInputOn: boolean;
   PlusSubBtn: (data: string) => void;
 };
 
@@ -29,6 +30,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
   setSubIsOn,
   filterTerms,
   PlusSubBtn,
+  onInputOn,
   size,
   ...props
 }) => {
@@ -76,12 +78,14 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
           })}
         </div>
       )}
-      {/* <div className='pl-17 pt-12'>
-        <InputAmount amount={amount} onInputAmountHandler={onInputAmountHandler} />
-      </div> */}
+      {activeFilterIndex === 0 && onInputOn && (
+        <div className={cls('pl-17', subIsOn.length === 0 ? 'pt-12' : 'pb-8')}>
+          <InputAmount amount={amount} onInputAmountHandler={onInputAmountHandler} />
+        </div>
+      )}
       {!(subIsOn.length === 0) && (
         <>
-          <hr className='border-b-2 border-border01' />
+          <hr className='border-b-1 border-border01' />
           <div className='mt-8 pl-17'>
             {subIsOn.map((data, index) => {
               return (
@@ -102,7 +106,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
     <div
       {...props}
       className={cls(
-        'w-342 bg-secondary border-2 border-border01 rounded-20',
+        'w-855 bg-secondary border-2 border-border01 rounded-10',
         subIsOn.length === 0 ? 'py-20' : 'pt-20',
       )}
     >
@@ -127,7 +131,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
         })}
       </div>
       {activeFilterIndex !== undefined && (
-        <div className={cls('pl-17', subIsOn.length === 0 ? 'mb-0' : 'mb-12')}>
+        <div className={cls('pl-17 ', subIsOn.length === 0 ? 'mb-0' : 'mb-12')}>
           {filterTerms[activeFilterIndex].sub.map((data, index) => {
             return (
               <FilterSubBtn
@@ -142,12 +146,14 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
           })}
         </div>
       )}
-      {/* <div className='pl-17 pt-12'>
-        <InputAmount amount={amount} onInputAmountHandler={onInputAmountHandler} />
-      </div> */}
+      {activeFilterIndex === 0 && onInputOn && (
+        <div className={cls('pl-17', subIsOn.length === 0 ? 'pt-12' : 'pb-8')}>
+          <InputAmount amount={amount} onInputAmountHandler={onInputAmountHandler} />
+        </div>
+      )}
       {!(subIsOn.length === 0) && (
         <>
-          <hr className='border-b-2 border-border01' />
+          <hr className='border-b-1 border-border01' />
           <div className='mt-8 pl-17'>
             {subIsOn.map((data, index) => {
               return (

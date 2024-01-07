@@ -47,18 +47,22 @@ const InterestRateGuide: React.FC<TInterestRateGuideProps & React.HTMLAttributes
         </div>
       </div>
       <table className='table-auto w-776 border-t-1 border-border02 mt-39 mb-63'>
-        <tr className='border-b-1 border-border02 h-33'>
-          <th className='border-r-1 border-border02 label-small text-typoPrimary bg-border00'>기간</th>
-          <th className='label-small text-typoPrimary bg-border00'>금리</th>
-        </tr>
-        <tr className='border-b-1 border-border02 h-33'>
-          <td className='border-r-1 border-border02 label-small text-typoSecondary'></td>
-          <td className='label-small text-typoSecondary'></td>
-        </tr>
-        <tr className='border-b-1 border-border02 h-33'>
-          <td className='border-r-1 border-border02 label-small text-typoSecondary'></td>
-          <td className='label-small text-typoSecondary'></td>
-        </tr>
+        <thead>
+          <tr className='border-b-1 border-border02 h-33'>
+            <th className='border-r-1 border-border02 label-small text-typoPrimary bg-border00'>기간</th>
+            <th className='label-small text-typoPrimary bg-border00'>금리</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className='border-b-1 border-border02 h-33'>
+            <td className='border-r-1 border-border02 label-small text-typoSecondary'></td>
+            <td className='label-small text-typoSecondary'></td>
+          </tr>
+          <tr className='border-b-1 border-border02 h-33'>
+            <td className='border-r-1 border-border02 label-small text-typoSecondary'></td>
+            <td className='label-small text-typoSecondary'></td>
+          </tr>
+        </tbody>
       </table>
       <div className='flex justify-center'>
         <DefaultBtn />

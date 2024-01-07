@@ -38,14 +38,16 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data, size }) => {
       <h1 className='heading-xl text-typoPrimary'>주요 특징</h1>
       <hr className='w-766 border-1 border-border02 my-10' />
       <table className='table-auto w-776 mb-63'>
-        {data1.map((item, index) => {
-          return (
-            <tr key={index}>
-              <th className='pb-10 text-left align-top w-94 paragraph-medium text-typoSecondary'>{item.title}</th>
-              <td className='px-25 paragraph-medium text-typoPrimary'>{item.content}</td>
-            </tr>
-          );
-        })}
+        <tbody>
+          {data1.map((item, index) => {
+            return (
+              <tr key={index}>
+                <th className='pb-10 text-left align-top w-94 paragraph-medium text-typoSecondary'>{item.title}</th>
+                <td className='px-25 paragraph-medium text-typoPrimary'>{item.content}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
       <h1 className='heading-xl text-typoPrimary'>수수료 혜택 안내</h1>
       <hr className='w-766 border-1 border-border02 my-10' />
