@@ -33,7 +33,7 @@ const WhatToDoPage = () => {
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
   const [size, setSize] = useState<'Large' | 'Small'>('Large');
-  const [sort, setSort] = useState(true); //true:기본금리순, false, 최고금리순
+  const [sort, setSort] = useState(true); //true:최고금리순, false:기본금리순
 
   //예금
   const [depAllFin, setDepAllFin] = useState(false);
@@ -120,7 +120,7 @@ const WhatToDoPage = () => {
       id: 0,
       productName: '상품명',
       bankName: '은행명',
-      maxInterestRate: '3.23',
+      maxInterestRate: '3.28',
       interestRate: '3.40',
       isHeart: false,
     },
@@ -375,12 +375,12 @@ const WhatToDoPage = () => {
               <div className='label-medium text-typoSecondary'>{bankDataDeposit.length}개</div>
               {sort ? (
                 <button className='flex' onClick={() => setSort(!sort)}>
-                  <span className='mr-3 label-medium text-typoSecondary'>기본 금리 순</span>
+                  <span className='mr-3 label-medium text-typoSecondary'>최고 금리 순</span>
                   <ArrowDown width='24px' />
                 </button>
               ) : (
                 <button className='flex' onClick={() => setSort(!sort)}>
-                  <span className='mr-3 label-medium text-typoSecondary'>최고 금리 순</span>
+                  <span className='mr-3 label-medium text-typoSecondary'>기본 금리 순</span>
                   <ArrowDown width='24px' />
                 </button>
               )}
