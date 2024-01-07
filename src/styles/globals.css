@@ -142,3 +142,7 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+input {
+  all: unset;
+}

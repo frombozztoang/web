@@ -12,6 +12,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  mode: 'jit',
   theme: {
     extend: {
       borderWidth: px0_10,
@@ -54,6 +55,7 @@ const config: Config = {
         mainLevel900: 'var(--main-level-900)',
         mainFooter: 'var(--main-footer)',
         imageBase: 'var(--image-base)',
+        darkComponent: 'var(--dark-component)',
       },
       fontFamily: {
         pretendard: 'var(--font-families-pretendard)',
