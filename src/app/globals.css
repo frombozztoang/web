@@ -80,14 +80,6 @@
     font-weight: 700;
     line-height: 140%; /* 22.4px */
   }
-
-  .heading-small {
-    font-family: Pretendard;
-    font-size: 12.003px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 140%; /* 16.804px */
-  }
 }
 
 /* 기본 스타일 */
@@ -122,24 +114,4 @@
 
 body {
   font-family: 'Pretendard', sans-serif;
-}
-
-@layer utilities {
-  input[type='number']::-webkit-inner-spin-button,
-  input[type='number']::-webkit-outer-spin-button {
-    @apply appearance-none;
-  }
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-input {
-  all: unset;
 }
