@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import BubbleP from '@/public/icons/bubble-p.svg';
 //import BubbleT from '@/public/icons/bubble-t.svg';
 import BubbleM from '@/public/icons/bubble-m.svg';
+import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 
 type TDepositSaving = {
   id: number;
@@ -25,10 +26,19 @@ type TDepositSaving = {
 const WhatToDoPage = () => {
   const router = useRouter();
   const [amount, setAmount] = useState('');
+  const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
   const [size, setSize] = useState<'Large' | 'Small'>('Large');
   const [sort, setSort] = useState(true); //true:최고금리순, false:기본금리순
+
+  useEffect(() => {
+    if (isDesktop) {
+      setSize('Large');
+    } else if (isMobile || isTablet) {
+      setSize('Small');
+    }
+  }, [isDesktop, isTablet, isMobile, size]);
 
   //예금
   const [depAllFin, setDepAllFin] = useState(false);

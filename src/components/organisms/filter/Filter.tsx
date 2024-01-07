@@ -80,7 +80,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
       )}
       {activeFilterIndex === 0 && onInputOn && (
         <div className={cls('pl-17', subIsOn.length === 0 ? 'pt-12' : 'pb-8')}>
-          <InputAmount amount={amount} onInputAmountHandler={onInputAmountHandler} />
+          <InputAmount size={size} amount={amount} onInputAmountHandler={onInputAmountHandler} />
         </div>
       )}
       {!(subIsOn.length === 0) && (
@@ -106,7 +106,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
     <div
       {...props}
       className={cls(
-        'w-855 bg-secondary border-2 border-border01 rounded-10',
+        'w-342 bg-secondary border-2 border-border01 rounded-20',
         subIsOn.length === 0 ? 'py-20' : 'pt-20',
       )}
     >
@@ -148,7 +148,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
       )}
       {activeFilterIndex === 0 && onInputOn && (
         <div className={cls('pl-17', subIsOn.length === 0 ? 'pt-12' : 'pb-8')}>
-          <InputAmount amount={amount} onInputAmountHandler={onInputAmountHandler} />
+          <InputAmount size={size} amount={amount} onInputAmountHandler={onInputAmountHandler} />
         </div>
       )}
       {!(subIsOn.length === 0) && (

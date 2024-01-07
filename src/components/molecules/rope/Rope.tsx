@@ -60,7 +60,7 @@ const Rope: React.FC<TRopeProps & React.HTMLAttributes<HTMLButtonElement>> = ({
         ))}
       </div>
       <div className='h-75 border-l-2 border-border04'></div>
-      <button {...props} className='pl-23 pr-13 flex flex-col justify-center items-center'>
+      <button {...props} className='pl-18 pr-13 flex flex-col justify-center items-center'>
         <Plus className='w-29 h-29' />
         <div className='text-border04 label-medium'>더보기</div>
       </button>

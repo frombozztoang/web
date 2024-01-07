@@ -1,6 +1,6 @@
 import React from 'react';
 import Heart from '@/public/icons/heart.svg';
-import HeartClick from '@/public/icons/heartclick.svg';
+import HeartClick from '@/public/icons/heart_click.svg';
 
 type TDepositSavingProps = {
   isLiked: boolean;
@@ -53,7 +53,7 @@ const DepositSaving: React.FC<TDepositSavingProps & React.HTMLAttributes<HTMLDiv
   ) : (
     <div
       {...props}
-      className='flex w-342 p-16 justify-between items-center gap-341 rounded-10 border-1 border-border01 bg-secondary'
+      className='flex w-342 p-16 justify-between items-center gap-341 rounded-10 border-1 border-border01 bg-secondary cursor-pointer'
     >
       <div className='flex flex-row items-center'>
         <div className='w-59 h-59 rounded-10 bg-imageBase'></div>

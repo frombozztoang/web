@@ -1,5 +1,5 @@
 import React from 'react';
-import ArrowDown from '@/public/icons/arrow-down.svg';
+import ArrowDown from '@/public/icons/arrow-down-2.svg';
 import { cls } from '@/utils/cls';
 
 type TFilterBtnProps = {

@@ -34,7 +34,7 @@ const InterestRateGuide: React.FC<TInterestRateGuideProps & React.HTMLAttributes
       <h1 className='heading-large text-typoPrimary'>금리 안내</h1>
       <hr className='w-766 mt-10 mb-39 border-1 border-typoPrimary' />
       <h1 className='mb-10 heading-large text-typoPrimary'>예치 금액</h1>
-      <InputAmount amount={amountStr} onInputAmountHandler={onInputAmountHandler} onClick={AmountHandler} />
+      <InputAmount size={size} amount={amountStr} onInputAmountHandler={onInputAmountHandler} onClick={AmountHandler} />
       <div className='bg-mainLevel200 rounded-10 py-17 mt-39'>
         <div className='flex justify-between'>
           <div className='ml-13 label-medium text-typoSecondary'>기본 세후 수령액</div>

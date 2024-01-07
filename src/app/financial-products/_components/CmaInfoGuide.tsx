@@ -1,5 +1,5 @@
-import DefaultBtn from '@/components/atom/button/DefaultBtn';
 import React from 'react';
+import DefaultBtn from '@/components/atom/button/DefaultBtn';
 
 type TCmaInfoGuideProps = {
   size: 'Large' | 'Small';

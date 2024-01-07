@@ -193,7 +193,7 @@ const WhatToDoPage = () => {
           <BankGoldtori width='178px' />
         </div>
       ) : (
-        <div className='flex justify-between w-330'>
+        <div className='flex justify-between w-342'>
           <div className='mt-20 relative'>
             <span className='absolute top-14 left-22 text-main label-small w-190'>
               적금은 월 단위로 일정 금액을 저축 후 만기에 이자와 함께 돌려받는 상품이에요 !

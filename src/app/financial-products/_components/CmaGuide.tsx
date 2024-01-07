@@ -1,6 +1,6 @@
 import React from 'react';
 import Heart from '@/public/icons/heart.svg';
-import HeartClick from '@/public/icons/heartclick.svg';
+import HeartClick from '@/public/icons/heart_click.svg';
 
 type TCmaGuideProps = {
   size: 'Large' | 'Small';
