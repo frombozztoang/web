@@ -1,8 +1,7 @@
 'use client';
 import StudyToggle from '@/components/atom/toggle/StudyToggle';
-
-import Setting from '@/components/templates/mypage/Setting';
-import Favorites from '@/components/templates/mypage/Favorites';
+import Setting from '@/components/templates/mypage/setting';
+import Favorites from '@/components/templates/mypage/favorites';
 import React, { useEffect, useState } from 'react';
 
 import { KAKAO_REDIRECT_URI_DEPLOY, KAKAO_REDIRECT_URI_DEVELOPMENT } from '@/constants/redirectUri';
