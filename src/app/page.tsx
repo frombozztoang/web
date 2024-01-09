@@ -1,3 +1,4 @@
+import React from 'react';
 import SectionOne from '@/components/templates/main/SectionOne';
 import SectionThree from '@/components/templates/main/SectionThree';
 import SectionTwo from '@/components/templates/main/SectionTwo';
