@@ -1,4 +1,4 @@
-import SubHeader from '@/components/organisms/mypage/SubHeader';
+import SubHeader from '@/components/organisms/myPage/SubHeader';
 import React from 'react';
 
 const Favorites = () => {

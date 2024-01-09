@@ -18,28 +18,20 @@ const FilterSubBtn: React.FC<TFilterSubBtnProps & React.HTMLAttributes<HTMLDivEl
       {...props}
       className={cls(
         'inline-flex p-12 items-center bg-secondary rounded-20 border cursor-pointer',
-        isOn ? 'border-border02' : 'border-main',
+        isOn ? 'border-main' : 'border-border02',
       )}
     >
-      <span
-        className={cls('font-pretendard text-16 font-semibold leading-24', isOn ? 'text-typoPrimary' : 'text-main')}
-      >
-        {text}
-      </span>
+      <span className={cls('label-medium', isOn ? 'text-main' : 'text-typoPrimary')}>{text}</span>
     </div>
   ) : (
     <div
       {...props}
       className={cls(
-        'inline-flex p-9 items-center bg-secondary rounded-15 border cursor-pointer',
-        isOn ? 'border-border02' : 'border-main',
+        'inline-flex p-9 items-center bg-secondary rounded-15 border cursor-pointer tablet:p-20 tablet:rounded-34 tablet:border-2',
+        isOn ? 'border-main' : 'border-border02',
       )}
     >
-      <span
-        className={cls('font-pretendard text-12 font-semibold leading-18', isOn ? 'text-typoPrimary' : 'text-main')}
-      >
-        {text}
-      </span>
+      <span className={cls('label-small tablet:label-xl', isOn ? 'text-main' : 'text-typoPrimary')}>{text}</span>
     </div>
   );
 };

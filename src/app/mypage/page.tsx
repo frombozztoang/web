@@ -1,18 +1,18 @@
 'use client';
 import StudyToggle from '@/components/atom/toggle/StudyToggle';
 import PolicyItem from '@/components/molecules/mypage/PolicyItem';
-import Accordian from '@/components/organisms/mypage/Accordian';
+import Accordian from '@/components/organisms/myPage/Accordian';
 import Setting from '@/components/templates/myPage/Setting';
-import SubHeader from '@/components/organisms/mypage/SubHeader';
+//import SubHeader from '@/components/organisms/mypage/SubHeader';
 import Favorites from '@/components/templates/myPage/Favorites';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import ModalView from '@/components/organisms/modal/modalView';
 import Login from '@/components/organisms/modal/Login';
 import { KAKAO_REDIRECT_URI_DEPLOY, KAKAO_REDIRECT_URI_DEVELOPMENT } from '@/constants/redirectUri';
 import Script from 'next/script';
 
-const page = () => {
+const Page = () => {
   const [toggle, setToggle] = useState(0);
 
   const user = false; // 로그인 여부
@@ -65,4 +65,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
