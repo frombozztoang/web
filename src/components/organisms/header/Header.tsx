@@ -37,7 +37,6 @@ const Header = () => {
   };
 
   const handleMenuHover = (menuName: string) => {
-    console.log('엥', pathname);
     setActiveMenu(menuName);
   };
 
