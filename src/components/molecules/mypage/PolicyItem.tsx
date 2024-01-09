@@ -14,7 +14,7 @@ type TPolicyItemProps = {
 
 const PolicyItem = ({ img, name, description, like, maxInterestRate, interestRate }: TPolicyItemProps) => {
   return (
-    <div className='bg-secondary dark:bg-dark-secondary dark:border-dark-border01 w-342 tablet:w-855 px-20 py-16 tablet:px-30 tablet:py-25 flex items-center border-2 rounded-10 border-border01 box-border '>
+    <div className='mb-10 bg-secondary dark:bg-dark-secondary dark:border-dark-border01 w-342 tablet:w-855 px-20 py-16 tablet:px-30 tablet:py-25 flex items-center border-2 rounded-10 border-border01 box-border '>
       {img == null ? (
         <div className=' w-72 h-72 bg-imageBase rounded-xl mr-21 flex items-center justify-center object-cover '>
           <Image src={img} alt='policyImg' />

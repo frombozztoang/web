@@ -1,7 +1,7 @@
 import SubBtn from '@/components/atom/button/SubBtn';
 import React, { useState } from 'react';
-import Educations from '../../organisms/mypage/educations';
-import FinancialProducts from '../../organisms/mypage/financialProducts';
+import Educations from '../../organisms/mypage/Educations';
+import FinancialProducts from '../../organisms/mypage/FinancialProducts';
 import Policies from '../../organisms/mypage/Policies';
 
 export const subHeaderItems = [
@@ -17,7 +17,7 @@ const Favorites = () => {
   };
   return (
     <div className='flex flex-col w-342 tablet:w-854'>
-      <div className='heading-large border-b-2 border-black pb-10 mt-63 mb-10 dark:text-dark-primary dark:border-white '>
+      <div className='heading-large border-b-2 border-black pb-10  mb-10 dark:text-dark-primary dark:border-white '>
         즐겨찾기
       </div>
       <div className='flex justify-between tablet:justify-start mb-63'>

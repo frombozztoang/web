@@ -5,7 +5,7 @@ import PolicyItem from '@/components/molecules/mypage/PolicyItem';
 
 type TAccordianProps = {
   title: string;
-  count: string;
+  count: number;
   children?: React.ReactNode;
 };
 
