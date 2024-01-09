@@ -9,6 +9,14 @@
 } */
 
 @layer utilities {
+  .paragraph-xl {
+    font-family: Pretendard;
+    font-size: 27.699px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 44.319px */
+  }
+
   .paragraph-large {
     font-family: Pretendard;
     font-size: 21.328px;
@@ -31,6 +39,22 @@
     font-style: normal;
     font-weight: 400;
     line-height: 160%; /* 19.205px */
+  }
+
+  .label-xxl {
+    font-family: Pretendard;
+    font-size: 36.923px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+  }
+
+  .label-xl {
+    font-family: Pretendard;
+    font-size: 27.699px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 41.549px */
   }
 
   .label-large {
@@ -57,6 +81,22 @@
     line-height: 150%; /* 18.005px */
   }
 
+  .heading-xxxl {
+    font-family: Pretendard;
+    font-size: 47.23px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 66.122px */
+  }
+
+  .heading-xxl {
+    font-family: Pretendard;
+    font-size: 36.923px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 51.692px */
+  }
+
   .heading-xl {
     font-family: Pretendard;
     font-size: 28.43px;
@@ -79,6 +119,14 @@
     font-style: normal;
     font-weight: 700;
     line-height: 140%; /* 22.4px */
+  }
+
+  .heading-small {
+    font-family: Pretendard;
+    font-size: 12.003px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 16.804px */
   }
 }
 
@@ -114,6 +162,22 @@
 
 body {
   font-family: 'Pretendard', sans-serif;
+}
+
+@layer utilities {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    @apply appearance-none;
+  }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 input {

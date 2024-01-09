@@ -24,6 +24,7 @@
     "@yoopta/marks": "^1.9.15-rc",
     "@yoopta/paragraph": "^1.9.17-rc",
     "@yoopta/toolbar": "^1.9.15-rc",
+    "has-flag": "^5.0.1",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
