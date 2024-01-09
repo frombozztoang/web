@@ -7,11 +7,12 @@ import MenuItem, { menuItems } from './MenuItem';
 import HeaderSwitch from '@/components/atom/header/HeaderSwitch';
 import MobileHeader from './MobileHeader';
 import { cls } from '@/utils/cls';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [darkMode, setDarkMode] = useState(false);
-
+  const pathname = usePathname();
   // darkMode 변경 시 확인 및 초기화
   useEffect(() => {
     themeCheck();
@@ -44,15 +45,15 @@ const Header = () => {
   };
 
   return (
-    <nav className={cls('z-header w-auto font-teneda py-12 px-24 bg-white tablet:px-200 mb-130')}>
-      <ul className='flex justify-between tablet:px-64 '>
+    <nav className={cls('z-header w-auto font-teneda py-12 px-24 bg-white dark:bg-dark-bg tablet:px-200 mb-130')}>
+      <ul className='flex justify-between items-center  desktop:px-64 '>
         <div className='flex items-center justify-center '>
           <li className='mr-258  tablet:mr-64'>
             <Link href='/'>
-              <Image layout='fixed' className='w-115 h-40' src={logoLight} alt='Logo Light' />
+              <Image className='w-115 h-40' priority src={logoLight} alt='Logo Light' />
             </Link>
           </li>
-          <div className='hidden tablet:flex '>
+          <div className='hidden desktop:flex '>
             {menuItems.map((menuItem) => (
               <MenuItem
                 key={menuItem.name}
@@ -60,18 +61,21 @@ const Header = () => {
                 activeMenu={activeMenu}
                 handleMenuHover={handleMenuHover}
                 handleMenuLeave={handleMenuLeave}
+                pathname={pathname}
               />
             ))}
           </div>
         </div>
-        <div className='flex items-center '>
-          <li className='hidden tablet:flex mr-26'>
+        <div className='flex  items-center'>
+          <li className='hidden desktop:flex mr-26'>
             <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
           </li>
-          <li className='mr-12 text-main text-22'>
-            <Link href='/mypage'>MY</Link>
+          <li className='mr-12 text-main text-22 pt-10  '>
+            <Link href='/mypage' className='text-center '>
+              MY
+            </Link>
           </li>
-          <li className='flex tablet:hidden '>
+          <li className='w-full h-full  flex desktop:hidden '>
             <MobileHeader darkMode={darkMode} setDarkMode={setDarkMode} />
           </li>
         </div>
