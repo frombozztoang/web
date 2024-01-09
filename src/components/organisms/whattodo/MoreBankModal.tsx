@@ -140,7 +140,7 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
             )}
           </div>
           <MainBtn
-            mr='mt-55'
+            styles='mt-55'
             onClick={() => {
               setBankAllFin(allBtn);
               setBankAllSave(allBtn2);
@@ -221,7 +221,7 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
             )}
           </div>
           <MainBtn
-            mr='mt-31 mb-39 tablet:mt-68 tablet:mb-56 tablet:px-197 tablet:py-19 tablet:gap-22 tablet:rounded-22 tablet:heading-xxxl'
+            styles='mt-31 mb-39 tablet:mt-68 tablet:mb-56 tablet:px-197 tablet:py-19 tablet:gap-22 tablet:rounded-22 tablet:heading-xxxl'
             onClick={() => {
               setBankAllFin(allBtn);
               setBankAllSave(allBtn2);
