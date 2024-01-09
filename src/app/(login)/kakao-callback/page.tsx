@@ -1,6 +1,7 @@
 'use client';
 
 import { postKakaoLogin } from '@/api/loginApi';
+import { user } from '@/class/user';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -13,8 +14,11 @@ export default function KakaoCallback() {
   useEffect(() => {
     if (typeof code === 'string') {
       (async () => {
-        const response = await postKakaoLogin(code); // 서버에 로그인 요청
-        if (response.status === 200) {
+        const { status, accessToken, isAdmin } = await postKakaoLogin(code); // 서버에 로그인 요청
+        if (status === 200) {
+          user.setAccessToken(accessToken);
+          user.setIsAdmin(isAdmin);
+          console.log(status, accessToken, isAdmin);
           router.push('/');
         }
       })();
