@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import FinanceToggle from '@/components/atom/toggle/FinanceToggle';
 import Rope from '@/components/molecules/rope/Rope';
 import DepositSaving from '@/components/molecules/whattodo/DepositSaving';
@@ -57,7 +57,7 @@ const WhatToDoPage = () => {
     }
   }, [isDesktop, isTablet, isMobile, size]);
 
-  const BankInfo = [
+  const DUMMY_BANK1 = [
     '경남은행',
     '광주은행',
     '국민은행',
@@ -72,7 +72,7 @@ const WhatToDoPage = () => {
     '주식회사 카카오뱅크',
   ];
 
-  const BankInfo2 = [
+  const DUMMY_BANK2 = [
     'CK저축은행',
     'HB저축은행',
     '고려저축은행',
@@ -92,52 +92,55 @@ const WhatToDoPage = () => {
     '동원제일저축은행',
   ];
 
-  const Saving = [
-    {
-      id: 0,
-      productName: '상품명적금',
-      bankName: '은행명',
-      maxInterestRate: '3.56',
-      interestRate: '3.33',
-      isLiked: false,
-    },
-    {
-      id: 1,
-      productName: '상품명적금2',
-      bankName: '은행명2',
-      maxInterestRate: '3.23',
-      interestRate: '3.53',
-      isLiked: true,
-    },
-    {
-      id: 2,
-      productName: '상품명적금3',
-      bankName: '은행명3',
-      maxInterestRate: '3.30',
-      interestRate: '3.40',
-      isLiked: false,
-    },
-  ];
+  const DUMMY_SAVINGS = useMemo(
+    () => [
+      {
+        id: 0,
+        productName: '상품명적금',
+        bankName: '은행명',
+        maxInterestRate: '3.56',
+        interestRate: '3.33',
+        isLiked: false,
+      },
+      {
+        id: 1,
+        productName: '상품명적금2',
+        bankName: '은행명2',
+        maxInterestRate: '3.23',
+        interestRate: '3.53',
+        isLiked: true,
+      },
+      {
+        id: 2,
+        productName: '상품명적금3',
+        bankName: '은행명3',
+        maxInterestRate: '3.30',
+        interestRate: '3.40',
+        isLiked: false,
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
-    setBankDataSaving(Saving);
-  }, []);
+    setBankDataSaving(DUMMY_SAVINGS);
+  }, [DUMMY_SAVINGS]);
 
   useEffect(() => {
     if (sort) {
-      const sortedSaving = [...Saving];
+      const sortedSaving = [...DUMMY_SAVINGS];
       sortedSaving.sort((a, b) => Number(b.maxInterestRate) - Number(a.maxInterestRate));
       setBankDataSaving(sortedSaving);
     } else {
-      const sortedSaving = [...Saving];
+      const sortedSaving = [...DUMMY_SAVINGS];
       sortedSaving.sort((a, b) => Number(b.interestRate) - Number(a.interestRate));
       setBankDataSaving(sortedSaving);
     }
-  }, [sort]);
+  }, [sort, DUMMY_SAVINGS]);
 
   const onAllClickBank = () => {
     if (!savAllFin) {
-      const allBanks = BankInfo.map((info) => info);
+      const allBanks = DUMMY_BANK1.map((info) => info);
       setSavSelFin(allBanks);
     } else {
       setSavSelFin([]);
@@ -218,7 +221,7 @@ const WhatToDoPage = () => {
         allBtnClick={savAllFin}
         onAllClickBank={onAllClickBank}
         selectedBanks={savSelFin}
-        bankInfo={BankInfo}
+        bankInfo={DUMMY_BANK1}
         onClickBank={onClickBank}
       />
       <Filter
@@ -288,8 +291,8 @@ const WhatToDoPage = () => {
           <MoreBankModal
             closeModal={() => setIsOpen(!isOpen)}
             size={size}
-            bankInfo={BankInfo}
-            bankInfo2={BankInfo2}
+            bankInfo={DUMMY_BANK1}
+            bankInfo2={DUMMY_BANK2}
             bankAllFin={savAllFin}
             bankAllSave={savAllSave}
             setBankAllFin={setSavAllFin}

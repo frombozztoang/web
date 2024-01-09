@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import FinanceToggle from '@/components/atom/toggle/FinanceToggle';
 import Rope from '@/components/molecules/rope/Rope';
 import MoreBankModal from '@/components/organisms/whattodo/MoreBankModal';
@@ -40,11 +40,12 @@ const WhatToDoPage = () => {
   const [cmaFilterIndex, setCmaFilterIndex] = useState<number | undefined>(undefined);
   const [cmaFilter, setCmaFilter] = useState<string[]>([]); //CMA 필터 데이터
 
-  const CmaTerms = [
+  const CMA_FILTER = [
     { filter: '상품 유형', sub: ['RP형', '종금어음형', '종금형'] },
     { filter: '우대조건', sub: ['비대면 가입', '예금자 보호', '주식 거래 가능', '체크카드 발급', '수수료 해택'] },
   ];
 
+  //eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (isDesktop) {
       setSize('Large');
@@ -53,7 +54,7 @@ const WhatToDoPage = () => {
     }
   }, [isDesktop, isTablet, isMobile, size]);
 
-  const BankInfo = [
+  const DUMMY_BANK1 = [
     '경남은행',
     '광주은행',
     '국민은행',
@@ -68,7 +69,7 @@ const WhatToDoPage = () => {
     '주식회사 카카오뱅크',
   ];
 
-  const BankInfo2 = [
+  const DUMMY_BANK2 = [
     'CK저축은행',
     'HB저축은행',
     '고려저축은행',
@@ -88,44 +89,47 @@ const WhatToDoPage = () => {
     '동원제일저축은행',
   ];
 
-  const CmaData = [
-    {
-      id: 0,
-      productName: 'CMA1',
-      description: '간단한 설명',
-      rate: '3.54',
-      isLiked: true,
-    },
-    {
-      id: 1,
-      productName: 'CMA2',
-      description: '간단한 설명',
-      rate: '5.45',
-      isLiked: true,
-    },
-    {
-      id: 2,
-      productName: 'CMA3',
-      description: '간단한 설명',
-      rate: '2.43',
-      isLiked: false,
-    },
-    {
-      id: 3,
-      productName: 'CMA4',
-      description: '간단한 설명',
-      rate: '6.43',
-      isLiked: false,
-    },
-  ];
+  const DUMMY_CMA = useMemo(
+    () => [
+      {
+        id: 0,
+        productName: 'CMA1',
+        description: '간단한 설명',
+        rate: '3.54',
+        isLiked: true,
+      },
+      {
+        id: 1,
+        productName: 'CMA2',
+        description: '간단한 설명',
+        rate: '5.45',
+        isLiked: true,
+      },
+      {
+        id: 2,
+        productName: 'CMA3',
+        description: '간단한 설명',
+        rate: '2.43',
+        isLiked: false,
+      },
+      {
+        id: 3,
+        productName: 'CMA4',
+        description: '간단한 설명',
+        rate: '6.43',
+        isLiked: false,
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
-    setBankDataCma(CmaData);
-  }, []);
+    setBankDataCma(DUMMY_CMA);
+  }, [DUMMY_CMA]);
 
   const onAllClickBank = () => {
     if (!cmaAllFin) {
-      const allBanks = BankInfo.map((info) => info);
+      const allBanks = DUMMY_BANK1.map((info) => info);
       setCmaSelFin(allBanks);
     } else {
       setCmaSelFin([]);
@@ -198,7 +202,7 @@ const WhatToDoPage = () => {
         allBtnClick={cmaAllFin}
         onAllClickBank={onAllClickBank}
         selectedBanks={cmaSelFin}
-        bankInfo={BankInfo}
+        bankInfo={DUMMY_BANK1}
         onClickBank={onClickBank}
       />
       <Filter
@@ -207,7 +211,7 @@ const WhatToDoPage = () => {
         setActiveFilterIndex={setCmaFilterIndex}
         subIsOn={cmaFilter}
         setSubIsOn={setCmaFilter}
-        filterTerms={CmaTerms}
+        filterTerms={CMA_FILTER}
         PlusSubBtn={PlusSubBtn}
         onInputOn={false}
       />
@@ -239,8 +243,8 @@ const WhatToDoPage = () => {
           <MoreBankModal
             closeModal={() => setIsOpen(!isOpen)}
             size={size}
-            bankInfo={BankInfo}
-            bankInfo2={BankInfo2}
+            bankInfo={DUMMY_BANK1}
+            bankInfo2={DUMMY_BANK2}
             bankAllFin={cmaAllFin}
             bankAllSave={cmaAllSave}
             setBankAllFin={setCmaAllFin}

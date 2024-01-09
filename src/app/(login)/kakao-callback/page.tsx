@@ -25,7 +25,7 @@ export default function KakaoCallback() {
     } else {
       // 에러 처리
     }
-  }, []);
+  }, [code, router]);
 
   return <div></div>;
 }

@@ -92,7 +92,7 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
               <SubBtn text='1금융권' mr='mr-15' isOn={isOn} onClick={() => setIsOn(!isOn)} />
               <SubBtn text='저축은행' isOn={!isOn} onClick={() => setIsOn(!isOn)} />
             </div>
-            <hr className='mt-16 mbt-15 border-border01' />
+            <hr className='mt-16 mb-15 border-border01' />
             {isOn ? (
               <>
                 <SelectBtn

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import FinanceToggle from '@/components/atom/toggle/FinanceToggle';
 import Rope from '@/components/molecules/rope/Rope';
 import DepositSaving from '@/components/molecules/whattodo/DepositSaving';
@@ -44,7 +44,7 @@ const WhatToDoPage = () => {
   const [depFilterIndex, setDepFilterIndex] = useState<number | undefined>(undefined);
   const [depFilter, setDepFilter] = useState<string[]>([]); //예금 필터 데이터
 
-  const DepositTerms = [
+  const DEPOSIT_FILTER = [
     { filter: '기간 및 금액', sub: ['전체', '3개월', '6개월', '12개월', '24개월', '36개월'] },
     { filter: '상품 유형', sub: ['누구나 가입'] },
   ];
@@ -57,7 +57,7 @@ const WhatToDoPage = () => {
     }
   }, [isDesktop, isTablet, isMobile, size]);
 
-  const BankInfo = [
+  const DUMMY_BANK1 = [
     '경남은행',
     '광주은행',
     '국민은행',
@@ -72,7 +72,7 @@ const WhatToDoPage = () => {
     '주식회사 카카오뱅크',
   ];
 
-  const BankInfo2 = [
+  const DUMMY_BANK2 = [
     'CK저축은행',
     'HB저축은행',
     '고려저축은행',
@@ -92,68 +92,71 @@ const WhatToDoPage = () => {
     '동원제일저축은행',
   ];
 
-  const Deposit = [
-    {
-      id: 0,
-      productName: '상품명',
-      bankName: '은행명',
-      maxInterestRate: '3.28',
-      interestRate: '3.40',
-      isLiked: false,
-    },
-    {
-      id: 1,
-      productName: '상품명2',
-      bankName: '은행명2',
-      maxInterestRate: '3.30',
-      interestRate: '3.40',
-      isLiked: true,
-    },
-    {
-      id: 2,
-      productName: '상품명3',
-      bankName: '은행명3',
-      maxInterestRate: '3.23',
-      interestRate: '3.53',
-      isLiked: false,
-    },
-    {
-      id: 3,
-      productName: '상품명4',
-      bankName: '은행명4',
-      maxInterestRate: '3.23',
-      interestRate: '3.53',
-      isLiked: false,
-    },
-    {
-      id: 4,
-      productName: '상품명5',
-      bankName: '은행명5',
-      maxInterestRate: '3.56',
-      interestRate: '3.33',
-      isLiked: false,
-    },
-  ];
+  const DUMMY_DEPOSIT = useMemo(
+    () => [
+      {
+        id: 0,
+        productName: '상품명',
+        bankName: '은행명',
+        maxInterestRate: '3.28',
+        interestRate: '3.40',
+        isLiked: false,
+      },
+      {
+        id: 1,
+        productName: '상품명2',
+        bankName: '은행명2',
+        maxInterestRate: '3.30',
+        interestRate: '3.40',
+        isLiked: true,
+      },
+      {
+        id: 2,
+        productName: '상품명3',
+        bankName: '은행명3',
+        maxInterestRate: '3.23',
+        interestRate: '3.53',
+        isLiked: false,
+      },
+      {
+        id: 3,
+        productName: '상품명4',
+        bankName: '은행명4',
+        maxInterestRate: '3.23',
+        interestRate: '3.53',
+        isLiked: false,
+      },
+      {
+        id: 4,
+        productName: '상품명5',
+        bankName: '은행명5',
+        maxInterestRate: '3.56',
+        interestRate: '3.33',
+        isLiked: false,
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
-    setBankDataDeposit(Deposit);
-  }, []);
+    setBankDataDeposit(DUMMY_DEPOSIT);
+  }, [DUMMY_DEPOSIT]);
 
   useEffect(() => {
     if (sort) {
-      const sortedDeposit = [...Deposit];
+      const sortedDeposit = [...DUMMY_DEPOSIT];
       sortedDeposit.sort((a, b) => Number(b.maxInterestRate) - Number(a.maxInterestRate));
       setBankDataDeposit(sortedDeposit);
     } else {
-      const sortedDeposit = [...Deposit];
+      const sortedDeposit = [...DUMMY_DEPOSIT];
       sortedDeposit.sort((a, b) => Number(b.interestRate) - Number(a.interestRate));
       setBankDataDeposit(sortedDeposit);
     }
-  }, [sort]);
+  }, [sort, DUMMY_DEPOSIT]);
 
   const onAllClickBank = () => {
     if (!depAllFin) {
-      const allBanks = BankInfo.map((info) => info);
+      const allBanks = DUMMY_BANK1.map((info) => info);
       setDepSelFin(allBanks);
     } else {
       setDepSelFin([]);
@@ -234,7 +237,7 @@ const WhatToDoPage = () => {
         allBtnClick={depAllFin}
         onAllClickBank={onAllClickBank}
         selectedBanks={depSelFin}
-        bankInfo={BankInfo}
+        bankInfo={DUMMY_BANK1}
         onClickBank={onClickBank}
       />
       <Filter
@@ -245,7 +248,7 @@ const WhatToDoPage = () => {
         setActiveFilterIndex={setDepFilterIndex}
         subIsOn={depFilter}
         setSubIsOn={setDepFilter}
-        filterTerms={DepositTerms}
+        filterTerms={DEPOSIT_FILTER}
         PlusSubBtn={PlusSubBtn}
         onInputOn={true}
       />
@@ -304,8 +307,8 @@ const WhatToDoPage = () => {
           <MoreBankModal
             closeModal={() => setIsOpen(!isOpen)}
             size={size}
-            bankInfo={BankInfo}
-            bankInfo2={BankInfo2}
+            bankInfo={DUMMY_BANK1}
+            bankInfo2={DUMMY_BANK2}
             bankAllFin={depAllFin}
             bankAllSave={depAllSave}
             setBankAllFin={setDepAllFin}

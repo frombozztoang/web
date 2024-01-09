@@ -37,7 +37,7 @@ const Des = () => {
     console.log(amount);
   };
 
-  const DepositData = {
+  const DUMMY_DEPOSIT = {
     productName: 'WON플러스예금',
     bankName: '우리은행',
     maxInterestRate: '3.7',
@@ -58,19 +58,19 @@ const Des = () => {
   return (
     <div className='flex flex-col justify-center items-center'>
       <DepositSavingGuide
-        isLiked={DepositData.isLiked}
-        productName={DepositData.productName}
-        bankName={DepositData.bankName}
-        maxInterestRate={DepositData.maxInterestRate}
-        interestRate={DepositData.interestRate}
+        isLiked={DUMMY_DEPOSIT.isLiked}
+        productName={DUMMY_DEPOSIT.productName}
+        bankName={DUMMY_DEPOSIT.bankName}
+        maxInterestRate={DUMMY_DEPOSIT.maxInterestRate}
+        interestRate={DUMMY_DEPOSIT.interestRate}
         onHeartClick={() => onHeartClick(DEPOSITS_ID)}
       />
       <div className='mt-25 px-15 py-17 w-342 gap-20 border rounded-8 tablet:w-789 tablet:py-40 tablet:px-36 tablet:border-2 tablet:rounded-18 tablet:mt-58 desktop:mt-63 desktop:py-44 desktop:px-40 desktop:w-855 desktop:gap-63 desktop:rounded-20 desktop:border-2 border-border02 bg-secondary'>
         <ProductGuide
-          savingTerms={DepositData.savingTerms}
-          maxLimit={DepositData.maxLimit}
-          joinMember={DepositData.joinMember}
-          etcNote={DepositData.etcNote}
+          savingTerms={DUMMY_DEPOSIT.savingTerms}
+          maxLimit={DUMMY_DEPOSIT.maxLimit}
+          joinMember={DUMMY_DEPOSIT.joinMember}
+          etcNote={DUMMY_DEPOSIT.etcNote}
         />
         <InterestRateGuide
           size={size}

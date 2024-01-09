@@ -6,14 +6,14 @@ type TCmaInfoGuideProps = {
 };
 
 const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data }) => {
-  const data1 = [
+  const DUMMY_DATA1 = [
     { title: '수익률', content: '연 3.15% (12개월, 세전) 기준일에 따라 수익률 변동 가능' },
     { title: '특징', content: '비대면가입, 체크카드발급, 수수료혜택' },
     { title: '가입방법', content: '영업점, 홈페이지, 어플' },
     { title: '예금자보호', content: '대상 아님' },
   ];
 
-  const data2 = [
+  const DUMMY_DATA2 = [
     { title: '혜택명', content: '이체, CD기 수수료 면제' },
     { title: '대상계좌', content: '은행 연결계좌가 없는 계좌 (당사 종합카드 하단에 은행 입금 번호가 없는 계좌)' },
     {
@@ -23,7 +23,7 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data }) => {
     },
   ];
 
-  const data3 = [
+  const DUMMY_DATA3 = [
     { title: '혜택명', content: '온라인 타행송금 수수료 면제' },
     {
       title: '수수료 면제 기준 (조건 1충족시)',
@@ -37,7 +37,7 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data }) => {
       <h1 className='heading-small tablet:heading-xl desktop:heading-xl text-typoPrimary'>주요 특징</h1>
       <hr className='border-1/2 my-4 w-310 tablet:w-715 tablet:my-9 tablet:border desktop:border border-border01 desktop:w-766 desktop:my-10' />
       <div className='mb-20 w-310 tablet:mb-46 tablet:w-715 desktop:w-776 desktop:mb-63'>
-        {data1.map((item, index) => {
+        {DUMMY_DATA1.map((item, index) => {
           return (
             <div key={index} className='flex flex-col desktop:flex-row'>
               <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-xl tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium'>
@@ -53,7 +53,7 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data }) => {
       <h1 className='heading-small tablet:heading-xl desktop:heading-xl text-typoPrimary'>수수료 혜택 안내</h1>
       <hr className='border-1/2 my-4 w-310 tablet:w-715 tablet:my-9 tablet:border desktop:border border-border01 desktop:w-766 desktop:my-10' />
       <div className='mb-20 w-310 tablet:mb-46 tablet:w-715 desktop:w-776 desktop:mb-63'>
-        {data2.map((item, index) => {
+        {DUMMY_DATA2.map((item, index) => {
           return (
             <div key={index} className='flex flex-col desktop:flex-row'>
               <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-xl tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium break-keep'>
@@ -73,7 +73,7 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data }) => {
       </div>
       <hr className='border-1/2 my-4 w-310 tablet:w-715 tablet:my-9 tablet:border desktop:border border-border01 desktop:w-766 desktop:my-10' />
       <div className='mb-20 w-310 tablet:mb-58 tablet:w-715 desktop:w-776 desktop:mb-63'>
-        {data3.map((item, index) => {
+        {DUMMY_DATA3.map((item, index) => {
           return (
             <div key={index} className='flex flex-col desktop:flex-row'>
               <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-xl tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium break-keep'>
