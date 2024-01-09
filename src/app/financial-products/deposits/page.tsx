@@ -10,8 +10,7 @@ import BankGoldtori from '@/public/icons/bank_goldtori.svg';
 import ArrowDown from '@/public/icons/arrow-down-2.svg';
 import { useRouter } from 'next/navigation';
 import BubbleP from '@/public/icons/bubble-p.svg';
-//import BubbleT from '@/public/icons/bubble-t.svg';
-import BubbleM from '@/public/icons/bubble-m.svg';
+import BubbleT from '@/public/icons/bubble-t.svg';
 import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 
 type TDepositSaving = {
@@ -25,20 +24,12 @@ type TDepositSaving = {
 
 const WhatToDoPage = () => {
   const router = useRouter();
-  const [amount, setAmount] = useState('');
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
+  const [amount, setAmount] = useState('');
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
-  const [size, setSize] = useState<'Large' | 'Small'>('Large');
+  const [size, setSize] = useState<'Large' | 'Small'>(isDesktop ? 'Large' : 'Small');
   const [sort, setSort] = useState(true); //true:최고금리순, false:기본금리순
-
-  useEffect(() => {
-    if (isDesktop) {
-      setSize('Large');
-    } else if (isMobile || isTablet) {
-      setSize('Small');
-    }
-  }, [isDesktop, isTablet, isMobile, size]);
 
   //예금
   const [depAllFin, setDepAllFin] = useState(false);
@@ -57,6 +48,14 @@ const WhatToDoPage = () => {
     { filter: '기간 및 금액', sub: ['전체', '3개월', '6개월', '12개월', '24개월', '36개월'] },
     { filter: '상품 유형', sub: ['누구나 가입'] },
   ];
+
+  useEffect(() => {
+    if (isDesktop) {
+      setSize('Large');
+    } else if (isTablet || isMobile) {
+      setSize('Small');
+    }
+  }, [isDesktop, isTablet, isMobile, size]);
 
   const BankInfo = [
     '경남은행',
@@ -196,7 +195,6 @@ const WhatToDoPage = () => {
   };
 
   const toggleFn = (number: number) => {
-    console.log(number);
     if (number === 2) {
       router.push('/financial-products/savings');
     } else if (number === 3) {
@@ -220,14 +218,14 @@ const WhatToDoPage = () => {
           <BankGoldtori width='178px' />
         </div>
       ) : (
-        <div className='flex justify-between w-330'>
-          <div className='mt-20 relative'>
-            <span className='absolute top-14 left-28 text-main label-small w-185'>
+        <div className='flex justify-between mt-10 w-330 tablet:w-789 tablet:mt-23'>
+          <div className='mt-15 relative tablet:mt-37'>
+            <span className='absolute top-14 left-25 text-main label-small w-185 tablet:top-32 tablet:left-55 tablet:label-xl tablet:w-426'>
               예금은 처음 한 번에 돈을 저축 후 만기에 이자와 함께 돌려받는 상품이에요 !
             </span>
-            <BubbleM />
+            <BubbleT className='h-63 tablet:h-145' />
           </div>
-          <BankGoldtori width='113px' />
+          <BankGoldtori className='w-113 tablet:w-260' />
         </div>
       )}
       <Rope
@@ -240,7 +238,6 @@ const WhatToDoPage = () => {
         onClickBank={onClickBank}
       />
       <Filter
-        style={{ marginTop: '10px' }}
         size={size}
         amount={amount}
         onInputAmountHandler={onInputAmountHandler}
@@ -258,29 +255,39 @@ const WhatToDoPage = () => {
           {sort ? (
             <button className='flex' onClick={() => setSort(!sort)}>
               <span className='mr-3 label-medium text-typoSecondary'>최고 금리 순</span>
-              <ArrowDown width='24px' />
+              <ArrowDown className='w-24' />
             </button>
           ) : (
             <button className='flex' onClick={() => setSort(!sort)}>
               <span className='mr-3 label-medium text-typoSecondary'>기본 금리 순</span>
-              <ArrowDown width='24px' />
+              <ArrowDown className='w-24' />
             </button>
           )}
         </div>
       ) : (
-        <div className='mt-39 mb-10 flex justify-between w-330'>
-          <div className='paragraph-small text-typoSecondary'>{bankDataDeposit.length}개</div>
-          <div className='flex'>
-            <span className='mr-3 paragraph-small text-typoSecondary'>최고 금리 순</span>
-            <ArrowDown width='19px' />
-          </div>
+        <div className='mt-21 mb-10 flex justify-between w-338 tablet:w-780 tablet:mt-48 tablet:mb-23'>
+          <div className='paragraph-small text-typoSecondary tablet:paragraph-xl'>{bankDataDeposit.length}개</div>
+          {sort ? (
+            <button className='flex' onClick={() => setSort(!sort)}>
+              <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-xl tablet:mr-7'>
+                최고 금리 순
+              </span>
+              <ArrowDown className='w-19 tablet:w-43' />
+            </button>
+          ) : (
+            <button className='flex' onClick={() => setSort(!sort)}>
+              <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-xl tablet:mr-7'>
+                기본 금리 순
+              </span>
+              <ArrowDown className='w-19 tablet:w-43' />
+            </button>
+          )}
         </div>
       )}
       {bankDataDeposit.map((data, index) => {
         return (
           <DepositSaving
             key={index}
-            style={{ marginBottom: '20px' }}
             size={size}
             isLiked={data.isLiked}
             productName={data.productName}
@@ -293,7 +300,7 @@ const WhatToDoPage = () => {
         );
       })}
       {isOpen && (
-        <div className='fixed w-full h-full left-0 top-0 flex items-center justify-center z-modal bg-bgBlind'>
+        <div className='fixed w-full h-full left-0 top-0 flex items-center justify-center z-modal bg-bgBlind overflow-hidden'>
           <MoreBankModal
             closeModal={() => setIsOpen(!isOpen)}
             size={size}

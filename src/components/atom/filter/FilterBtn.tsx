@@ -29,12 +29,16 @@ const FilterBtn: React.FC<TFilterBtnProps & React.HTMLAttributes<HTMLDivElement>
     <div
       {...props}
       className={cls(
-        'inline-flex p-8 items-center bg-secondary rounded-[7.452px] border cursor-pointer',
+        'inline-flex p-8 items-center bg-secondary rounded-[7.452px] border cursor-pointer tablet:p-20 tablet:rounded-17 tablet:border-2',
         isOn ? 'border-main' : 'border-border02',
       )}
     >
-      <span className={cls('mr-3 label-small', isOn ? 'text-main' : 'text-typoPrimary')}>{text}</span>
-      <ArrowDown className={cls('w-17 h-17 stroke-2', isOn ? 'stroke-main' : 'stroke-primary')} />
+      <span className={cls('mr-3 label-small tablet:mr-6 tablet:label-xl', isOn ? 'text-main' : 'text-typoPrimary')}>
+        {text}
+      </span>
+      <ArrowDown
+        className={cls('w-17 h-17 stroke-2 tablet:w-41 tablet:h-41', isOn ? 'stroke-main' : 'stroke-primary')}
+      />
     </div>
   );
 };

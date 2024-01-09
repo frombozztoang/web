@@ -12,12 +12,12 @@ const SelectBtn: React.FC<TSelectBtnProps & React.HTMLAttributes<HTMLButtonEleme
     <button
       {...props}
       className={cls(
-        'inline-flex justify-center items-center px-10 py-4 bg-secondary border rounded-20',
+        'inline-flex justify-center items-center px-10 py-4 bg-secondary border rounded-100 tablet:px-22 tablet:py-8 tablet:border-2',
         isOn ? 'border-main' : 'border-border01',
       )}
     >
-      {isOn ? <CheckSquare /> : <Square />}
-      <span className='text-typoSecondary ml-5 label-small'>전체선택</span>
+      {isOn ? <CheckSquare className='w-15 tablet:w-32' /> : <Square className='w-15 tablet:w-32' />}
+      <span className='text-typoSecondary ml-5 label-small tablet:ml-11 tablet:label-xl'>전체선택</span>
     </button>
   );
 };

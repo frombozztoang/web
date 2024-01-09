@@ -9,8 +9,8 @@ import BankGoldtori from '@/public/icons/bank_goldtori.svg';
 import { useRouter } from 'next/navigation';
 import Cma from '@/components/molecules/whattodo/Cma';
 import BubbleP from '@/public/icons/bubble-p.svg';
-//import BubbleT from '@/public/icons/bubble-t.svg';
-import BubbleM from '@/public/icons/bubble-m.svg';
+import BubbleT from '@/public/icons/bubble-t.svg';
+import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 
 type TCma = {
   id: number;
@@ -22,9 +22,10 @@ type TCma = {
 
 const WhatToDoPage = () => {
   const router = useRouter();
+  const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
-  const [size, setSize] = useState<'Large' | 'Small'>('Large');
+  const [size, setSize] = useState<'Large' | 'Small'>(isDesktop ? 'Large' : 'Small');
 
   //CMA
   const [cmaAllFin, setCmaAllFin] = useState(false);
@@ -43,6 +44,14 @@ const WhatToDoPage = () => {
     { filter: '상품 유형', sub: ['RP형', '종금어음형', '종금형'] },
     { filter: '우대조건', sub: ['비대면 가입', '예금자 보호', '주식 거래 가능', '체크카드 발급', '수수료 해택'] },
   ];
+
+  useEffect(() => {
+    if (isDesktop) {
+      setSize('Large');
+    } else if (isTablet || isMobile) {
+      setSize('Small');
+    }
+  }, [isDesktop, isTablet, isMobile, size]);
 
   const BankInfo = [
     '경남은행',
@@ -165,7 +174,7 @@ const WhatToDoPage = () => {
       {size === 'Large' ? (
         <div className='flex justify-between w-850'>
           <div className='mt-55 relative'>
-            <span className='absolute top-20 left-55 translate-y-1 text-main heading-medium'>
+            <span className='absolute top-20 left-55 text-main heading-medium'>
               CMA는 은행사 대신 증권사가 돈을 관리 해주는 입출금이 자유로운 통장이예요 !
             </span>
             <BubbleP />
@@ -173,14 +182,14 @@ const WhatToDoPage = () => {
           <BankGoldtori width='178px' />
         </div>
       ) : (
-        <div className='flex justify-between w-330'>
-          <div className='mt-20 relative'>
-            <span className='absolute top-14 left-22 text-main label-small w-190'>
+        <div className='flex justify-between mt-10 w-330 tablet:w-789 tablet:mt-23'>
+          <div className='mt-15 relative tablet:mt-37'>
+            <span className='absolute top-14 left-20 text-main label-small w-190 tablet:top-32 tablet:left-46 tablet:label-xl tablet:w-436'>
               CMA는 은행사 대신 증권사가 돈을 관리 해주는 입출금이 자유로운 통장이예요 !
             </span>
-            <BubbleM />
+            <BubbleT className='h-63 tablet:h-145' />
           </div>
-          <BankGoldtori width='113px' />
+          <BankGoldtori className='w-113 tablet:w-260' />
         </div>
       )}
       <Rope
@@ -193,7 +202,6 @@ const WhatToDoPage = () => {
         onClickBank={onClickBank}
       />
       <Filter
-        style={{ marginTop: '10px' }}
         size={size}
         activeFilterIndex={cmaFilterIndex}
         setActiveFilterIndex={setCmaFilterIndex}
@@ -208,15 +216,14 @@ const WhatToDoPage = () => {
           <div className='label-medium text-typoSecondary'>{bankDataCma.length}개</div>
         </div>
       ) : (
-        <div className='mt-39 mb-10 flex justify-between w-330'>
-          <div>{bankDataCma.length}개</div>
+        <div className='mt-21 mb-10 flex justify-between w-338 tablet:w-780 tablet:mt-48 tablet:mb-23'>
+          <div className='paragraph-small text-typoSecondary tablet:paragraph-xl'>{bankDataCma.length}개</div>
         </div>
       )}
       {bankDataCma.map((data, index) => {
         return (
           <Cma
             key={index}
-            style={{ marginBottom: '20px' }}
             size={size}
             isLiked={data.isLiked}
             productName={data.productName}
@@ -228,7 +235,7 @@ const WhatToDoPage = () => {
         );
       })}
       {isOpen && (
-        <div className='fixed w-full h-full left-0 top-0 flex items-center justify-center z-modal bg-bgBlind'>
+        <div className='fixed w-full h-full left-0 top-0 flex items-center justify-center z-modal bg-bgBlind overflow-hidden'>
           <MoreBankModal
             closeModal={() => setIsOpen(!isOpen)}
             size={size}

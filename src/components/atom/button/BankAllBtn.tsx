@@ -23,12 +23,19 @@ const BankAllBtn: React.FC<TBankAllBtnProps & React.HTMLAttributes<HTMLDivElemen
     <div
       {...props}
       className={cls(
-        'flex flex-col items-center w-68 h-68 bg-secondary rounded-11 border cursor-pointer',
+        'flex flex-col items-center w-68 h-68 bg-secondary rounded-11 border cursor-pointer tablet:w-156 tablet:h-156 tablet:rounded-30 tablet:border-2',
         isOn ? 'border-main' : 'border-border04',
       )}
     >
-      <All className={cls('w-29 h-19 mt-17', isOn ? 'fill-main' : 'fill-typoSecondary')} />
-      <p className={cls('mt-7 label-small', isOn ? 'text-main' : 'text-typoSecondary')}>1금융권</p>
+      <All
+        className={cls(
+          'w-29 h-19 mt-17 tablet:w-68 tablet:h-44 tablet:mt-38',
+          isOn ? 'fill-main' : 'fill-typoSecondary',
+        )}
+      />
+      <p className={cls('mt-7 label-small tablet:mt-18 tablet:label-xl', isOn ? 'text-main' : 'text-typoSecondary')}>
+        1금융권
+      </p>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import FilterSubBtn from '@/components/atom/filter/FilterSubBtn';
 import React from 'react';
 import { cls } from '@/utils/cls';
 import InputAmount from '@/components/molecules/inputfield/InputAmount';
+import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 
 type TFilterProps = {
   size: 'Large' | 'Small';
@@ -34,11 +35,13 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
   size,
   ...props
 }) => {
+  const { isTablet } = useFinMediaQuery();
+
   return size === 'Large' ? (
     <div
       {...props}
       className={cls(
-        'w-855 bg-secondary border-2 border-border01 rounded-10',
+        'w-855 bg-secondary border-2 border-border01 rounded-10 mt-10',
         subIsOn.length === 0 ? 'py-20' : 'pt-20',
       )}
     >
@@ -106,16 +109,21 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
     <div
       {...props}
       className={cls(
-        'w-342 bg-secondary border-2 border-border01 rounded-20',
-        subIsOn.length === 0 ? 'py-20' : 'pt-20',
+        'w-342 bg-secondary border-2 border-border01 rounded-20 mt-10 tablet:w-789 tablet:border-4 tablet:rounded-46 tablet:mt-23',
+        subIsOn.length === 0 ? 'py-20 tablet:py-45' : 'pt-20 tablet:pt-45',
       )}
     >
-      <div className={cls('pl-17', activeFilterIndex !== undefined || subIsOn.length === 0 ? 'pb-0' : 'pb-20')}>
+      <div
+        className={cls(
+          'pl-17 tablet:pl-39',
+          activeFilterIndex !== undefined || subIsOn.length === 0 ? 'pb-0' : 'pb-20 tablet:pb-40',
+        )}
+      >
         {filterTerms.map((data, index) => {
           return (
             <FilterBtn
               key={index}
-              style={{ marginRight: '10px' }}
+              style={{ marginRight: isTablet ? '23px' : '10px' }}
               text={data.filter}
               isOn={activeFilterIndex === index}
               size={size}
@@ -131,12 +139,12 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
         })}
       </div>
       {activeFilterIndex !== undefined && (
-        <div className={cls('pl-17 ', subIsOn.length === 0 ? 'mb-0' : 'mb-12')}>
+        <div className={cls('pl-17 tablet:pl-39', subIsOn.length === 0 ? 'mb-0' : 'mb-12 tablet:mb-26')}>
           {filterTerms[activeFilterIndex].sub.map((data, index) => {
             return (
               <FilterSubBtn
                 key={index}
-                style={{ marginRight: '10px', marginTop: '12px' }}
+                style={{ marginRight: '10px', marginTop: isTablet ? '26px' : '12px' }}
                 text={data}
                 isOn={subIsOn.includes(data)}
                 size={size}
@@ -147,19 +155,19 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
         </div>
       )}
       {activeFilterIndex === 0 && onInputOn && (
-        <div className={cls('pl-17', subIsOn.length === 0 ? 'pt-12' : 'pb-8')}>
+        <div className={cls('pl-17 tablet:pl-39', subIsOn.length === 0 ? 'pt-12 tablet:pt-26' : 'pb-8 tablet:pb-19')}>
           <InputAmount size={size} amount={amount} onInputAmountHandler={onInputAmountHandler} />
         </div>
       )}
       {!(subIsOn.length === 0) && (
         <>
           <hr className='border-b-1 border-border01' />
-          <div className='mt-8 pl-17'>
+          <div className='mt-8 pl-17 tablet:pl-39 tablet:mt-19'>
             {subIsOn.map((data, index) => {
               return (
                 <FilterResult
                   key={index}
-                  style={{ marginRight: '10px', marginBottom: '8px' }}
+                  style={{ marginRight: '10px', marginBottom: isTablet ? '19px' : '8px' }}
                   text={data}
                   size={size}
                   toggleFn={() => PlusSubBtn(data)}
