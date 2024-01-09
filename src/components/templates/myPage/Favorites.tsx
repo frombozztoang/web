@@ -1,5 +1,6 @@
-import SubBtn from '@/components/atom/button/SubBtn';
+'use client';
 import React, { useState } from 'react';
+import SubBtn from '@/components/atom/button/SubBtn';
 import Educations from '../../organisms/mypage/Educations';
 import FinancialProducts from '../../organisms/mypage/FinancialProducts';
 import Policies from '../../organisms/mypage/Policies';

@@ -1,6 +1,6 @@
 'use client';
-import MainBtn from '@/components/atom/button/MainBtn';
 import React, { useState } from 'react';
+import MainBtn from '@/components/atom/button/MainBtn';
 
 const setBtnItems = [
   { index: 0, label: '로그아웃' },

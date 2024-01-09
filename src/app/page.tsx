@@ -1,7 +1,7 @@
 import React from 'react';
-import SectionOne from '@/components/templates/main/SectionOne';
-import SectionThree from '@/components/templates/main/SectionThree';
-import SectionTwo from '@/components/templates/main/SectionTwo';
+import SectionOne from '@/components/templates/main/sectionone';
+import SectionThree from '@/components/templates/main/sectionthree';
+import SectionTwo from '@/components/templates/main/sectiontwo';
 
 export default function RootPage() {
   return (
