@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ArrowDown from '@/public/icons/arrow-down.svg';
 import { cls } from '@/utils/cls';
-import PolicyItem from '@/components/molecules/mypage/PolicyItem';
 
 type TAccordianProps = {
   title: string;

@@ -2,7 +2,7 @@
 import { getFinancialProducts } from '@/api/mypage/getFinancialProducts';
 import PolicyItem from '@/components/molecules/mypage/PolicyItem';
 import React, { useEffect, useState } from 'react';
-import Accordian from '@/components/organisms/mypage/Accordian';
+import Accordian from '@/components/organisms/mypage/accordian';
 
 type TFinancialProductBookmark = {
   financialProductType: 'SAVING' | 'DEPOSIT';
