@@ -25,7 +25,8 @@ export default function KakaoCallback() {
     } else {
       // 에러 처리
     }
-  }, [code, router]);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <div></div>;
 }

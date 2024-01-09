@@ -15,7 +15,7 @@ const Setting = () => {
 
   return (
     <div className='flex flex-col items-center'>
-      <div className='heading-xl mb-10 dark:text-dark-primary'>계정 설정</div>
+      <div className='tablet:heading-xl mb-10 dark:text-dark-primary heading-medium'>계정 설정</div>
 
       <div className='flex'>
         {setBtnItems.map((i) => (
@@ -24,7 +24,7 @@ const Setting = () => {
             key={i.index}
             text={i.label}
             isOn={i.index === btnItem}
-            mr='mr-10'
+            styles='mr-10'
           />
         ))}
       </div>

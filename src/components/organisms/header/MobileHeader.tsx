@@ -9,8 +9,10 @@ import Close from '@/public/icons/close.svg';
 import HeaderSwitch, { THeaderSwitchProps } from '@/components/atom/header/HeaderSwitch';
 
 import { usePathname, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isOpened, setIsOpened] = useState(false);
   const mobileHeaderRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -46,9 +48,16 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
     setIsOpened(false);
   }, [pathname, searchParams]);
 
+  const handleMenuHover = (menuName: string) => {
+    setActiveMenu(menuName);
+  };
+  const handleMenuLeave = () => {
+    setActiveMenu(null);
+  };
+
   return (
     <div className='z-mobileHeader'>
-      <List onClick={handleMenuOpen} className={cls('', isOpened ? 'hidden' : 'block')} />
+      <List onClick={handleMenuOpen} className=' hover:cursor-pointer' />
 
       {isOpened && (
         <div className='fixed w-full h-full left-0 top-0 flex  z-modal bg-bgBlind'>
@@ -59,13 +68,25 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
               isOpened ? 'block ' : 'hidden',
             )}
           >
-            <div>
+            <div className='bg-red-100 flex flex-col justify-start'>
               <Close stroke='#000000' className='w-25 h-25 mb-21 ' onClick={handleMenuOpen} />
               <Image className='mb-21 pb-[5.13]  border-b-1 border-black' src={Logo} alt='logo' />
 
               {menuItems.map((menuItem) => (
-                <MenuItem key={menuItem.name} menuItem={menuItem} />
+                <MenuItem
+                  handleMenuHover={handleMenuHover}
+                  handleMenuLeave={handleMenuLeave}
+                  key={menuItem.name}
+                  menuItem={menuItem}
+                  activeMenu={activeMenu}
+                  pathname={pathname}
+                />
               ))}
+              <li className='text-22 hover:text-main'>
+                <Link href='/mypage' className='text-center '>
+                  MY
+                </Link>
+              </li>
             </div>
 
             <div className='pb-15'>

@@ -12,8 +12,10 @@ const SubBtn: React.FC<TSubBtnProps & React.HTMLAttributes<HTMLButtonElement>> =
     <button
       {...props}
       className={cls(
-        'flex justify-center items-center  gap-10 w-108 py-4 rounded-7 border label-medium box-border',
-        isOn ? 'bg-main text-typoTertiary border-main' : 'bg-secondary text-typoSecondary border-border01',
+        'flex justify-center items-center dark:border-dark-border01  gap-10 w-108 py-4 rounded-7 border label-medium box-border',
+        isOn
+          ? 'bg-main text-typoTertiary border-main'
+          : 'bg-secondary text-typoSecondary border-border01  dark:bg-dark-secondary',
         mr ? mr : '',
       )}
     >
