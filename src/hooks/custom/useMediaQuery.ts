@@ -9,6 +9,7 @@ export default function useMediaQuery({ minWidth, maxWidth }: { minWidth?: numbe
   const maxWidthString = maxWidth ? `(max-width: ${maxWidth}px)` : '';
   const andString = minWidth && maxWidth ? ' and ' : '';
   const mediaQueryString = `${minWidthString}${andString}${maxWidthString}`;
+  //const [matches, setMatches] = useState<boolean>(window.matchMedia(mediaQueryString).matches);
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia(mediaQueryString);

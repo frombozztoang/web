@@ -17,7 +17,7 @@ const InputAmount: React.FC<TInputAmountProps & React.HTMLAttributes<HTMLButtonE
       {size === 'Large' ? (
         <div className='flex'>
           <input
-            className='box-border w-619 px-12 py-13 items-center gap-10 rounded-10 border border-border04 bg-border01 text-typoSecondary mr-6 label-medium outline-none placeholder-typoSecondary'
+            className='box-border w-610 px-12 py-13 items-center gap-10 rounded-10 border border-border04 bg-border01 text-typoSecondary mr-6 label-medium outline-none placeholder-typoSecondary'
             placeholder='설정 금액을 입력해주세요.'
             type='text'
             value={amount}

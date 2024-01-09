@@ -3,7 +3,6 @@ import Heart from '@/public/icons/heart.svg';
 import HeartClick from '@/public/icons/heart_click.svg';
 
 type TDepositSavingGuideProps = {
-  size: 'Large' | 'Small';
   isLiked: boolean;
   productName: string;
   bankName: string;
@@ -19,53 +18,36 @@ const DepositSavingGuide: React.FC<TDepositSavingGuideProps> = ({
   maxInterestRate,
   interestRate,
   onHeartClick,
-  size,
 }) => {
-  return size === 'Large' ? (
-    <div className='flex w-855 px-33 py-40 justify-between items-center rounded-20 border-2 border-border02 bg-secondary'>
+  return (
+    <div className='flex justify-between items-center border-border02 bg-secondary w-342 px-13 py-17 rounded-8 border tablet:w-789 tablet:px-30 tablet:py-40 tablet:rounded-18 tablet:border-2 desktop:w-855 desktop:px-33 desktop:py-40 desktop:rounded-20 desktop:border-2'>
       <div className='flex flex-row items-center'>
-        <div className='w-70 h-70 rounded-13 bg-imageBase'></div>
-        <div className='ml-19'>
-          <div className='heading-xl text-typoPrimary'>{productName}</div>
-          <div className='paragraph-large text-typoPrimary'>{bankName}</div>
+        <div className='bg-imageBase w-35 h-35 rounded-4 tablet:w-80 tablet:h-80 tablet:rounded-9 desktop:w-70 desktop:h-70 desktop:rounded-13'></div>
+        <div className='ml-7 tablet:ml-17 desktop:ml-19'>
+          <div className='text-typoPrimary heading-small tablet:heading-xl desktop:heading-xl'>{productName}</div>
+          <div className='paragraph-small text-typoPrimary tablet:paragraph-xl desktop:paragraph-large'>{bankName}</div>
         </div>
       </div>
       <div className='flex items-center'>
         <div>
-          <div className='mb-16 heading-medium text-typoSecondary'>최고</div>
-          <div className='label-large text-main'>연 {maxInterestRate}%</div>
+          <div className='text-typoSecondary mb-4 paragraph-small tablet:paragraph-xl tablet:mb-0 desktop:mb-16 desktop:heading-medium'>
+            최고
+          </div>
+          <div className='text-main label-small tablet:paragraph-xl desktop:label-large'>연 {maxInterestRate}%</div>
         </div>
-        <div className='h-70 mx-15 border-l-1 border-border02'></div>
+        <div className='border-l-1 border-border02 h-35 mx-8 tablet:h-87 tablet:mx-13 desktop:h-70 desktop:mx-15 '></div>
         <div>
-          <div className='mb-16 heading-medium text-typoSecondary'>기본</div>
-          <div className='label-large text-main'>연 {interestRate}%</div>
+          <div className='text-typoSecondary mb-4 paragraph-small tablet:paragraph-xl tablet:mb-0 desktop:mb-16 desktop:heading-medium'>
+            기본
+          </div>
+          <div className='text-main label-small tablet:paragraph-xl desktop:label-large'>연 {interestRate}%</div>
         </div>
-        <button className='ml-60' onClick={onHeartClick}>
-          {isLiked ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
-        </button>
-      </div>
-    </div>
-  ) : (
-    <div className='flex w-342 px-13 py-17 justify-between items-center rounded-8 border-1 border-border02 bg-secondary'>
-      <div className='flex flex-row items-center'>
-        <div className='w-35 h-35 rounded-13 bg-imageBase'></div>
-        <div className='ml-7'>
-          <div className='heading-small text-typoPrimary'>{productName}</div>
-          <div className='paragraph-small text-typoPrimary'>{bankName}</div>
-        </div>
-      </div>
-      <div className='flex items-center'>
-        <div>
-          <div className='mb-4 paragraph-small text-typoSecondary'>최고</div>
-          <div className='label-small text-main'>연 {maxInterestRate}%</div>
-        </div>
-        <div className='h-35 mx-8 border-l-1 border-border02'></div>
-        <div>
-          <div className='mb-4 paragraph-small text-typoSecondary'>기본</div>
-          <div className='label-small text-main'>연 {interestRate}%</div>
-        </div>
-        <button className='ml-17' onClick={onHeartClick}>
-          {isLiked ? <Heart className='w-25 h-25' /> : <HeartClick className='w-25 h-25' />}
+        <button className='ml-17 tablet:ml-55 desktop:ml-60' onClick={onHeartClick}>
+          {isLiked ? (
+            <Heart className='w-25 :h-25 tablet:w-59 tablet:h-59 desktop:w-37 desktop:h-37' />
+          ) : (
+            <HeartClick className='w-25 :h-25 tablet:w-59 tablet:h-59 desktop:w-37 desktop:h-37' />
+          )}
         </button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { usePathname } from 'next/navigation';
 import CmaGuide from '../../_components/CmaGuide';
 import CmaInfoGuide from '../../_components/CmaInfoGuide';
@@ -8,7 +8,6 @@ import CmaInfoGuide from '../../_components/CmaInfoGuide';
 const Des = () => {
   const PATHNAME = usePathname();
   const CMA_ID = Number(PATHNAME.replace('/financial-products/cma/', ''));
-  const [size, setSize] = useState<'Large' | 'Small'>('Large');
 
   const CmaData = {
     productName: 'WON플러스예금',
@@ -37,10 +36,9 @@ const Des = () => {
         bankName={CmaData.bankName}
         rate={CmaData.rate}
         onHeartClick={() => onHeartClick(CMA_ID)}
-        size={size}
       />
-      <div className='mt-39 py-44 px-40 w-855 gap-63 rounded-20 border-2 border-border02 bg-secondary'>
-        <CmaInfoGuide size={size} data={['글자', '글자']} />
+      <div className='mt-25 px-15 py-17 w-342 gap-20 border rounded-8 tablet:w-789 tablet:py-40 tablet:px-36 tablet:border-2 tablet:rounded-18 tablet:mt-58 desktop:mt-63 desktop:py-44 desktop:px-40 desktop:w-855 desktop:gap-63 desktop:rounded-20 desktop:border-2 border-border02 bg-secondary'>
+        <CmaInfoGuide data={['글자', '글자']} />
       </div>
     </div>
   );

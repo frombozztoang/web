@@ -2,11 +2,10 @@ import React from 'react';
 import DefaultBtn from '@/components/atom/button/DefaultBtn';
 
 type TCmaInfoGuideProps = {
-  size: 'Large' | 'Small';
   data: string[];
 };
 
-const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data, size }) => {
+const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data }) => {
   const data1 = [
     { title: '수익률', content: '연 3.15% (12개월, 세전) 기준일에 따라 수익률 변동 가능' },
     { title: '특징', content: '비대면가입, 체크카드발급, 수수료혜택' },
@@ -33,69 +32,69 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data, size }) => {
     },
   ];
 
-  return size === 'Large' ? (
+  return (
     <div>
-      <h1 className='heading-xl text-typoPrimary'>주요 특징</h1>
-      <hr className='w-766 border-1 border-border02 my-10' />
-      <table className='table-auto w-776 mb-63'>
-        <tbody>
-          {data1.map((item, index) => {
-            return (
-              <tr key={index}>
-                <th className='pb-10 text-left align-top w-94 paragraph-medium text-typoSecondary'>{item.title}</th>
-                <td className='px-25 paragraph-medium text-typoPrimary'>{item.content}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <h1 className='heading-xl text-typoPrimary'>수수료 혜택 안내</h1>
-      <hr className='w-766 border-1 border-border02 my-10' />
-      <table className='table-auto w-776 mb-63'>
+      <h1 className='heading-small tablet:heading-xl desktop:heading-xl text-typoPrimary'>주요 특징</h1>
+      <hr className='border-1/2 my-4 w-310 tablet:w-715 tablet:my-9 tablet:border desktop:border border-border01 desktop:w-766 desktop:my-10' />
+      <div className='mb-20 w-310 tablet:mb-46 tablet:w-715 desktop:w-776 desktop:mb-63'>
+        {data1.map((item, index) => {
+          return (
+            <div key={index} className='flex flex-col desktop:flex-row'>
+              <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-xl tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium'>
+                {item.title}
+              </div>
+              <div className='paragraph-small mb-6 text-typoPrimary tablet:mb-13 tablet:paragraph-xl desktop:px-25 desktop:paragraph-medium'>
+                {item.content}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <h1 className='heading-small tablet:heading-xl desktop:heading-xl text-typoPrimary'>수수료 혜택 안내</h1>
+      <hr className='border-1/2 my-4 w-310 tablet:w-715 tablet:my-9 tablet:border desktop:border border-border01 desktop:w-766 desktop:my-10' />
+      <div className='mb-20 w-310 tablet:mb-46 tablet:w-715 desktop:w-776 desktop:mb-63'>
         {data2.map((item, index) => {
           return (
-            <tr key={index}>
-              <th className='pb-10 text-left align-top w-94 paragraph-medium text-typoSecondary break-keep'>
+            <div key={index} className='flex flex-col desktop:flex-row'>
+              <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-xl tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium break-keep'>
                 {item.title}
-              </th>
-              <td className='px-25 paragraph-medium text-typoPrimary'>
+              </div>
+              <div className='paragraph-small mb-6 text-typoPrimary tablet:mb-13 tablet:paragraph-xl desktop:px-25 desktop:paragraph-medium'>
                 {item.content.split('\n').map((line, index) => (
-                  <div key={index} className='mb-10'>
+                  <div key={index} className='mb-4 tablet:mb-9 desktop:mb-10'>
                     {line}
                     <br />
                   </div>
                 ))}
-              </td>
-            </tr>
+              </div>
+            </div>
           );
         })}
-      </table>
-      <hr className='w-766 border-1 border-border02 my-10' />
-      <table className='table-auto w-776 mb-63'>
+      </div>
+      <hr className='border-1/2 my-4 w-310 tablet:w-715 tablet:my-9 tablet:border desktop:border border-border01 desktop:w-766 desktop:my-10' />
+      <div className='mb-20 w-310 tablet:mb-58 tablet:w-715 desktop:w-776 desktop:mb-63'>
         {data3.map((item, index) => {
           return (
-            <tr key={index}>
-              <th className='pb-10 text-left align-top w-94 paragraph-medium text-typoSecondary break-keep'>
+            <div key={index} className='flex flex-col desktop:flex-row'>
+              <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-xl tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium break-keep'>
                 {item.title}
-              </th>
-              <td className='px-25 paragraph-medium text-typoPrimary'>
+              </div>
+              <div className='paragraph-small mb-6 text-typoPrimary tablet:mb-13 tablet:paragraph-xl desktop:px-25 desktop:paragraph-medium'>
                 {item.content.split('\n').map((line, index) => (
-                  <div key={index} className='mb-10'>
+                  <div key={index} className='mb-4 tablet:mb-9 desktop:mb-10'>
                     {line}
                     <br />
                   </div>
                 ))}
-              </td>
-            </tr>
+              </div>
+            </div>
           );
         })}
-      </table>
+      </div>
       <div className='flex justify-center'>
         <DefaultBtn />
       </div>
     </div>
-  ) : (
-    <div>Small</div>
   );
 };
 
