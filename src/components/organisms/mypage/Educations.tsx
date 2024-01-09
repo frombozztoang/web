@@ -1,6 +1,6 @@
 import PolicyItem from '@/components/molecules/mypage/PolicyItem';
 import React from 'react';
-import Accordian from './Accordian';
+import Accordian from '@/components/organisms/mypage/Accordian';
 
 const Educations = () => {
   return (
