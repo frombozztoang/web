@@ -30,6 +30,9 @@ const renderMobileHeaderDiv = () => {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko'>
+      <head>
+        <meta http-equiv='Content-Security-Policy' content='upgrade-insecure-requests' />
+      </head>
       <body className='bg-bg dark:bg-dark-bg'>
         <Header />
         <main className='min-h-screen px-24 tablet:px-0 box-border'>{children}</main>
