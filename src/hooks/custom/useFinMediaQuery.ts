@@ -1,9 +1,9 @@
 import useMediaQuery from './useMediaQuery';
 
 export default function useFinMediaQuery() {
-  const isDesktop = useMediaQuery({ minWidth: 1680 });
-  const isTablet = useMediaQuery({ minWidth: 900, maxWidth: 1679 });
-  const isMobile = useMediaQuery({ maxWidth: 899 });
+  const isDesktop = useMediaQuery({ minWidth: 1135 });
+  const isTablet = useMediaQuery({ minWidth: 500, maxWidth: 1134 });
+  const isMobile = useMediaQuery({ maxWidth: 499 });
 
   return { isDesktop, isTablet, isMobile };
 }
