@@ -5,23 +5,12 @@ import { usePathname } from 'next/navigation';
 import DepositSavingGuide from '../../_components/DepositSavingGuide';
 import ProductGuide from '../../_components/ProductGuide';
 import InterestRateGuide from '../../_components/InterestRateGuide';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 
 const Des = () => {
   const PATHNAME = usePathname();
   const DEPOSITS_ID = Number(PATHNAME.replace('/financial-products/deposits/', ''));
-  const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
-  const [size, setSize] = useState<'Large' | 'Small'>(isDesktop ? 'Large' : 'Small');
   const [amount, setAmount] = useState(0);
   const [amountStr, setAmoutStr] = useState('');
-
-  useEffect(() => {
-    if (isDesktop) {
-      setSize('Large');
-    } else if (isTablet || isMobile) {
-      setSize('Small');
-    }
-  }, [isDesktop, isTablet, isMobile, size]);
 
   const onInputAmountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(Number(event.target.value));
@@ -65,7 +54,7 @@ const Des = () => {
         interestRate={DUMMY_DEPOSIT.interestRate}
         onHeartClick={() => onHeartClick(DEPOSITS_ID)}
       />
-      <div className='mt-25 px-15 py-17 w-342 gap-20 border rounded-8 tablet:w-789 tablet:py-40 tablet:px-36 tablet:border-2 tablet:rounded-18 tablet:mt-58 desktop:mt-63 desktop:py-44 desktop:px-40 desktop:w-855 desktop:gap-63 desktop:rounded-20 desktop:border-2 border-border02 bg-secondary'>
+      <div className='mt-25 px-15 py-17 w-342 gap-20 border rounded-8 tablet:w-438 tablet:py-22 tablet:px-20 tablet:rounded-10 tablet:mt-32 desktop:mt-63 desktop:py-44 desktop:px-40 desktop:w-855 desktop:gap-63 desktop:rounded-20 desktop:border-2 border-border02 dark:border-dark-border02 bg-secondary dark:bg-dark-secondary'>
         <ProductGuide
           savingTerms={DUMMY_DEPOSIT.savingTerms}
           maxLimit={DUMMY_DEPOSIT.maxLimit}
@@ -73,7 +62,6 @@ const Des = () => {
           etcNote={DUMMY_DEPOSIT.etcNote}
         />
         <InterestRateGuide
-          size={size}
           amountStr={amountStr}
           onInputAmountHandler={onInputAmountHandler}
           AmountHandler={AmountHandler}

@@ -4,52 +4,32 @@ import { cls } from '@/utils/cls';
 type TBankIconBtnProps = {
   isOn: boolean;
   text: string;
-  size: 'Large' | 'Small';
+  styles?: string;
 };
 
 const BankIconBtn: React.FC<TBankIconBtnProps & React.HTMLAttributes<HTMLDivElement>> = ({
   isOn,
   text,
-  size,
+  styles,
   ...props
 }) => {
-  return size === 'Large' ? (
+  return (
     <div
       {...props}
       className={cls(
-        'flex flex-col items-center min-w-91 h-91 bg-secondary rounded-15 border cursor-pointer',
-        isOn ? 'border-main' : 'border-border04',
+        'flex flex-col items-center min-w-68 min-h-68 bg-secondary dark:bg-dark-secondary rounded-11 border cursor-pointer tablet:min-w-87 tablet:min-h-87 tablet:rounded-14 desktop:min-w-91 desktop:min-h-91 desktop:rounded-15',
+        isOn ? 'border-main' : 'border-border04 dark:border-dark-border04',
+        styles ? styles : '',
       )}
     >
-      <div className='w-44 h-44 rounded-7 mt-10 bg-imageBase'></div>
+      <div className='w-34 h-34 rounded-5 mt-7 bg-imageBase tablet:w-44 tablet:h-44 tablet:rounded-7 tablet:mt-10 desktop:w-44 desktop:h-44 desktop:rounded-7 desktop:mt-10'></div>
       <p
         style={{
           textOverflow: 'ellipsis',
         }}
         className={cls(
-          'mt-5 w-87 text-center overflow-hidden text-overflow-ellipsis whitespace-nowrap label-medium',
-          isOn ? 'text-main' : 'text-typoPrimary',
-        )}
-      >
-        {text}
-      </p>
-    </div>
-  ) : (
-    <div
-      {...props}
-      className={cls(
-        'flex flex-col items-center min-w-68 h-68 bg-secondary rounded-11 border cursor-pointer tablet:min-w-156 tablet:h-156 tablet:rounded-30 tablet:border-2',
-        isOn ? 'border-main' : 'border-border04',
-      )}
-    >
-      <div className='w-34 h-34 rounded-5 mt-7 bg-imageBase tablet:w-80 tablet:h-80 tablet:rounded-13 tablet:mt-15'></div>
-      <p
-        style={{
-          textOverflow: 'ellipsis',
-        }}
-        className={cls(
-          'mt-3 w-65 text-center overflow-hidden text-overflow-ellipsis whitespace-nowrap label-small tablet:mt-5 tablet:w-145 tablet:label-xl',
-          isOn ? 'text-main' : 'text-typoPrimary',
+          'mt-3 w-65 text-center overflow-hidden text-overflow-ellipsis whitespace-nowrap label-small tablet:mt-3 tablet:w-83 tablet:label-medium desktop:mt-5 desktop:w-87 desktop:label-medium',
+          isOn ? 'text-main' : 'text-typoPrimary dark:text-dark-typoPrimary',
         )}
       >
         {text}

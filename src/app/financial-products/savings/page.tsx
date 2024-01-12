@@ -12,6 +12,8 @@ import { useRouter } from 'next/navigation';
 import BubbleP from '@/public/icons/bubble-p.svg';
 import BubbleT from '@/public/icons/bubble-t.svg';
 import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+import BackDrop from '@/components/organisms/modal/backdrop';
+import Pagination from '@/components/molecules/pagination/Pagination';
 
 type TDepositSaving = {
   id: number;
@@ -24,12 +26,15 @@ type TDepositSaving = {
 
 const WhatToDoPage = () => {
   const router = useRouter();
-  const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
+  const { isDesktop } = useFinMediaQuery();
   const [amount, setAmount] = useState('');
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
-  const [size, setSize] = useState<'Large' | 'Small'>(isDesktop ? 'Large' : 'Small');
   const [sort, setSort] = useState(true); //true:최고금리순, false:기본금리순
+
+  //페이지
+  const [pageNum, setPageNum] = useState(0); //현재 페이지
+  const [pageTotalNum, setPageTotalNum] = useState(13); //총 페이지 수
 
   //적금
   const [savAllFin, setSavAllFin] = useState(false);
@@ -37,25 +42,18 @@ const WhatToDoPage = () => {
   const [savSelFin, setSavSelFin] = useState<string[]>([]);
   const [savSelSave, setSavSelSave] = useState<string[]>([]);
 
-  //목록
+  //적금 목록
   const [bankDataSaving, setBankDataSaving] = useState<TDepositSaving[]>([]);
+  const [totalElements, setTotalElements] = useState(0); //예금 결과 개수
 
   //검색 필터
   const [savFilterIndex, setSavFilterIndex] = useState<number | undefined>(undefined);
   const [savFilter, setSavFilter] = useState<string[]>([]); //적금 필터 데이터
 
-  const SavingTerms = [
+  const SAVINGS_FILTER = [
     { filter: '기간 및 금액', sub: ['전체', '3개월', '6개월', '12개월', '24개월', '36개월'] },
     { filter: '상품 유형', sub: ['누구나 가입'] },
   ];
-
-  useEffect(() => {
-    if (isDesktop) {
-      setSize('Large');
-    } else if (isTablet || isMobile) {
-      setSize('Small');
-    }
-  }, [isDesktop, isTablet, isMobile, size]);
 
   const DUMMY_BANK1 = [
     '경남은행',
@@ -193,30 +191,21 @@ const WhatToDoPage = () => {
 
   return (
     <div className='flex flex-col justify-center items-center'>
-      <FinanceToggle activeToggle={2} size={size} toggleFn={toggleFn} />
-      {size === 'Large' ? (
-        <div className='flex justify-between w-850'>
-          <div className='mt-55 relative'>
-            <span className='absolute top-20 left-55 text-main heading-medium'>
-              적금은 월 단위로 일정 금액을 저축 후 만기에 이자와 함께 돌려받는 상품이에요 !
-            </span>
-            <BubbleP />
-          </div>
-          <BankGoldtori width='178px' />
+      <FinanceToggle activeToggle={2} toggleFn={toggleFn} />
+      <div className='flex justify-between mt-10 w-330 tablet:w-438 tablet:mt-12 desktop:w-850 desktop:mt-10'>
+        <div className='mt-16 relative tablet:mt-21 desktop:mt-45'>
+          <span className='absolute top-14 left-20 text-main label-small w-190 tablet:top-17 tablet:left-18 tablet:label-medium tablet:w-255 desktop:top-20 desktop:left-60 desktop:w-600 desktop:heading-medium'>
+            적금은 월 단위로 일정 금액을 저축 후 만기에 이자와 함께 돌려받는 상품이에요 !
+          </span>
+          {isDesktop ? (
+            <BubbleP className='fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
+          ) : (
+            <BubbleT className='h-63 tablet:h-80 fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
+          )}
         </div>
-      ) : (
-        <div className='flex justify-between mt-10 w-330 tablet:w-789 tablet:mt-23'>
-          <div className='mt-15 relative tablet:mt-37'>
-            <span className='absolute top-14 left-20 text-main label-small w-190 tablet:top-32 tablet:left-45 tablet:label-xl tablet:w-430'>
-              적금은 월 단위로 일정 금액을 저축 후 만기에 이자와 함께 돌려받는 상품이에요 !
-            </span>
-            <BubbleT className='h-63 tablet:h-145' />
-          </div>
-          <BankGoldtori className='w-113 tablet:w-260' />
-        </div>
-      )}
+        <BankGoldtori className='w-113 tablet:w-144 desktop:w-178' />
+      </div>
       <Rope
-        size={size}
         onClick={() => setIsOpen(!isOpen)}
         allBtnClick={savAllFin}
         onAllClickBank={onAllClickBank}
@@ -225,57 +214,40 @@ const WhatToDoPage = () => {
         onClickBank={onClickBank}
       />
       <Filter
-        size={size}
         amount={amount}
         onInputAmountHandler={onInputAmountHandler}
         activeFilterIndex={savFilterIndex}
         setActiveFilterIndex={setSavFilterIndex}
         subIsOn={savFilter}
         setSubIsOn={setSavFilter}
-        filterTerms={SavingTerms}
+        filterTerms={SAVINGS_FILTER}
         PlusSubBtn={PlusSubBtn}
         onInputOn={true}
       />
-      {size === 'Large' ? (
-        <div className='mt-39 mb-10 flex justify-between w-850'>
-          <div className='label-medium text-typoSecondary'>{bankDataSaving.length}개</div>
-          {sort ? (
-            <button className='flex' onClick={() => setSort(!sort)}>
-              <span className='mr-3 label-medium text-typoSecondary'>최고 금리 순</span>
-              <ArrowDown className='w-24' />
-            </button>
-          ) : (
-            <button className='flex' onClick={() => setSort(!sort)}>
-              <span className='mr-3 label-medium text-typoSecondary'>기본 금리 순</span>
-              <ArrowDown className='w-24' />
-            </button>
-          )}
+      <div className='flex justify-between w-338 mt-21 mb-10 tablet:w-430 tablet:mt-26 tablet:mb-12 desktop:w-850 desktop:mt-39 desktop:mb-10'>
+        <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
+          {totalElements}개
         </div>
-      ) : (
-        <div className='mt-21 mb-10 flex justify-between w-338 tablet:w-780 tablet:mt-48 tablet:mb-23'>
-          <div className='paragraph-small text-typoSecondary tablet:paragraph-xl'>{bankDataSaving.length}개</div>
-          {sort ? (
-            <button className='flex' onClick={() => setSort(!sort)}>
-              <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-xl tablet:mr-7'>
-                최고 금리 순
-              </span>
-              <ArrowDown className='w-19 tablet:w-43' />
-            </button>
-          ) : (
-            <button className='flex' onClick={() => setSort(!sort)}>
-              <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-xl tablet:mr-7'>
-                기본 금리 순
-              </span>
-              <ArrowDown className='w-19 tablet:w-43' />
-            </button>
-          )}
-        </div>
-      )}
+        {sort ? (
+          <button className='flex' onClick={() => setSort(!sort)}>
+            <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
+              최고 금리 순
+            </span>
+            <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
+          </button>
+        ) : (
+          <button className='flex' onClick={() => setSort(!sort)}>
+            <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
+              기본 금리 순
+            </span>
+            <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
+          </button>
+        )}
+      </div>
       {bankDataSaving.map((data, index) => {
         return (
           <DepositSaving
             key={index}
-            size={size}
             isLiked={data.isLiked}
             productName={data.productName}
             bankName={data.bankName}
@@ -286,11 +258,11 @@ const WhatToDoPage = () => {
           />
         );
       })}
+      <Pagination pageNum={pageNum} pageTotalNum={pageTotalNum} setPageNum={setPageNum} />
       {isOpen && (
-        <div className='fixed w-full h-full left-0 top-0 flex items-center justify-center z-modal bg-bgBlind overflow-hidden'>
+        <BackDrop>
           <MoreBankModal
             closeModal={() => setIsOpen(!isOpen)}
-            size={size}
             bankInfo={DUMMY_BANK1}
             bankInfo2={DUMMY_BANK2}
             bankAllFin={savAllFin}
@@ -302,7 +274,7 @@ const WhatToDoPage = () => {
             setBankSelFin={setSavSelFin}
             setBankSelSave={setSavSelSave}
           />
-        </div>
+        </BackDrop>
       )}
     </div>
   );

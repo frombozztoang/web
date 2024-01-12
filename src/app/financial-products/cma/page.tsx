@@ -2,8 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import FinanceToggle from '@/components/atom/toggle/FinanceToggle';
-import Rope from '@/components/molecules/rope/Rope';
-import MoreBankModal from '@/components/organisms/whattodo/MoreBankModal';
+import RopeCma from '@/components/molecules/rope/RopeCma';
+import MoreCmaModal from '@/components/organisms/whattodo/MoreCmaModal';
 import Filter from '@/components/organisms/filter/Filter';
 import BankGoldtori from '@/public/icons/bank_goldtori.svg';
 import { useRouter } from 'next/navigation';
@@ -11,6 +11,8 @@ import Cma from '@/components/molecules/whattodo/Cma';
 import BubbleP from '@/public/icons/bubble-p.svg';
 import BubbleT from '@/public/icons/bubble-t.svg';
 import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
+import BackDrop from '@/components/organisms/modal/backdrop';
+import Pagination from '@/components/molecules/pagination/Pagination';
 
 type TCma = {
   id: number;
@@ -22,19 +24,21 @@ type TCma = {
 
 const WhatToDoPage = () => {
   const router = useRouter();
-  const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
+  const { isDesktop } = useFinMediaQuery();
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
-  const [size, setSize] = useState<'Large' | 'Small'>(isDesktop ? 'Large' : 'Small');
+
+  //페이지
+  const [pageNum, setPageNum] = useState(0); //현재 페이지
+  const [pageTotalNum, setPageTotalNum] = useState(13); //총 페이지 수
 
   //CMA
   const [cmaAllFin, setCmaAllFin] = useState(false);
-  const [cmaAllSave, setCmaAllSave] = useState(false);
   const [cmaSelFin, setCmaSelFin] = useState<string[]>([]);
-  const [cmaSelSave, setCmaSelSave] = useState<string[]>([]);
 
   //CMA 목록
   const [bankDataCma, setBankDataCma] = useState<TCma[]>([]);
+  const [totalElements, setTotalElements] = useState(0); //예금 결과 개수
 
   //검색 필터
   const [cmaFilterIndex, setCmaFilterIndex] = useState<number | undefined>(undefined);
@@ -45,48 +49,19 @@ const WhatToDoPage = () => {
     { filter: '우대조건', sub: ['비대면 가입', '예금자 보호', '주식 거래 가능', '체크카드 발급', '수수료 해택'] },
   ];
 
-  //eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if (isDesktop) {
-      setSize('Large');
-    } else if (isTablet || isMobile) {
-      setSize('Small');
-    }
-  }, [isDesktop, isTablet, isMobile, size]);
-
   const DUMMY_BANK1 = [
-    '경남은행',
-    '광주은행',
-    '국민은행',
-    '농협은행',
-    '대구은행',
-    '부산은행',
-    '수협은행',
-    '신한은행',
-    '우리은행',
-    '전북은행',
-    '제주은행',
-    '주식회사 카카오뱅크',
-  ];
-
-  const DUMMY_BANK2 = [
-    'CK저축은행',
-    'HB저축은행',
-    '고려저축은행',
-    '국제저축은행',
-    '금화저축은행',
-    '남양저축은행',
-    '다올저축은행',
-    '대명상호저축은행',
-    '대백저축은행',
-    '대신저축은행',
-    '대아상호저축은행',
-    '대원상호저축은행',
-    '대한저축은행',
-    '더블저축은행',
-    '더케이저축은행',
-    '동양저축은행',
-    '동원제일저축은행',
+    '증권사1',
+    '증권사2',
+    '증권사3',
+    '증권사4',
+    '증권사5',
+    '증권사6',
+    '증권사7',
+    '증권사8',
+    '증권사9',
+    '증권사10',
+    '증권사11',
+    '증권사12',
   ];
 
   const DUMMY_CMA = useMemo(
@@ -127,16 +102,6 @@ const WhatToDoPage = () => {
     setBankDataCma(DUMMY_CMA);
   }, [DUMMY_CMA]);
 
-  const onAllClickBank = () => {
-    if (!cmaAllFin) {
-      const allBanks = DUMMY_BANK1.map((info) => info);
-      setCmaSelFin(allBanks);
-    } else {
-      setCmaSelFin([]);
-    }
-    setCmaAllFin(!cmaAllFin);
-  };
-
   const onClickBank = (bank: string) => {
     if (cmaAllFin) {
       setCmaAllFin(!cmaAllFin);
@@ -162,7 +127,6 @@ const WhatToDoPage = () => {
   };
 
   const toggleFn = (number: number) => {
-    console.log(number);
     if (number === 2) {
       router.push('/financial-products/savings');
     } else if (number === 3) {
@@ -174,39 +138,27 @@ const WhatToDoPage = () => {
 
   return (
     <div className='flex flex-col justify-center items-center'>
-      <FinanceToggle activeToggle={3} size={size} toggleFn={toggleFn} />
-      {size === 'Large' ? (
-        <div className='flex justify-between w-850'>
-          <div className='mt-55 relative'>
-            <span className='absolute top-20 left-55 text-main heading-medium'>
-              CMA는 은행사 대신 증권사가 돈을 관리 해주는 입출금이 자유로운 통장이예요 !
-            </span>
-            <BubbleP />
-          </div>
-          <BankGoldtori width='178px' />
+      <FinanceToggle activeToggle={3} toggleFn={toggleFn} />
+      <div className='flex justify-between mt-10 w-330 tablet:w-438 tablet:mt-12 desktop:w-850 desktop:mt-10'>
+        <div className='mt-16 relative tablet:mt-21 desktop:mt-45'>
+          <span className='absolute top-14 left-20 text-main label-small w-190 tablet:top-17 tablet:left-19 tablet:label-medium tablet:w-250 desktop:top-20 desktop:left-55 desktop:w-600 desktop:heading-medium'>
+            CMA는 은행사 대신 증권사가 돈을 관리 해주는 입출금이 자유로운 통장이예요 !
+          </span>
+          {isDesktop ? (
+            <BubbleP className='fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
+          ) : (
+            <BubbleT className='h-63 tablet:h-80 fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
+          )}
         </div>
-      ) : (
-        <div className='flex justify-between mt-10 w-330 tablet:w-789 tablet:mt-23'>
-          <div className='mt-15 relative tablet:mt-37'>
-            <span className='absolute top-14 left-20 text-main label-small w-190 tablet:top-32 tablet:left-46 tablet:label-xl tablet:w-436'>
-              CMA는 은행사 대신 증권사가 돈을 관리 해주는 입출금이 자유로운 통장이예요 !
-            </span>
-            <BubbleT className='h-63 tablet:h-145' />
-          </div>
-          <BankGoldtori className='w-113 tablet:w-260' />
-        </div>
-      )}
-      <Rope
-        size={size}
+        <BankGoldtori className='w-113 tablet:w-144 desktop:w-178' />
+      </div>
+      <RopeCma
         onClick={() => setIsOpen(!isOpen)}
-        allBtnClick={cmaAllFin}
-        onAllClickBank={onAllClickBank}
         selectedBanks={cmaSelFin}
         bankInfo={DUMMY_BANK1}
         onClickBank={onClickBank}
       />
       <Filter
-        size={size}
         activeFilterIndex={cmaFilterIndex}
         setActiveFilterIndex={setCmaFilterIndex}
         subIsOn={cmaFilter}
@@ -215,20 +167,15 @@ const WhatToDoPage = () => {
         PlusSubBtn={PlusSubBtn}
         onInputOn={false}
       />
-      {size === 'Large' ? (
-        <div className='mt-39 mb-10 flex justify-between w-850'>
-          <div className='label-medium text-typoSecondary'>{bankDataCma.length}개</div>
+      <div className='flex justify-between w-338 mt-21 mb-10 tablet:w-430 tablet:mt-26 tablet:mb-12 desktop:w-850 desktop:mt-39 desktop:mb-10'>
+        <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
+          {totalElements}개
         </div>
-      ) : (
-        <div className='mt-21 mb-10 flex justify-between w-338 tablet:w-780 tablet:mt-48 tablet:mb-23'>
-          <div className='paragraph-small text-typoSecondary tablet:paragraph-xl'>{bankDataCma.length}개</div>
-        </div>
-      )}
+      </div>
       {bankDataCma.map((data, index) => {
         return (
           <Cma
             key={index}
-            size={size}
             isLiked={data.isLiked}
             productName={data.productName}
             description={data.description}
@@ -238,23 +185,18 @@ const WhatToDoPage = () => {
           />
         );
       })}
+      <Pagination pageNum={pageNum} pageTotalNum={pageTotalNum} setPageNum={setPageNum} />
       {isOpen && (
-        <div className='fixed w-full h-full left-0 top-0 flex items-center justify-center z-modal bg-bgBlind overflow-hidden'>
-          <MoreBankModal
+        <BackDrop>
+          <MoreCmaModal
             closeModal={() => setIsOpen(!isOpen)}
-            size={size}
             bankInfo={DUMMY_BANK1}
-            bankInfo2={DUMMY_BANK2}
-            bankAllFin={cmaAllFin}
-            bankAllSave={cmaAllSave}
-            setBankAllFin={setCmaAllFin}
-            setBankAllSave={setCmaAllSave}
-            bankSelFin={cmaSelFin}
-            bankSelSave={cmaSelSave}
-            setBankSelFin={setCmaSelFin}
-            setBankSelSave={setCmaSelSave}
+            bankAllCma={cmaAllFin}
+            setBankAllCma={setCmaAllFin}
+            bankSelCma={cmaSelFin}
+            setBankSelCma={setCmaSelFin}
           />
-        </div>
+        </BackDrop>
       )}
     </div>
   );

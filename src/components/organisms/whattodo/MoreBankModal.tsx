@@ -6,7 +6,6 @@ import { useState } from 'react';
 import Close from '@/public/icons/close_b.svg';
 
 type TMoreBankModalProps = {
-  size: 'Large' | 'Small';
   bankInfo: string[];
   bankInfo2: string[];
   bankAllFin: boolean;
@@ -21,7 +20,6 @@ type TMoreBankModalProps = {
 };
 
 const MoreBankModal: React.FC<TMoreBankModalProps> = ({
-  size,
   bankInfo,
   bankInfo2,
   bankAllFin,
@@ -83,162 +81,79 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
   };
 
   return (
-    <>
-      {size === 'Large' ? (
-        <div className='relative w-855 h-546 rounded-10 bg-secondary flex flex-col items-center'>
-          <h1 className='heading-large text-typoPrimary mt-23'>은행 선택</h1>
-          <div className='w-712'>
-            <div className='flex mt-42'>
-              <SubBtn text='1금융권' mr='mr-15' isOn={isOn} onClick={() => setIsOn(!isOn)} />
-              <SubBtn text='저축은행' isOn={!isOn} onClick={() => setIsOn(!isOn)} />
-            </div>
-            <hr className='mt-16 mb-15 border-border01' />
-            {isOn ? (
-              <>
-                <SelectBtn
-                  style={{
-                    float: 'right',
-                  }}
-                  isOn={allBtn}
-                  onClick={onAllClickBank}
-                />
-                <div className='mt-57 gap-13 grid grid-cols-7 max-h-200 overflow-y-auto scrollbar-hide'>
-                  {bankInfo.map((bank, index) => (
-                    <BankIconBtn
-                      key={index}
-                      style={{ marginRight: 10 }}
-                      isOn={selectedBank.includes(bank)}
-                      text={bank}
-                      size={size}
-                      onClick={() => onClickBanks(bank)}
-                    />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <>
-                <SelectBtn
-                  style={{
-                    float: 'right',
-                  }}
-                  isOn={allBtn2}
-                  onClick={onAllClickBank}
-                />
-                <div className='mt-57 gap-13 grid grid-cols-7 max-h-200 overflow-y-auto scrollbar-hide'>
-                  {bankInfo2.map((bank, index) => (
-                    <BankIconBtn
-                      key={index}
-                      style={{ marginRight: 10 }}
-                      isOn={selectedBank2.includes(bank)}
-                      text={bank}
-                      size={size}
-                      onClick={() => onClickBanks(bank)}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-          <MainBtn
-            styles='mt-55'
-            onClick={() => {
-              setBankAllFin(allBtn);
-              setBankAllSave(allBtn2);
-              setBankSelFin(selectedBank);
-              setBankSelSave(selectedBank2);
-              closeModal();
-            }}
-            text='적용'
-            isOn={!(selectedBank.length === 0 && selectedBank2.length === 0)}
-          />
-          <Close className='absolute top-21 right-20 cursor-pointer w-19 h-19' onClick={() => closeModal()} />
+    <div className='relative w-full h-full bg-secondary dark:bg-dark-secondary flex flex-col items-center overflow-y-auto overflow-x-hidden scrollbar-hide desktop:w-855 desktop:h-546 desktop:rounded-10'>
+      <h1 className='heading-large text-typoPrimary dark:text-dark-typoPrimary mt-39 tablet:mt-56 desktop:mt-23'>
+        은행 선택
+      </h1>
+      <div className='w-358 desktop:w-712'>
+        <div className='flex mt-44 tablet:mt-41 desktop:mt-42'>
+          <SubBtn text='1금융권' mr='mr-10 desktop:mr-15' isOn={isOn} onClick={() => setIsOn(!isOn)} />
+          <SubBtn text='저축은행' isOn={!isOn} onClick={() => setIsOn(!isOn)} />
         </div>
-      ) : (
-        <div className='relative w-full h-full bg-secondary flex flex-col items-center tablet:overflow-y-auto scrollbar-hide'>
-          <h1 className='heading-large text-typoPrimary mt-39 tablet:mt-56 tablet:heading-xxxl'>은행 선택</h1>
-          <div className='px-15 tablet:px-53'>
-            <div className='flex mt-44 tablet:mt-100'>
-              <SubBtn
-                text='1금융권'
-                mr='mr-10 tablet:mr-22 tablet:w-239 tablet:py-8 tablet:label-xxl tablet:rounded-15'
-                isOn={isOn}
-                onClick={() => setIsOn(!isOn)}
-              />
-              <SubBtn
-                text='저축은행'
-                mr='tablet:w-239 tablet:py-8 tablet:label-xxl tablet:rounded-15'
-                isOn={!isOn}
-                onClick={() => setIsOn(!isOn)}
-              />
+        <hr className='mt-16 mb-21 border-border01 dark:border-dark-border01 desktop:mb-15' />
+        {isOn ? (
+          <>
+            <SelectBtn
+              style={{
+                float: 'right',
+              }}
+              isOn={allBtn}
+              onClick={onAllClickBank}
+            />
+            <div className='mt-78 flex items-center justify-center w-full desktop:mt-57'>
+              <div className='grid overflow-x-hidden gap-x-30 gap-y-15 grid-cols-3 overflow-y-auto scrollbar-hide desktop:grid-cols-7 desktop:gap-13 desktop:max-h-195 desktop:overflow-y-auto scrollbar-hide'>
+                {bankInfo.map((bank, index) => (
+                  <BankIconBtn
+                    key={index}
+                    isOn={selectedBank.includes(bank)}
+                    text={bank}
+                    onClick={() => onClickBanks(bank)}
+                  />
+                ))}
+              </div>
             </div>
-            <hr className='mt-16 mb-21 border-border01 tablet:mt-35 tablet:mb-46' />
-            {isOn ? (
-              <>
-                <SelectBtn
-                  style={{
-                    float: 'right',
-                  }}
-                  isOn={allBtn}
-                  onClick={onAllClickBank}
-                />
-                <div className='mt-78 flex items-center justify-center w-full tablet:mt-172'>
-                  <div className='grid gap-x-30 gap-y-15 grid-cols-3 w-342 overflow-y-auto scrollbar-hide tablet:w-792 tablet:gap-x-66 tablet:gap-y-33'>
-                    {bankInfo.map((bank, index) => (
-                      <BankIconBtn
-                        key={index}
-                        isOn={selectedBank.includes(bank)}
-                        text={bank}
-                        size={size}
-                        onClick={() => onClickBanks(bank)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                <SelectBtn
-                  style={{
-                    float: 'right',
-                  }}
-                  isOn={allBtn2}
-                  onClick={onAllClickBank}
-                />
-                <div className='mt-78 flex items-center justify-center w-full tablet:mt-172'>
-                  <div className='grid gap-x-30 gap-y-15 grid-cols-3 w-342 overflow-y-auto scrollbar-hide tablet:w-792 tablet:gap-x-66 tablet:gap-y-33'>
-                    {bankInfo2.map((bank, index) => (
-                      <BankIconBtn
-                        key={index}
-                        isOn={selectedBank2.includes(bank)}
-                        text={bank}
-                        size={size}
-                        onClick={() => onClickBanks(bank)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-          <MainBtn
-            styles='mt-31 mb-39 tablet:mt-68 tablet:mb-56 tablet:px-197 tablet:py-19 tablet:gap-22 tablet:rounded-22 tablet:heading-xxxl'
-            onClick={() => {
-              setBankAllFin(allBtn);
-              setBankAllSave(allBtn2);
-              setBankSelFin(selectedBank);
-              setBankSelSave(selectedBank2);
-              closeModal();
-            }}
-            text='적용'
-            isOn={!(selectedBank.length === 0 && selectedBank2.length === 0)}
-          />
-          <Close
-            className='absolute top-39 right-15 w-19 h-19 cursor-pointer tablet:top-56 tablet:right-53 tablet:w-45 tablet:h-45'
-            onClick={() => closeModal()}
-          />
-        </div>
-      )}
-    </>
+          </>
+        ) : (
+          <>
+            <SelectBtn
+              style={{
+                float: 'right',
+              }}
+              isOn={allBtn2}
+              onClick={onAllClickBank}
+            />
+            <div className='mt-78 flex items-center justify-center w-full desktop:mt-57'>
+              <div className='grid overflow-x-hidden gap-x-30 gap-y-15 grid-cols-3 overflow-y-auto scrollbar-hide desktop:grid-cols-7 desktop:gap-13 desktop:max-h-195 desktop:overflow-y-auto scrollbar-hide'>
+                {bankInfo2.map((bank, index) => (
+                  <BankIconBtn
+                    key={index}
+                    isOn={selectedBank2.includes(bank)}
+                    text={bank}
+                    onClick={() => onClickBanks(bank)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      <MainBtn
+        styles='mt-31 mb-39 tablet:mb-56 desktop:mt-57 desktop:mb-0'
+        onClick={() => {
+          setBankAllFin(allBtn);
+          setBankAllSave(allBtn2);
+          setBankSelFin(selectedBank);
+          setBankSelSave(selectedBank2);
+          closeModal();
+        }}
+        text='적용'
+        isOn={!(selectedBank.length === 0 && selectedBank2.length === 0)}
+      />
+      <Close
+        className='absolute stroke-typoPrimary dark:stroke-dark-typoPrimary top-39 right-15 w-19 h-19 cursor-pointer tablet:top-56 tablet:right-53 desktop:top-21 desktop:right-20'
+        onClick={() => closeModal()}
+      />
+    </div>
   );
 };
 

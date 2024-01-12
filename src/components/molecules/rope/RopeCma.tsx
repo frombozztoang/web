@@ -1,19 +1,14 @@
 import React from 'react';
-import BankAllBtn from '@/components/atom/button/BankAllBtn';
 import BankIconBtn from '@/components/atom/button/BankIconBtn';
 import Plus from '@/public/icons/plus.svg';
 
-type TRopeProps = {
-  allBtnClick: boolean;
-  onAllClickBank: () => void;
+type TRopeCmaProps = {
   selectedBanks: string[];
   bankInfo: string[];
   onClickBank: (bank: string) => void;
 };
 
-const Rope: React.FC<TRopeProps & React.HTMLAttributes<HTMLButtonElement>> = ({
-  allBtnClick,
-  onAllClickBank,
+const RopeCma: React.FC<TRopeCmaProps & React.HTMLAttributes<HTMLButtonElement>> = ({
   selectedBanks,
   bankInfo,
   onClickBank,
@@ -21,9 +16,7 @@ const Rope: React.FC<TRopeProps & React.HTMLAttributes<HTMLButtonElement>> = ({
 }) => {
   return (
     <div className='flex items-center w-342 px-12 py-15 bg-secondary dark:bg-dark-secondary border-2 rounded-10 border-border01 dark:border-dark-border01 tablet:w-438 tablet:px-15 tablet:py-18 tablet:rounded-12 desktop:w-855 desktop:px-16 desktop:py-20 desktop:rounded-20'>
-      <BankAllBtn isOn={allBtnClick} onClick={() => onAllClickBank()} />
-      <div className='h-75 border-l-2 border-border04 dark:border-dark-border04 ml-16 mr-4 tablet:h-96 tablet:ml-15 tablet:mr-5 desktop:h-100 desktop:ml-16 desktop:mr-6'></div>
-      <div className='flex overflow-x-scroll scrollbar-hide w-140 ml-10 tablet:ml-12 tablet:w-183 desktop:w-590 desktop:ml-10'>
+      <div className='flex overflow-x-scroll scrollbar-hide w-235 ml-5 tablet:ml-7 tablet:w-297 desktop:w-709 desktop:ml-5'>
         {bankInfo.map((bank, index) => (
           <BankIconBtn
             key={index}
@@ -45,4 +38,4 @@ const Rope: React.FC<TRopeProps & React.HTMLAttributes<HTMLButtonElement>> = ({
   );
 };
 
-export default Rope;
+export default RopeCma;

@@ -4,36 +4,29 @@ import { cls } from '@/utils/cls';
 
 type TBankAllBtnProps = {
   isOn: boolean;
-  size: 'Large' | 'Small';
 };
 
-const BankAllBtn: React.FC<TBankAllBtnProps & React.HTMLAttributes<HTMLDivElement>> = ({ isOn, size, ...props }) => {
-  return size === 'Large' ? (
+const BankAllBtn: React.FC<TBankAllBtnProps & React.HTMLAttributes<HTMLDivElement>> = ({ isOn, ...props }) => {
+  return (
     <div
       {...props}
       className={cls(
-        'flex flex-col items-center w-91 h-91 bg-secondary rounded-15 border cursor-pointer',
-        isOn ? 'border-main' : 'border-border04',
-      )}
-    >
-      <All className={cls('w-39 h-25 mt-22', isOn ? 'fill-main' : 'fill-typoSecondary')} />
-      <p className={cls('mt-10 label-medium', isOn ? 'text-main' : 'text-typoSecondary')}>1금융권</p>
-    </div>
-  ) : (
-    <div
-      {...props}
-      className={cls(
-        'flex flex-col items-center w-68 h-68 bg-secondary rounded-11 border cursor-pointer tablet:w-156 tablet:h-156 tablet:rounded-30 tablet:border-2',
-        isOn ? 'border-main' : 'border-border04',
+        'flex flex-col items-center w-68 h-68 bg-secondary dark:bg-dark-secondary rounded-11 border cursor-pointer tablet:w-87 tablet:h-87 tablet:rounded-14 desktop:w-91 desktop:h-91 desktop:rounded-15',
+        isOn ? 'border-main' : 'border-border04 dark:border-dark-border04',
       )}
     >
       <All
         className={cls(
-          'w-29 h-19 mt-17 tablet:w-68 tablet:h-44 tablet:mt-38',
+          'w-29 h-19 mt-17 tablet:w-38 tablet:h-24 tablet:mt-21 desktop:w-39 desktop:h-25 desktop:mt-22',
           isOn ? 'fill-main' : 'fill-typoSecondary',
         )}
       />
-      <p className={cls('mt-7 label-small tablet:mt-18 tablet:label-xl', isOn ? 'text-main' : 'text-typoSecondary')}>
+      <p
+        className={cls(
+          'mt-7 label-small tablet:mt-10 tablet:label-medium desktop:mt-10 desktop:label-medium',
+          isOn ? 'text-main' : 'text-typoSecondary',
+        )}
+      >
         1금융권
       </p>
     </div>

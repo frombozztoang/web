@@ -8,7 +8,6 @@ type TCmaProps = {
   description: string;
   rate: string;
   onHeartClick: () => void;
-  size: 'Large' | 'Small';
 };
 
 const Cma: React.FC<TCmaProps & React.HTMLAttributes<HTMLDivElement>> = ({
@@ -17,59 +16,37 @@ const Cma: React.FC<TCmaProps & React.HTMLAttributes<HTMLDivElement>> = ({
   description,
   rate,
   onHeartClick,
-  size,
   ...props
 }) => {
-  return size === 'Large' ? (
+  return (
     <div
       {...props}
-      className='flex w-855 px-30 py-25 mb-20 justify-between items-center gap-417 rounded-10 border-2 border-border01 bg-secondary cursor-pointer'
+      className='flex w-342 p-16 mb-10 justify-between items-center gap-341 rounded-12 border-2 border-border01 dark:border-dark-border01 bg-secondary dark:bg-dark-secondary cursor-pointer tablet:w-438 tablet:p-20 tablet:rounded-15 tablet:mb-12 desktop:w-855 desktop:px-30 desktop:py-25 desktop:mb-20 desktop:gap-417 desktop:rounded-10'
     >
       <div className='flex flex-row items-center'>
-        <div className='w-72 h-72 rounded-13 bg-imageBase'></div>
-        <div className='ml-21'>
-          <div className='label-large text-typoPrimary'>{productName}</div>
-          <div className='mt-5 paragraph-large text-typoPrimary'>{description}</div>
+        <div className='w-59 h-59 rounded-12 bg-imageBase tablet:w-75 tablet:h-75 tablet:rounded-13 desktop:w-72 desktop:h-72 desktop:rounded-13'></div>
+        <div className='ml-10 tablet:ml-12 desktop:ml-21'>
+          <div className='label-medium text-typoPrimary dark:text-dark-typoPrimary desktop:label-large'>
+            {productName}
+          </div>
+          <div className='mt-4 paragraph-medium text-typoPrimary dark:text-dark-typoPrimary tablet:mt-6 desktop:mt-5 desktop:paragraph-large'>
+            {description}
+          </div>
         </div>
       </div>
       <div className='flex flex-row items-center'>
-        <div className='label-large text-main'>수익률 {rate}%</div>
+        <div className='label-medium text-main desktop:label-large'>수익률 {rate}%</div>
         <button
-          className='ml-19'
-          onClick={(event) => {
-            event.stopPropagation();
-            onHeartClick();
-          }}
-        >
-          {isLiked ? <Heart className='w-37 h-37' /> : <HeartClick className='w-37 h-37' />}
-        </button>
-      </div>
-    </div>
-  ) : (
-    <div
-      {...props}
-      className='flex w-342 p-16 mb-10 justify-between items-center gap-341 rounded-12 border-2 border-border01 bg-secondary cursor-pointer tablet:w-789 tablet:p-36 tablet:rounded-27 tablet:border-4 tablet:mb-23'
-    >
-      <div className='flex flex-row items-center'>
-        <div className='w-59 h-59 rounded-12 bg-imageBase tablet:w-136 tablet:h-136 tablet:rounded-24'></div>
-        <div className='ml-10 tablet:ml-23'>
-          <div className='label-medium text-typoPrimary tablet:label-xl'>{productName}</div>
-          <div className='mt-4 paragraph-medium text-typoPrimary tablet:paragraph-xl tablet:mt-11'>{description}</div>
-        </div>
-      </div>
-      <div className='flex flex-row items-center'>
-        <div className='label-medium text-main tablet:label-xl'>수익률 {rate}%</div>
-        <button
-          className='ml-10 tablet:ml-23'
+          className='ml-10 tablet:ml-12 desktop:ml-19'
           onClick={(event) => {
             event.stopPropagation();
             onHeartClick();
           }}
         >
           {isLiked ? (
-            <Heart className='w-25 h-25 tablet:w-59 tablet:h-59' />
+            <Heart className='w-25 h-25 tablet:w-33 tablet:h-33 desktop:w-37 desktop:h-37' />
           ) : (
-            <HeartClick className='w-25 h-25 tablet:w-59 tablet:h-59' />
+            <HeartClick className='w-25 h-25 tablet:w-33 tablet:h-33 desktop:w-37 desktop:h-37' />
           )}
         </button>
       </div>

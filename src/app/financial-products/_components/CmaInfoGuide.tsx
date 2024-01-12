@@ -34,34 +34,38 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data }) => {
 
   return (
     <div>
-      <h1 className='heading-small tablet:heading-xl desktop:heading-xl text-typoPrimary'>주요 특징</h1>
-      <hr className='border-1/2 my-4 w-310 tablet:w-715 tablet:my-9 tablet:border desktop:border border-border01 desktop:w-766 desktop:my-10' />
-      <div className='mb-20 w-310 tablet:mb-46 tablet:w-715 desktop:w-776 desktop:mb-63'>
+      <h1 className='heading-small tablet:heading-medium desktop:heading-xl text-typoPrimary dark:text-dark-typoPrimary'>
+        주요 특징
+      </h1>
+      <hr className='border-1/2 my-4 w-310 tablet:w-397 tablet:my-5 desktop:border border-border01 dark:border-dark-border02 desktop:w-766 desktop:my-10' />
+      <div className='mb-20 w-310 tablet:mb-25 tablet:w-397 desktop:w-776 desktop:mb-63'>
         {DUMMY_DATA1.map((item, index) => {
           return (
             <div key={index} className='flex flex-col desktop:flex-row'>
-              <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-xl tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium'>
+              <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-medium tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium'>
                 {item.title}
               </div>
-              <div className='paragraph-small mb-6 text-typoPrimary tablet:mb-13 tablet:paragraph-xl desktop:px-25 desktop:paragraph-medium'>
+              <div className='paragraph-small mb-6 text-typoPrimary dark:text-dark-typoPrimary tablet:mb-7 tablet:paragraph-medium desktop:px-25 desktop:paragraph-medium'>
                 {item.content}
               </div>
             </div>
           );
         })}
       </div>
-      <h1 className='heading-small tablet:heading-xl desktop:heading-xl text-typoPrimary'>수수료 혜택 안내</h1>
-      <hr className='border-1/2 my-4 w-310 tablet:w-715 tablet:my-9 tablet:border desktop:border border-border01 desktop:w-766 desktop:my-10' />
-      <div className='mb-20 w-310 tablet:mb-46 tablet:w-715 desktop:w-776 desktop:mb-63'>
+      <h1 className='heading-small tablet:heading-medium desktop:heading-xl text-typoPrimary dark:text-dark-typoPrimary'>
+        수수료 혜택 안내
+      </h1>
+      <hr className='border-1/2 my-4 w-310 tablet:w-397 tablet:my-5 desktop:border border-border01 dark:border-dark-border02 desktop:w-766 desktop:my-10' />
+      <div className='mb-20 w-310 tablet:mb-25 tablet:w-397 desktop:w-776 desktop:mb-63'>
         {DUMMY_DATA2.map((item, index) => {
           return (
             <div key={index} className='flex flex-col desktop:flex-row'>
-              <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-xl tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium break-keep'>
+              <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-medium tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium break-keep'>
                 {item.title}
               </div>
-              <div className='paragraph-small mb-6 text-typoPrimary tablet:mb-13 tablet:paragraph-xl desktop:px-25 desktop:paragraph-medium'>
+              <div className='paragraph-small mb-6 text-typoPrimary dark:text-dark-typoPrimary tablet:mb-7 tablet:paragraph-medium desktop:px-25 desktop:paragraph-medium'>
                 {item.content.split('\n').map((line, index) => (
-                  <div key={index} className='mb-4 tablet:mb-9 desktop:mb-10'>
+                  <div key={index} className='mb-4 tablet:mb-5 desktop:mb-10'>
                     {line}
                     <br />
                   </div>
@@ -71,17 +75,17 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({ data }) => {
           );
         })}
       </div>
-      <hr className='border-1/2 my-4 w-310 tablet:w-715 tablet:my-9 tablet:border desktop:border border-border01 desktop:w-766 desktop:my-10' />
-      <div className='mb-20 w-310 tablet:mb-58 tablet:w-715 desktop:w-776 desktop:mb-63'>
+      <hr className='border-1/2 my-4 w-310 tablet:w-397 tablet:my-5 desktop:border border-border01 dark:border-dark-border02 desktop:w-766 desktop:my-10' />
+      <div className='mb-25 w-310 tablet:mb-32 tablet:w-397 desktop:w-776 desktop:mb-63'>
         {DUMMY_DATA3.map((item, index) => {
           return (
             <div key={index} className='flex flex-col desktop:flex-row'>
-              <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-xl tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium break-keep'>
+              <div className='paragraph-small pb-2 text-typoSecondary text-left align-top tablet:paragraph-medium tablet:pb-4 desktop:min-w-94 desktop:max-w-94 desktop:pb-10 desktop:paragraph-medium break-keep'>
                 {item.title}
               </div>
-              <div className='paragraph-small mb-6 text-typoPrimary tablet:mb-13 tablet:paragraph-xl desktop:px-25 desktop:paragraph-medium'>
+              <div className='paragraph-small mb-6 text-typoPrimary dark:text-dark-typoPrimary tablet:mb-7 tablet:paragraph-medium desktop:px-25 desktop:paragraph-medium'>
                 {item.content.split('\n').map((line, index) => (
-                  <div key={index} className='mb-4 tablet:mb-9 desktop:mb-10'>
+                  <div key={index} className='mb-4 tablet:mb-5 desktop:mb-10'>
                     {line}
                     <br />
                   </div>
