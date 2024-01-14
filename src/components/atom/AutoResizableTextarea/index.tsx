@@ -10,6 +10,7 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 // 최소 높이를 지정하려면 min-height 속성 추가
 function AutoResizableTextarea({ textareaRef, textareaOnChange, children, ...props }: Props) {
   const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    textareaOnChange && textareaOnChange(event);
     // scrollHeight을 구하기 전 줄바꿈 공백을 없애기 위해 높이를 초기화한다
     event.target.style.height = '0px';
     const { borderTopWidth, borderBottomWidth, paddingTop, paddingBottom } = getComputedStyle(event.target);
@@ -30,7 +31,6 @@ function AutoResizableTextarea({ textareaRef, textareaOnChange, children, ...pro
     // height 늘리기
     const newHeight = scrollHeight + parseInt(borderTopWidth) + parseInt(borderBottomWidth);
     event.target.style.height = `${newHeight}px`;
-    textareaOnChange && textareaOnChange(event);
   };
 
   return <textarea ref={textareaRef} onChange={handleTextareaChange} {...props}></textarea>;

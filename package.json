@@ -11,6 +11,7 @@
     "build-storybook": "storybook build -s public"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@yoopta/action-menu-list": "^1.9.16-rc",
     "@yoopta/blockquote": "^1.9.19-rc",
     "@yoopta/callout": "^1.9.15-rc",
@@ -24,12 +25,17 @@
     "@yoopta/marks": "^1.9.15-rc",
     "@yoopta/paragraph": "^1.9.17-rc",
     "@yoopta/toolbar": "^1.9.15-rc",
+    "escape-html": "^1.0.3",
     "has-flag": "^5.0.1",
+    "highlight.js": "^11.9.0",
+    "js-cookie": "^3.0.5",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "slate": "^0.101.4",
-    "slate-react": "^0.101.3"
+    "react-query": "^3.39.3",
+    "slate": "^0.101.5",
+    "slate-history": "^0.100.0",
+    "slate-react": "^0.101.5"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.6",
@@ -41,6 +47,9 @@
     "@storybook/react": "^7.6.6",
     "@storybook/test": "^7.6.6",
     "@svgr/webpack": "^8.1.0",
+    "@types/escape-html": "^1.0.4",
+    "@types/is-hotkey": "^0.1.10",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

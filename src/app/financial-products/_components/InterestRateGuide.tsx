@@ -6,11 +6,17 @@ import DefaultBtn from '@/components/atom/button/DefaultBtn';
 
 type TInterestRateGuideProps = {
   amountStr: string;
+  bankHomepageUrl: string;
   onInputAmountHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   AmountHandler: () => void;
 };
 
-const InterestRateGuide: React.FC<TInterestRateGuideProps> = ({ amountStr, onInputAmountHandler, AmountHandler }) => {
+const InterestRateGuide: React.FC<TInterestRateGuideProps> = ({
+  amountStr,
+  bankHomepageUrl,
+  onInputAmountHandler,
+  AmountHandler,
+}) => {
   return (
     <div className='mt-20 tablet:mt-26 desktop:mt-64'>
       <h1 className='heading-small tablet:heading-medium desktop:heading-large text-typoPrimary dark:text-dark-typoPrimary'>
@@ -63,7 +69,7 @@ const InterestRateGuide: React.FC<TInterestRateGuideProps> = ({ amountStr, onInp
         </tbody>
       </table>
       <div className='flex justify-center'>
-        <DefaultBtn />
+        <DefaultBtn onClick={() => window.open(bankHomepageUrl)} />
       </div>
     </div>
   );

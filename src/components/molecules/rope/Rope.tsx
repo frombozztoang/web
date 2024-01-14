@@ -2,12 +2,13 @@ import React from 'react';
 import BankAllBtn from '@/components/atom/button/BankAllBtn';
 import BankIconBtn from '@/components/atom/button/BankIconBtn';
 import Plus from '@/public/icons/plus.svg';
+import { TgetBankApiResponse } from '@/types/financial-productsTypes';
 
 type TRopeProps = {
   allBtnClick: boolean;
   onAllClickBank: () => void;
   selectedBanks: string[];
-  bankInfo: string[];
+  bankInfo: TgetBankApiResponse[] | undefined;
   onClickBank: (bank: string) => void;
 };
 
@@ -24,13 +25,14 @@ const Rope: React.FC<TRopeProps & React.HTMLAttributes<HTMLButtonElement>> = ({
       <BankAllBtn isOn={allBtnClick} onClick={() => onAllClickBank()} />
       <div className='h-75 border-l-2 border-border04 dark:border-dark-border04 ml-16 mr-4 tablet:h-96 tablet:ml-15 tablet:mr-5 desktop:h-100 desktop:ml-16 desktop:mr-6'></div>
       <div className='flex overflow-x-scroll scrollbar-hide w-140 ml-10 tablet:ml-12 tablet:w-183 desktop:w-590 desktop:ml-10'>
-        {bankInfo.map((bank, index) => (
+        {bankInfo?.map((bank, index) => (
           <BankIconBtn
             key={index}
             styles='mr-10 tablet:mr-12 desktop:mr-10'
-            isOn={selectedBanks.includes(bank)}
-            text={bank}
-            onClick={() => onClickBank(bank)}
+            isOn={selectedBanks.includes(bank.bankName)}
+            img={bank.bankLogoUrl}
+            text={bank.bankName}
+            onClick={() => onClickBank(bank.bankName)}
           />
         ))}
       </div>

@@ -4,10 +4,11 @@ import SelectBtn from '@/components/atom/button/SelectBtn';
 import SubBtn from '@/components/atom/button/SubBtn';
 import { useState } from 'react';
 import Close from '@/public/icons/close_b.svg';
+import { TgetBankApiResponse } from '@/types/financial-productsTypes';
 
 type TMoreBankModalProps = {
-  bankInfo: string[];
-  bankInfo2: string[];
+  bankInfo: TgetBankApiResponse[] | undefined;
+  bankInfo2: TgetBankApiResponse[] | undefined;
   bankAllFin: boolean;
   bankAllSave: boolean;
   setBankAllFin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,16 +41,16 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
 
   const onAllClickBank = () => {
     if (isOn) {
-      if (!allBtn) {
-        const allBanks = bankInfo.map((info) => info);
+      if (!allBtn && bankInfo) {
+        const allBanks = bankInfo.map((info) => info.bankName);
         setSelectedBank(allBanks);
       } else {
         setSelectedBank([]);
       }
       setAllBtn(!allBtn);
     } else {
-      if (!allBtn2) {
-        const allBanks = bankInfo2.map((info) => info);
+      if (!allBtn2 && bankInfo2) {
+        const allBanks = bankInfo2.map((info) => info.bankName);
         setSelectedBank2(allBanks);
       } else {
         setSelectedBank2([]);
@@ -102,12 +103,13 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
             />
             <div className='mt-78 flex items-center justify-center w-full desktop:mt-57'>
               <div className='grid overflow-x-hidden gap-x-30 gap-y-15 grid-cols-3 overflow-y-auto scrollbar-hide desktop:grid-cols-7 desktop:gap-13 desktop:max-h-195 desktop:overflow-y-auto scrollbar-hide'>
-                {bankInfo.map((bank, index) => (
+                {bankInfo?.map((bank, index) => (
                   <BankIconBtn
                     key={index}
-                    isOn={selectedBank.includes(bank)}
-                    text={bank}
-                    onClick={() => onClickBanks(bank)}
+                    isOn={selectedBank.includes(bank.bankName)}
+                    img={bank.bankLogoUrl}
+                    text={bank.bankName}
+                    onClick={() => onClickBanks(bank.bankName)}
                   />
                 ))}
               </div>
@@ -124,12 +126,13 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
             />
             <div className='mt-78 flex items-center justify-center w-full desktop:mt-57'>
               <div className='grid overflow-x-hidden gap-x-30 gap-y-15 grid-cols-3 overflow-y-auto scrollbar-hide desktop:grid-cols-7 desktop:gap-13 desktop:max-h-195 desktop:overflow-y-auto scrollbar-hide'>
-                {bankInfo2.map((bank, index) => (
+                {bankInfo2?.map((bank, index) => (
                   <BankIconBtn
                     key={index}
-                    isOn={selectedBank2.includes(bank)}
-                    text={bank}
-                    onClick={() => onClickBanks(bank)}
+                    isOn={selectedBank2.includes(bank.bankName)}
+                    img={bank.bankLogoUrl}
+                    text={bank.bankName}
+                    onClick={() => onClickBanks(bank.bankName)}
                   />
                 ))}
               </div>

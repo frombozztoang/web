@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FinanceToggle from '@/components/atom/toggle/FinanceToggle';
 import Rope from '@/components/molecules/rope/Rope';
 import DepositSaving from '@/components/molecules/whattodo/DepositSaving';
@@ -9,24 +9,15 @@ import Filter from '@/components/organisms/filter/Filter';
 import BankGoldtori from '@/public/icons/bank_goldtori.svg';
 import ArrowDown from '@/public/icons/arrow-down-2.svg';
 import { useRouter } from 'next/navigation';
-import BubbleP from '@/public/icons/bubble-p.svg';
-import BubbleT from '@/public/icons/bubble-t.svg';
-import useFinMediaQuery from '@/hooks/custom/useFinMediaQuery';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import Pagination from '@/components/molecules/pagination/Pagination';
-
-type TDepositSaving = {
-  id: number;
-  productName: string;
-  bankName: string;
-  maxInterestRate: string;
-  interestRate: string;
-  isLiked: boolean;
-};
+import { getBankApi } from '@/api/financial-productsApi';
+import { getDepositsApi } from '@/api/depositsApi';
+import { TgetBankApiResponse, TgetDepositSavingResponse } from '@/types/financial-productsTypes';
+import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
 
 const WhatToDoPage = () => {
   const router = useRouter();
-  const { isDesktop } = useFinMediaQuery();
   const [amount, setAmount] = useState('');
 
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
@@ -34,127 +25,111 @@ const WhatToDoPage = () => {
 
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
-  const [pageTotalNum, setPageTotalNum] = useState(13); //총 페이지 수
+  const [pageTotalNum, setPageTotalNum] = useState(0); //총 페이지 수
+
+  //은행 정보
+  const [bankFinInfo, setBankFinInfo] = useState<TgetBankApiResponse[]>(); //1금융권
+  const [bankSaveInfo, setBankSaveInfo] = useState<TgetBankApiResponse[]>(); //저축은행
 
   //예금
   const [depAllFin, setDepAllFin] = useState(false);
   const [depAllSave, setDepAllSave] = useState(false);
   const [depSelFin, setDepSelFin] = useState<string[]>([]);
   const [depSelSave, setDepSelSave] = useState<string[]>([]);
+  const [depSel, setDepSel] = useState<string>();
 
   //예금 목록
-  const [bankDataDeposit, setBankDataDeposit] = useState<TDepositSaving[]>([]);
-  const [totalElements, setTotalElements] = useState(0); //예금 결과 개수
+  const [bankDataDeposit, setBankDataDeposit] = useState<TgetDepositSavingResponse[] | undefined>();
+  const [totalElements, setTotalElements] = useState<number | null>(null); //예금 결과 개수
 
   //검색 필터
   const [depFilterIndex, setDepFilterIndex] = useState<number | undefined>(undefined);
-  const [depFilter, setDepFilter] = useState<string[]>([]); //예금 필터 데이터
+  const [depFilter, setDepFilter] = useState<
+    {
+      text: string;
+      value: string;
+    }[]
+  >([]); //예금 텍스트 필터 데이터
+  const [depValueFilter, setDepValueFilter] = useState<string>(); //예금 값 필터 데이터
 
   const DEPOSIT_FILTER = [
-    { filter: '기간 및 금액', sub: ['전체', '3개월', '6개월', '12개월', '24개월', '36개월'] },
-    { filter: '상품 유형', sub: ['누구나 가입'] },
+    {
+      filter: '기간 및 금액',
+      sub: [
+        { text: '전체', value: '' },
+        { text: '1개월', value: '&terms=1' },
+        { text: '3개월', value: '&terms=3' },
+        { text: '6개월', value: '&terms=6' },
+        { text: '12개월', value: '&terms=12' },
+        { text: '24개월', value: '&terms=24' },
+        { text: '36개월', value: '&terms=36' },
+      ],
+    },
+    {
+      filter: '상품 유형',
+      sub: [
+        { text: '누구나 가입', value: '&types=누구나 가입' },
+        { text: '특판', value: '&types=특판' },
+        { text: '방문없이 가입', value: '&types=방문없이 가입' },
+        { text: '청년적금', value: '&types=청년적금' },
+        { text: '군인적금', value: '&types=군인적금' },
+        { text: '주택청약', value: '&types=주택청약' },
+        { text: '자유적금', value: '&types=자유적금' },
+        { text: '정기적금', value: '&types=정기적금' },
+        { text: '청년도약계좌', value: '&types=청년도약계좌' },
+      ],
+    },
   ];
 
-  const DUMMY_BANK1 = [
-    '경남은행',
-    '광주은행',
-    '국민은행',
-    '농협은행',
-    '대구은행',
-    '부산은행',
-    '수협은행',
-    '신한은행',
-    '우리은행',
-    '전북은행',
-    '제주은행',
-    '주식회사 카카오뱅크',
-  ];
-
-  const DUMMY_BANK2 = [
-    'CK저축은행',
-    'HB저축은행',
-    '고려저축은행',
-    '국제저축은행',
-    '금화저축은행',
-    '남양저축은행',
-    '다올저축은행',
-    '대명상호저축은행',
-    '대백저축은행',
-    '대신저축은행',
-    '대아상호저축은행',
-    '대원상호저축은행',
-    '대한저축은행',
-    '더블저축은행',
-    '더케이저축은행',
-    '동양저축은행',
-    '동원제일저축은행',
-  ];
-
-  const DUMMY_DEPOSIT = useMemo(
-    () => [
-      {
-        id: 0,
-        productName: '상품명',
-        bankName: '은행명',
-        maxInterestRate: '3.28',
-        interestRate: '3.40',
-        isLiked: false,
-      },
-      {
-        id: 1,
-        productName: '상품명2',
-        bankName: '은행명2',
-        maxInterestRate: '3.30',
-        interestRate: '3.40',
-        isLiked: true,
-      },
-      {
-        id: 2,
-        productName: '상품명3',
-        bankName: '은행명3',
-        maxInterestRate: '3.23',
-        interestRate: '3.53',
-        isLiked: false,
-      },
-      {
-        id: 3,
-        productName: '상품명4',
-        bankName: '은행명4',
-        maxInterestRate: '3.23',
-        interestRate: '3.53',
-        isLiked: false,
-      },
-      {
-        id: 4,
-        productName: '상품명5',
-        bankName: '은행명5',
-        maxInterestRate: '3.56',
-        interestRate: '3.33',
-        isLiked: false,
-      },
-    ],
-    [],
-  );
-
-  useEffect(() => {
-    setBankDataDeposit(DUMMY_DEPOSIT);
-  }, [DUMMY_DEPOSIT]);
-
-  useEffect(() => {
-    if (sort) {
-      const sortedDeposit = [...DUMMY_DEPOSIT];
-      sortedDeposit.sort((a, b) => Number(b.maxInterestRate) - Number(a.maxInterestRate));
-      setBankDataDeposit(sortedDeposit);
-    } else {
-      const sortedDeposit = [...DUMMY_DEPOSIT];
-      sortedDeposit.sort((a, b) => Number(b.interestRate) - Number(a.interestRate));
-      setBankDataDeposit(sortedDeposit);
+  const bankInfoFetchData = async () => {
+    try {
+      const bankFin = await getBankApi('020000');
+      setBankFinInfo(bankFin);
+      const bankSave = await getBankApi('030300');
+      setBankSaveInfo(bankSave);
+    } catch (error) {
+      console.error('Error fetching bankInfoFetchData:', error);
     }
-  }, [sort, DUMMY_DEPOSIT]);
+  };
+
+  useEffect(() => {
+    bankInfoFetchData();
+  }, []);
+
+  const bankListFetchData = async () => {
+    try {
+      const data = await getDepositsApi(`size=10&page=${pageNum}${depValueFilter}${depSel}`);
+      if (data) {
+        setBankDataDeposit(data.content);
+        setPageTotalNum(data.totalPages);
+        setTotalElements(data.totalElements);
+      }
+    } catch (error) {
+      console.error('Error fetching bankListFetchData:', error);
+    }
+  };
+
+  useEffect(() => {
+    bankListFetchData();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNum, depValueFilter, depSel]);
+
+  const DepSelect = () => {
+    const queryStringArray = depSelFin.map((bankName) => `&bankNames=${bankName}`);
+    const queryStringArray2 = depSelSave.map((bankName) => `&bankNames=${bankName}`);
+    const combinedQueryStringArray = queryStringArray.concat(queryStringArray2);
+    const queryString = combinedQueryStringArray.join('');
+    setDepSel(queryString);
+  };
+
+  useEffect(() => {
+    DepSelect();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [depSelFin, depSelSave]);
 
   const onAllClickBank = () => {
-    if (!depAllFin) {
-      const allBanks = DUMMY_BANK1.map((info) => info);
+    if (!depAllFin && bankFinInfo) {
+      const allBanks = bankFinInfo.map((info) => info.bankName);
       setDepSelFin(allBanks);
     } else {
       setDepSelFin([]);
@@ -182,18 +157,54 @@ const WhatToDoPage = () => {
     }
   };
 
-  const onHeartClick = (id: number) => {
-    //id로 즐겨찾기
-    console.log(id);
-  };
-
-  const PlusSubBtn = (data: string) => {
-    if (depFilter?.includes(data)) {
-      setDepFilter(depFilter.filter((item) => item !== data));
-    } else {
-      setDepFilter([...depFilter, data]);
+  const onHeartClick = async (id: number, isLiked: boolean) => {
+    try {
+      let apiResult;
+      if (isLiked) {
+        apiResult = await deleteBankBookmarkApi(id);
+      } else {
+        apiResult = await postBankBookmarkApi(id);
+      }
+      if (apiResult !== undefined) {
+        setBankDataDeposit(bankDataDeposit?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+      } else {
+        console.log('로그인 해주세요');
+      }
+    } catch (error) {
+      console.error('Error fetching bankBookmark:', error);
     }
   };
+
+  const PlusSubBtn = (text: string, value: string) => {
+    setDepFilter((prevDepFilter) => {
+      if (text === '전체') {
+        if (prevDepFilter.some((filter) => filter.text === '전체')) {
+          return [];
+        } else {
+          return DEPOSIT_FILTER[0].sub;
+        }
+      } else {
+        const newDepFilter = prevDepFilter.filter((filter) => filter.text !== '전체');
+        const existingFilter = newDepFilter.find((filter) => filter.text === text);
+        if (existingFilter) {
+          return newDepFilter.filter((filter) => filter.text !== text);
+        } else {
+          return [...newDepFilter, { text, value }];
+        }
+      }
+    });
+  };
+
+  const DepValueFilter = () => {
+    const valuesArray = depFilter.map((filter) => filter.value);
+    const combinedValues = valuesArray.join('');
+    setDepValueFilter(combinedValues);
+  };
+
+  useEffect(() => {
+    DepValueFilter();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [depFilter]);
 
   const toggleFn = (number: number) => {
     if (number === 2) {
@@ -209,15 +220,11 @@ const WhatToDoPage = () => {
     <div className='flex flex-col justify-center items-center'>
       <FinanceToggle activeToggle={1} toggleFn={toggleFn} />
       <div className='flex justify-between mt-10 w-330 tablet:w-438 tablet:mt-12 desktop:w-850 desktop:mt-10'>
-        <div className='mt-16 relative tablet:mt-21 desktop:mt-45'>
+        <div className='mt-13 relative tablet:mt-21 desktop:mt-45'>
           <span className='absolute top-14 left-25 text-main label-small w-185 tablet:top-17 tablet:left-26 tablet:label-medium tablet:w-237 desktop:top-20 desktop:left-70 desktop:w-600 desktop:heading-medium'>
             예금은 처음 한 번에 돈을 저축 후 만기에 이자와 함께 돌려받는 상품이에요 !
           </span>
-          {isDesktop ? (
-            <BubbleP className='fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
-          ) : (
-            <BubbleT className='h-63 tablet:h-80 fill-secondary stroke-border01 dark:fill-dark-border01 dark:stroke-dark-border01' />
-          )}
+          <div className='h-63 w-228 tablet:w-291 tablet:h-80 desktop:w-616 desktop:h-62 rounded-100 fill-secondary border-2 border-border01 dark:fill-dark-border01 dark:border-dark-border01'></div>
         </div>
         <BankGoldtori className='w-113 tablet:w-144 desktop:w-178' />
       </div>
@@ -226,7 +233,7 @@ const WhatToDoPage = () => {
         allBtnClick={depAllFin}
         onAllClickBank={onAllClickBank}
         selectedBanks={depSelFin}
-        bankInfo={DUMMY_BANK1}
+        bankInfo={bankFinInfo}
         onClickBank={onClickBank}
       />
       <Filter
@@ -235,41 +242,43 @@ const WhatToDoPage = () => {
         activeFilterIndex={depFilterIndex}
         setActiveFilterIndex={setDepFilterIndex}
         subIsOn={depFilter}
-        setSubIsOn={setDepFilter}
         filterTerms={DEPOSIT_FILTER}
         PlusSubBtn={PlusSubBtn}
         onInputOn={true}
       />
-      <div className='flex justify-between w-338 mt-21 mb-10 tablet:w-430 tablet:mt-26 tablet:mb-12 desktop:w-850 desktop:mt-39 desktop:mb-10'>
-        <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
-          {totalElements}개
+      {totalElements && (
+        <div className='flex justify-between w-338 mt-21 mb-10 tablet:w-430 tablet:mt-26 tablet:mb-12 desktop:w-850 desktop:mt-39 desktop:mb-10'>
+          <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
+            {totalElements}개
+          </div>
+          {sort ? (
+            <button className='flex' onClick={() => setSort(!sort)}>
+              <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
+                최고 금리 순
+              </span>
+              <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
+            </button>
+          ) : (
+            <button className='flex' onClick={() => setSort(!sort)}>
+              <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
+                기본 금리 순
+              </span>
+              <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
+            </button>
+          )}
         </div>
-        {sort ? (
-          <button className='flex' onClick={() => setSort(!sort)}>
-            <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
-              최고 금리 순
-            </span>
-            <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
-          </button>
-        ) : (
-          <button className='flex' onClick={() => setSort(!sort)}>
-            <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
-              기본 금리 순
-            </span>
-            <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
-          </button>
-        )}
-      </div>
-      {bankDataDeposit.map((data, index) => {
+      )}
+      {bankDataDeposit?.map((data, index) => {
         return (
           <DepositSaving
             key={index}
             isLiked={data.isLiked}
+            bankLogoUrl={data.bankLogoUrl}
             productName={data.productName}
             bankName={data.bankName}
             maxInterestRate={data.maxInterestRate}
             interestRate={data.interestRate}
-            onHeartClick={() => onHeartClick(data.id)}
+            onHeartClick={() => onHeartClick(data.id, data.isLiked)}
             onClick={() => router.push(`/financial-products/deposits/${data.id}`)}
           />
         );
@@ -279,8 +288,8 @@ const WhatToDoPage = () => {
         <BackDrop>
           <MoreBankModal
             closeModal={() => setIsOpen(!isOpen)}
-            bankInfo={DUMMY_BANK1}
-            bankInfo2={DUMMY_BANK2}
+            bankInfo={bankFinInfo}
+            bankInfo2={bankSaveInfo}
             bankAllFin={depAllFin}
             bankAllSave={depAllSave}
             setBankAllFin={setDepAllFin}

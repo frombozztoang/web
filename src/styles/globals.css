@@ -129,6 +129,60 @@
     line-height: 140%; /* 16.804px */
   }
 
+  .tenada-xxxxxxl {
+    font-family: Tenada;
+    font-size: 200px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 150%; /* 300px */
+    letter-spacing: -4.4px;
+  }
+
+  .tenada-xxxxxl {
+    font-family: Tenada;
+    font-size: 130.312px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 150%; /* 195.468px */
+    letter-spacing: -2.867px;
+  }
+
+  .tenada-xxxxl {
+    font-family: Tenada;
+    font-size: 89.933px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 150%; /* 134.899px */
+    letter-spacing: -1.979px;
+  }
+
+  .tenada-xxxl {
+    font-family: Tenada;
+    font-size: 70.147px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 150%; /* 105.221px */
+    letter-spacing: -1.543px;
+  }
+
+  .tenada-xxl {
+    font-family: Tenada;
+    font-size: 58.597px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 150%; /* 87.895px */
+    letter-spacing: -1.289px;
+  }
+
+  .tenada-xl {
+    font-family: Tenada;
+    font-size: 45.705px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 150%; /* 68.558px */
+    letter-spacing: -1.006px;
+  }
+
   .tenada-large {
     font-family: Tenada;
     font-size: 26px;
@@ -151,6 +205,23 @@
     font-style: normal;
     font-weight: 800;
     line-height: normal;
+  }
+
+  .pretenard-xxl {
+    font-family: Pretendard;
+    font-size: 47.442px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 71.163px */
+    letter-spacing: -1.044px;
+  }
+
+  .pretenard-xl {
+    font-family: Pretendard;
+    font-size: 20.513px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 30.769px */
   }
 }
 
@@ -215,4 +286,10 @@ body {
 /* 모달창 띄울 때 스크롤 방지 */
 .modal-open {
   overflow: hidden;
+}
+
+.post-box {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 10px 10px 20px 2px rgb(0 0 0 / 5%);
 }

@@ -10,14 +10,19 @@ type TFilterProps = {
   onInputAmountHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   activeFilterIndex: number | undefined;
   setActiveFilterIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
-  subIsOn: string[];
-  setSubIsOn: React.Dispatch<React.SetStateAction<string[]>>;
+  subIsOn: {
+    text: string;
+    value: string;
+  }[];
   filterTerms: {
     filter: string;
-    sub: string[];
+    sub: {
+      text: string;
+      value: string;
+    }[];
   }[];
   onInputOn: boolean;
-  PlusSubBtn: (data: string) => void;
+  PlusSubBtn: (text: string, value: string) => void;
 };
 
 const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
@@ -26,7 +31,6 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
   activeFilterIndex,
   setActiveFilterIndex,
   subIsOn,
-  setSubIsOn,
   filterTerms,
   PlusSubBtn,
   onInputOn,
@@ -76,9 +80,9 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
               <FilterSubBtn
                 key={index}
                 styles='mr-10 mt-12 tablet:mt-15 desktop:mt-12'
-                text={data}
-                isOn={subIsOn.includes(data)}
-                onClick={() => PlusSubBtn(data)}
+                text={data.text}
+                isOn={subIsOn.some((sub) => sub.text === data.text && sub.value === data.value)}
+                onClick={() => PlusSubBtn(data.text, data.value)}
               />
             );
           })}
@@ -103,8 +107,8 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
                 <FilterResult
                   key={index}
                   styles='mr-10 mb-8 tablet:mb-10 desktop:mb-8'
-                  text={data}
-                  toggleFn={() => PlusSubBtn(data)}
+                  text={data.text}
+                  toggleFn={() => PlusSubBtn(data.text, data.value)}
                 />
               );
             })}

@@ -24,15 +24,17 @@ const CmaGuide: React.FC<TCmaGuideProps> = ({ isLiked, productName, bankName, ra
           </div>
         </div>
       </div>
-      <div className='flex items-center'>
+      <div className='flex items-center pl-5'>
         <div>
-          <div className='text-main label-small tablet:paragraph-medium desktop:label-large'>수익률 {rate}%</div>
+          <div className='text-main label-small tablet:paragraph-medium desktop:label-large whitespace-nowrap'>
+            수익률 {rate}%
+          </div>
         </div>
         <button className='ml-17 tablet:ml-30 desktop:ml-60' onClick={onHeartClick}>
           {isLiked ? (
-            <Heart className='w-25 :h-25 tablet:w-33 tablet:h-33 desktop:w-37 desktop:h-37' />
-          ) : (
             <HeartClick className='w-25 :h-25 tablet:w-33 tablet:h-33 desktop:w-37 desktop:h-37' />
+          ) : (
+            <Heart className='w-25 :h-25 tablet:w-33 tablet:h-33 desktop:w-37 desktop:h-37' />
           )}
         </button>
       </div>

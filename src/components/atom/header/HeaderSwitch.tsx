@@ -15,6 +15,9 @@ const HeaderSwitch: React.FC<THeaderSwitchProps & React.HTMLAttributes<HTMLDivEl
   ...props
 }) => {
   const toggleTheme = () => {
+    console.log('HeaderSwitch 클릭됨');
+    // 이벤트 발생
+    window.dispatchEvent(new Event('darkModeToggle'));
     const theme = localStorage.getItem('theme');
     if (theme) {
       localStorage.setItem('theme', theme === 'dark' ? 'light' : 'dark');
@@ -23,7 +26,6 @@ const HeaderSwitch: React.FC<THeaderSwitchProps & React.HTMLAttributes<HTMLDivEl
     }
     setDarkMode(!darkMode);
   };
-
   return (
     <div
       onClick={toggleTheme}

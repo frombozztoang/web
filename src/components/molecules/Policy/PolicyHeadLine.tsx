@@ -19,20 +19,20 @@ const PolicyHeadLine: React.FC<TPolicyHeadLineProps> = ({ title, content }) => {
   const formattedContent = content && content.length > 52 ? `${content.slice(0, 52)}\n${content.slice(52)}` : content;
 
   return (
-    <div className='w-[342px] tablet:w-[789px] desktop:w-855'>
+    <div className='w-[342px] tablet:w-[438px] desktop:w-855 '>
       <div>
-        <div className='w-79 h-58 ml-[260px] tablet:w-181 tablet:h-132 tablet:ml-[600px] desktop:w-197 desktop:h-144 desktop:ml-[687px]'>
+        <div className='w-79 h-58 ml-[260px] tablet:w-101 tablet:h-74 tablet:ml-[339px] desktop:w-197 desktop:h-144 desktop:ml-[687px]'>
           <Default_goldtoriv2 />
         </div>
-        <div className='w-full flex border-2 mb-10 mt-[-7px] tablet:mt-[-15px] border-02 rounded-[20px] py-[50px]  desktop:mt-[-19px] z-0'>
-          <div className='flex-col'>
-            <div className='heading-medium px-[20px] tablet:text-37 desktop:heading-xl  z-5 font-bold pb-10 '>
+        <div className='w-full flex border-2 mb-10 mt-[-7px] py-18 tablet:mt-[-10px] border-02 rounded desktop:mt-[-17px] z-0 dark:bg-[#343434] dark:border-[#343434]'>
+          <div className='flex-col tablet:py-23 desktop:py-35 '>
+            <div className='heading-medium px-[20px] tablet:heading-large  desktop:heading-xl  z-5 font-bold pb-10 desktop:mt-[-30px] dark:text-[#D6D6D6]'>
               {title}
-              <div className='mobile:hidden label-small desktop:block tablet:block text-justify desktop:label-medium tablet:w-500 font-bold'>
+              <div className='label-small tablet:label-medium text-justify desktop:label-medium tablet:w-220 font-bold desktop:w-700 desktop:mt-5'>
                 {formattedContent}
               </div>
             </div>
-            <p className='z-10 w-29 h-29 ml-[290px] mt-[-30px] tablet:w-68 tablet:h-68 tablet:mt-[-85px] tablet:ml-[650px] desktop:w-37 desktop:h-37 desktop:ml-[800px]'>
+            <p className='z-10 w-29 h-29 ml-[290px] mt-[-35px] tablet:w-38 tablet:h-38 tablet:mt-[-120px] tablet:ml-[380px] desktop:w-37 desktop:h-37 desktop:ml-[790px] desktop:mt-[-70px]'>
               {isHeartClick ? <Heartclick onClick={handleClick} /> : <Heartdefault onClick={handleClick} />}
             </p>
           </div>

@@ -1,11 +1,13 @@
+import Cookies from 'js-cookie';
+
 class User {
   private _accessToken: string | null;
   private _refreshToken: string | null;
   private _isAdmin: boolean;
 
   constructor() {
-    this._accessToken = null;
-    this._refreshToken = null;
+    this._accessToken = Cookies.get('accessToken') || null;
+    this._refreshToken = Cookies.get('refreshToken') || null;
     this._isAdmin = false;
   }
 
@@ -14,21 +16,26 @@ class User {
   }
 
   setAccessToken(newAccessToken: string) {
+    Cookies.set('accessToken', newAccessToken);
     this._accessToken = newAccessToken;
   }
 
   deleteAccessToken() {
+    Cookies.remove('accessToken');
     this._accessToken = null;
   }
+
   getRefreshToken() {
     return this._refreshToken;
   }
 
   setRefreshToken(newRefreshToken: string) {
+    Cookies.set('refreshToken', newRefreshToken);
     this._refreshToken = newRefreshToken;
   }
 
   deleteRefreshToken() {
+    Cookies.remove('refreshToken');
     this._refreshToken = null;
   }
 

@@ -17,8 +17,8 @@ const Favorites = () => {
     setSubHeaderITem(index);
   };
   return (
-    <div className='flex flex-col w-342 tablet:w-854'>
-      <div className='heading-large border-b-2 border-black pb-10  mb-10 dark:text-dark-primary dark:border-white '>
+    <div className='flex flex-col w-342 tablet:w-438 desktop:w-855'>
+      <div className='heading-large tablet:text-27 border-b-2 border-black pb-10  mb-10 dark:text-dark-primary dark:border-white '>
         즐겨찾기
       </div>
       <div className='flex justify-between tablet:justify-start mb-63'>

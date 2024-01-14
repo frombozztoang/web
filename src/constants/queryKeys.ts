@@ -1,0 +1,6 @@
+const QUERY_KEYS = {
+  GET_USER: 'GET_USER',
+  GET_CHATBOT_MEMORY: 'GET_CHATBOT_MEMORY',
+};
+
+export default QUERY_KEYS;

@@ -14,20 +14,18 @@ const Accordian = ({ title, children, count }: TAccordianProps) => {
     setIsOpend(!isOpend);
   };
   return (
-    <div className='w-342 tablet:w-855 '>
+    <div className='w-342 tablet:w-438 desktop:w-855 '>
       <div className='label-medium text-typoSecondary mb-10'>전체 {count}</div>
       <div
         className={cls(
-          'tablet:label-large font-semibold py-12 px-30 mb-10 tablet:py-25  flex items-center justify-between dark:bg-dark-secondary dark:border-dark-border01 dark:text-dark-primary border-2 border-border01 rounded-10 hover:cursor-pointer transition-all duration-300 ease-in-out ',
+          'tablet:font-20 desktop:label-large font-semibold py-12 px-30 mb-10 desktop:py-25  flex items-center justify-between dark:bg-dark-secondary dark:border-dark-border01 dark:text-dark-primary border-2 border-border01 rounded-10 hover:cursor-pointer transition-all duration-300 ease-in-out ',
           isOpend ? 'bg-border01' : ' bg-secondary',
         )}
         onClick={handleIsOpend}
       >
         {title}
         <div>
-          <ArrowDown
-            className={cls('transition-all duration-300 ease-in-out fill-dark-primary', isOpend ? 'rotate-180' : '')}
-          />
+          <ArrowDown className={cls('transition-all duration-300 ease-in-out ', isOpend ? 'rotate-180' : '')} />
         </div>
       </div>
       <div className={cls('', isOpend ? 'block' : 'hidden')}>{children}</div>

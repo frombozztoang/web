@@ -1,15 +1,18 @@
 import React from 'react';
 import { cls } from '@/utils/cls';
+import Image from 'next/image';
 
 type TBankIconBtnProps = {
   isOn: boolean;
   text: string;
+  img: string;
   styles?: string;
 };
 
 const BankIconBtn: React.FC<TBankIconBtnProps & React.HTMLAttributes<HTMLDivElement>> = ({
   isOn,
   text,
+  img,
   styles,
   ...props
 }) => {
@@ -22,7 +25,13 @@ const BankIconBtn: React.FC<TBankIconBtnProps & React.HTMLAttributes<HTMLDivElem
         styles ? styles : '',
       )}
     >
-      <div className='w-34 h-34 rounded-5 mt-7 bg-imageBase tablet:w-44 tablet:h-44 tablet:rounded-7 tablet:mt-10 desktop:w-44 desktop:h-44 desktop:rounded-7 desktop:mt-10'></div>
+      <Image
+        width={100}
+        height={100}
+        className='w-34 h-34 rounded-5 mt-7 tablet:w-44 tablet:h-44 tablet:rounded-7 tablet:mt-10 desktop:w-44 desktop:h-44 desktop:rounded-7 desktop:mt-10'
+        src={img}
+        alt={text}
+      />
       <p
         style={{
           textOverflow: 'ellipsis',

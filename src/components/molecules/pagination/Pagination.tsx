@@ -35,7 +35,10 @@ const Pagination: React.FC<TPaginationProps> = ({ pageNum, pageTotalNum, setPage
             num={pageNumber + 1}
             isOn={pageNum === pageNumber}
             styles='ml-3 mr-3 tablet:ml-4 tablet:mr-4 desktop:ml-5 desktop:mr-5'
-            onClick={() => setPageNum(pageNumber)}
+            onClick={() => {
+              setPageNum(pageNumber);
+              window.scroll({ top: 0, behavior: 'smooth' });
+            }}
           />
         );
       })}

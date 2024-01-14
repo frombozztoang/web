@@ -20,7 +20,7 @@ const Setting = () => {
       <div className='flex'>
         {setBtnItems.map((i) => (
           <MainBtn
-            onClick={() => handleBtn(i.index)}
+            onMouseEnter={() => handleBtn(i.index)}
             key={i.index}
             text={i.label}
             isOn={i.index === btnItem}

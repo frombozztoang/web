@@ -4,9 +4,10 @@ import SelectBtn from '@/components/atom/button/SelectBtn';
 import SubBtn from '@/components/atom/button/SubBtn';
 import { useState } from 'react';
 import Close from '@/public/icons/close_b.svg';
+import { TgetBankApiResponse } from '@/types/financial-productsTypes';
 
 type TMoreCmaModalProps = {
-  bankInfo: string[];
+  bankInfo: TgetBankApiResponse[] | undefined;
   bankAllCma: boolean;
   setBankAllCma: React.Dispatch<React.SetStateAction<boolean>>;
   bankSelCma: string[];
@@ -26,8 +27,8 @@ const MoreCmaModal: React.FC<TMoreCmaModalProps> = ({
   const [allBtn, setAllBtn] = useState(bankAllCma);
 
   const onAllClickBank = () => {
-    if (!allBtn) {
-      const allBanks = bankInfo.map((info) => info);
+    if (!allBtn && bankInfo) {
+      const allBanks = bankInfo.map((info) => info.bankName);
       setSelectedBank(allBanks);
     } else {
       setSelectedBank([]);
@@ -65,12 +66,13 @@ const MoreCmaModal: React.FC<TMoreCmaModalProps> = ({
         />
         <div className='mt-78 flex items-center justify-center w-full desktop:mt-57'>
           <div className='grid overflow-x-hidden gap-x-30 gap-y-15 grid-cols-3 overflow-y-auto scrollbar-hide desktop:grid-cols-7 desktop:gap-13 desktop:max-h-195 desktop:overflow-y-auto scrollbar-hide'>
-            {bankInfo.map((bank, index) => (
+            {bankInfo?.map((bank, index) => (
               <BankIconBtn
                 key={index}
-                isOn={selectedBank.includes(bank)}
-                text={bank}
-                onClick={() => onClickBanks(bank)}
+                isOn={selectedBank.includes(bank.bankName)}
+                img={bank.bankLogoUrl}
+                text={bank.bankName}
+                onClick={() => onClickBanks(bank.bankName)}
               />
             ))}
           </div>

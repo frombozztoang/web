@@ -1,3 +1,4 @@
+import { cls } from '@/utils/cls';
 import React, { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -11,7 +12,7 @@ const ModalView: React.FC<Props> = ({ children, ...props }) => {
   };
   return (
     <div className=' fixed top-0 left-0 w-screen h-screen flex justify-center items-center'>
-      <div onClick={handleClickModalView} className={props.className ?? ''} {...props}>
+      <div onClick={handleClickModalView} className={cls(props.className ?? '', 'z-modal')} {...props}>
         {children}
       </div>
     </div>

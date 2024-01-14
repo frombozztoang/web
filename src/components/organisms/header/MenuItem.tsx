@@ -1,43 +1,94 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 
-const MenuItem = ({ menuItem, activeMenu, handleMenuHover, handleMenuLeave, pathname, ...props }: TMenuItemProps) => {
+const MenuItem = ({
+  menuItem,
+  activeMenu,
+  handleMenuHover,
+  handleMenuLeave,
+  handleMenuClick,
+  pathname,
+  ...props
+}: TMenuItemProps) => {
+  const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const isCurrentPage =
     (menuItem.name === '서비스 소개' && (pathname === '/' || pathname === '/notice')) || // 서비스 소개, 공지사항 페이지
     (menuItem.subMenu &&
       menuItem.subMenu.some((subItem) =>
         subItem.href === '/' ? pathname === '/' : pathname.startsWith(subItem.href),
       ));
+  const handleSubMenuToggle = () => {
+    setIsSubMenuOpen(!isSubMenuOpen);
+  };
+
+  const handleMenuClickInternal = () => {
+    handleSubMenuToggle();
+    if (handleMenuClick) {
+      handleMenuClick(menuItem.name);
+    }
+  };
   return (
-    <div
-      {...props}
-      className={
-        'mb-27 desktop:mb-7 desktop:p-10 tablet:mr-10 text-black dark:text-dark-secondary transition-all relative active:text-main hover:text-main z-header'
-      }
-      onMouseEnter={() => handleMenuHover && handleMenuHover(menuItem.name)}
-      onMouseLeave={handleMenuLeave && (() => handleMenuLeave())}
-    >
-      <Link
-        className={`text-18 tablet:min-w-max whitespace-nowrap ${isCurrentPage ? 'text-main' : ''}`}
-        href={menuItem.href}
-      >
-        {menuItem.name}
-      </Link>
-      {/* 서브 메뉴 */}
-      {activeMenu === menuItem.name && menuItem.subMenu && (
-        <ul className='hidden desktop:block shadow-lg rounded-tl-0 rounded-xl w-120 absolute  left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
-          {menuItem.subMenu.map((subItem) => (
-            <li
-              className=' mb-10  box-border flex-nowrap gap-10 text-16 text-primary font-semibold '
-              key={subItem.name}
-            >
-              <Link href={subItem.href}>{subItem.name}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+      {isDesktop ? (
+        <div
+          {...props}
+          className={
+            ' mr-20 text-center text-black dark:text-dark-secondary transition-all relative active:text-main hover:text-main z-header'
+          }
+          onMouseEnter={() => handleMenuHover && handleMenuHover(menuItem.name)}
+          onMouseLeave={handleMenuLeave && (() => handleMenuLeave())}
+        >
+          <Link
+            className={`text-18 min-w-max whitespace-nowrap  ${
+              isCurrentPage ? 'text-main dark:text-dark-main' : 'dark:text-dark-primary'
+            }`}
+            href={menuItem.href}
+          >
+            {menuItem.name}
+          </Link>
+          {/* 서브 메뉴 */}
+          {activeMenu === menuItem.name && menuItem.subMenu && (
+            <ul className=' shadow-lg rounded-tl-0 rounded-xl w-120 absolute  left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
+              {menuItem.subMenu.map((subItem) => (
+                <li
+                  className=' mb-10  box-border flex-nowrap gap-10 text-16 text-primary font-semibold '
+                  key={subItem.name}
+                >
+                  <Link href={subItem.href}>{subItem.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ) : (
+        <div>
+          <div
+            className={`text-18 tablet:text-23 mb-20 min-w-max whitespace-nowrap hover:cursor-pointer ${
+              isCurrentPage ? 'text-main' : ''
+            }`}
+            onClick={handleSubMenuToggle}
+          >
+            {menuItem.name}
+          </div>
+          {/* 서브 메뉴 */}
+          {isSubMenuOpen && menuItem.subMenu && (
+            <ul className='text-left font-pretendard '>
+              {menuItem.subMenu.map((subItem) => (
+                <li
+                  className='hover:cursor-pointer mb-20 flex-nowrap label-medium tablet:text-20 font-pretendard text-primary font-semibold '
+                  key={subItem.name}
+                >
+                  <Link href={subItem.href}>{subItem.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}{' '}
+    </>
   );
 };
 
@@ -50,6 +101,7 @@ type TMenuItemProps = {
   activeMenu: string | null;
   handleMenuHover?: (menuName: string) => void;
   handleMenuLeave?: () => void;
+  handleMenuClick?: (menuName: string) => void;
   pathname: string;
 };
 
