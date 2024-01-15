@@ -11,9 +11,9 @@ import Login from '@/components/organisms/modal/Login';
 import Script from 'next/script';
 import useUser from '@/hooks/useUser';
 
+
 const Page = () => {
   const [toggle, setToggle] = useState(0);
-
   const { user, isLoading: isUserLoading, isError: isUserError } = useUser();
 
   const loginFn = () => {
