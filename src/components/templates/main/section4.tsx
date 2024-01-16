@@ -6,7 +6,7 @@ import section4Mock from '@/public/icons/main/section4Mock.png';
 import section4Logo from '@/public/icons/main/section4Logo.png';
 import section4MockM from '@/public/icons/main/section4MockM.png';
 import section4LogoM from '@/public/icons/main/section4LogoM.png';
-
+import section4MockMD from '@/public/icons/main/section4MockMD.png';
 import section4MockD from '@/public/icons/main/section4MockD.png';
 import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 import useThemeCheck from '@/hooks/useThemeCheck';
@@ -16,7 +16,7 @@ const Section4 = () => {
   const isDarkMode = useThemeCheck();
 
   const mockImage = isDarkMode ? section4MockD : section4Mock;
-  const mobileMockImage = isDarkMode ? section4MockD : section4MockM;
+  const mobileMockImage = section4MockMD ? section4MockD : section4MockM;
 
   return (
     <div className='mt-200 tablet:mt-[450px] min-h-screen label-small  tablet:text-20 desktop:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>

@@ -9,6 +9,12 @@ export type TNoticeProps = {
   content: string;
 };
 
+export type TPostNotice = {
+  created_at: string;
+  title: string;
+  content: string;
+};
+
 type TSort = {
   empty: boolean;
   sorted: boolean;

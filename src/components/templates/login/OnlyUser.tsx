@@ -11,7 +11,7 @@ import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
 // 로그인이 필요한 페이지에 사용
-export default function WithLoginModal({
+export default function OnlyUser({
   children,
   closeFn,
 }: {

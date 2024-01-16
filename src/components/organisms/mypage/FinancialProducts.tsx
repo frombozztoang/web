@@ -21,7 +21,6 @@ type TBookmarks = {
 
 const FinancialProducts = () => {
   const [bookmarks, setBookmarks] = useState<TBookmarks>({ cma: [], deposit: [], saving: [] });
-  const [isLiked, setIsLiked] = useState(true);
 
   const onBankHeartClick = async (id: number, isLiked: boolean) => {
     try {
@@ -30,7 +29,7 @@ const FinancialProducts = () => {
       } else {
         await postBankBookmarkApi(id);
       }
-      setIsLiked(!isLiked);
+      fetchData();
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }
@@ -43,7 +42,7 @@ const FinancialProducts = () => {
       } else {
         await postCmaBookmarkApi(id);
       }
-      setIsLiked(!isLiked);
+      fetchData();
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }
@@ -74,14 +73,17 @@ const FinancialProducts = () => {
     items.map((item, index) => {
       let id: number;
       let link: string;
+      let isLiked: boolean;
       let onHeartClick: () => void;
       if ('cmaId' in item) {
         id = item.cmaId;
         link = 'cma';
+        isLiked = item.isLiked;
         onHeartClick = () => onCmaHeartClick(id, isLiked);
       } else {
         id = item.financialProductId;
         item.financialProductType === 'DEPOSIT' ? (link = 'deposits') : (link = 'savings');
+        isLiked = item.isLiked;
         onHeartClick = () => onBankHeartClick(id, isLiked);
       }
       return (

@@ -5,11 +5,15 @@ import { useState } from 'react';
 
 export default function ContentsCreateBtn({ createFn }: { createFn: TEditorUploadFn }) {
   const [showEditor, setShowEditor] = useState(false);
+  const handleCloseEditor = () => {
+    setShowEditor(false);
+    window.location.reload();
+  };
 
   return (
     <>
       <MainBtn text='작성' isOn onClick={() => setShowEditor(true)} />
-      {showEditor && <Editor mode='create' closeEditor={() => setShowEditor(false)} uploadFn={createFn} />}
+      {showEditor && <Editor mode='create' closeEditor={handleCloseEditor} uploadFn={createFn} />}
     </>
   );
 }

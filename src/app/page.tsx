@@ -11,7 +11,7 @@ import Section8 from '@/components/templates/main/section8';
 export default function RootPage() {
   return (
     <>
-      <div className='mt-[-10px] tablet:mt-[-130px] tablet:px-20 box-border relative flex flex-col items-center justify-center'>
+      <div className=' mt-[150px] tablet:mt-[-50px] tablet:px-20 box-border relative flex flex-col items-center justify-center'>
         <Section1 />
         <Section2 />
         <Section3 />

@@ -1,5 +1,6 @@
 export type TFinancialProductBookmark = {
   financialProductType: 'SAVING' | 'DEPOSIT';
+  isLiked: boolean;
   financialProductId: number;
   companyName: string;
   productName: string;
@@ -8,6 +9,7 @@ export type TFinancialProductBookmark = {
 };
 
 export type TCmaBookmark = {
+  isLiked: boolean;
   cmaId: number;
   companyName: string;
   productName: string;
@@ -26,6 +28,7 @@ export type TEducationBookmarkApiResponse = {
 };
 
 export type TEducationBookmark = {
+  isLiked: boolean;
   educationInfoId: number;
   title: string;
   content: string;
@@ -37,6 +40,7 @@ export type TPoliciesBookmarkApiResponse = {
 };
 
 export type TPoliciesBookmark = {
+  isLiked: boolean;
   policyInfoId: number;
   contentName: string;
   content: string;

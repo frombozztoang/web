@@ -5,7 +5,7 @@ import NotFoundTori from '@/public/icons/notfoundtori.png';
 
 export default function NotFound() {
   return (
-    <div className='flex flex-col items-center justify-center min-h-[100vh]'>
+    <div className='flex flex-col items-center justify-center min-h-full dark:text-dark-primary'>
       <div>
         <div className='flex'>
           <span className='tenada-xxxl tablet:tenada-xxxxl desktop:tenada-xxxxxxl'>4</span>

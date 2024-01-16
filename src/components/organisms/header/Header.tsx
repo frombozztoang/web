@@ -45,14 +45,12 @@ const Header = () => {
   };
 
   return (
-    <nav
-      className={cls('z-header fixed top-0 left-0 right-0 font-teneda py-12 px-24 bg-white dark:bg-dark-bg box-border')}
-    >
-      <ul className='flex justify-between items-center tablet:px-40 desktop:px-64 '>
+    <nav className={cls('z-header  fixed top-0 left-0 right-0 font-teneda py-12 px-24  dark:bg-dark-bg box-border')}>
+      <ul className='flex justify-between items-center tablet:px-40 desktop:px-200 '>
         <div className='flex items-center justify-center '>
-          <li className='mr-258 tablet:mr-10  desktop:mr-64'>
+          <li className='mr-258 min-w-100 tablet:mr-10  desktop:mr-64'>
             <Link href='/'>
-              <Image priority src={logoLight} alt='Logo Light' />
+              <Image layout='fixed' priority src={logoLight} alt='Logo Light' />
             </Link>
           </li>
           <div className='hidden desktop:flex '>
@@ -69,7 +67,7 @@ const Header = () => {
           </div>
         </div>
         <div className='flex  items-center'>
-          <li className='hidden desktop:flex mr-26'>
+          <li className='hidden tablet:flex mr-26'>
             <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
           </li>
           <li className='mr-12 text-main text-22 pt-10  '>

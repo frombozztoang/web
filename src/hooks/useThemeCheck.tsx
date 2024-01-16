@@ -6,11 +6,7 @@ const UseThemeCheck = () => {
 
   const toggleTheme = () => {
     const theme = localStorage.getItem('theme');
-    if (theme) {
-      localStorage.setItem('theme', theme === 'dark' ? 'light' : 'dark');
-    } else {
-      localStorage.setItem('theme', 'dark');
-    }
+
     setIsDarkMode(!isDarkMode);
   };
 
