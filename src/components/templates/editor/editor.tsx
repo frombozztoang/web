@@ -13,7 +13,9 @@ import Preview from './plugins/preview';
 import Tools from './tools';
 import BackDrop from '@/components/organisms/modal/backdrop';
 import ModalView from '@/components/organisms/modal/modalView';
-import SlateCompiler from '@/libs/editor/slateCompiler';
+import { useMutation } from 'react-query';
+import { cls } from '@/utils/cls';
+import { TEditorUploadFn } from '@/types/editor/editorUploadFnType';
 
 export default function Editor({
   mode,
@@ -26,7 +28,7 @@ export default function Editor({
   title?: string;
   content?: string;
   closeEditor: () => void;
-  uploadFn: (title: string, content: string) => void;
+  uploadFn: TEditorUploadFn;
 }) {
   const initialValue: Descendant[] = [
     {
@@ -40,17 +42,37 @@ export default function Editor({
   const [editorValue, setEditorValue] = useState<Descendant[]>(initialValue);
   const [activatedPlugin, setActivatedPlugin] = useState<TPluginFormat | null>(null);
   const titleRef = React.useRef<HTMLInputElement>(null);
+  const uploadMutation = useMutation(uploadFn);
 
   function handleChangeEditorValue(value: Descendant[]) {
     setEditorValue(value);
   }
 
   function handleUpload() {
-    const title = titleRef.current!.value;
+    const title = titleRef.current!.value.trim();
+    if (!title) {
+      alert('제목을 입력해주세요');
+      return;
+    }
+
     const content = JSON.stringify(editorValue);
-    uploadFn(title, content);
+
     console.log('title', title);
     console.log('content', content);
+
+    uploadMutation.mutate(
+      { title, content },
+      {
+        onSuccess: () => {
+          alert('성공적으로 업로드 되었습니다');
+          closeEditor();
+        },
+        onError: (err) => {
+          alert('업로드에 실패하였습니다');
+          console.log(err);
+        },
+      },
+    );
   }
 
   function handleCloseEditor() {
@@ -73,9 +95,12 @@ export default function Editor({
           </button>
           <button
             onClick={handleUpload}
-            className='flex justify-center items-center px-20 py-8 text-16 text-white bg-main font-bold rounded-4 border-1 border-main'
+            className={cls(
+              'flex justify-center items-center px-20 py-8 text-16 text-white bg-main font-bold rounded-4 border-1 border-main',
+              uploadMutation.isLoading ? 'bg-opacity-50 cursor-not-allowed' : '',
+            )}
           >
-            업로드
+            {uploadMutation.isLoading ? '업로드 중...' : '업로드'}
           </button>
         </div>
         {/* 제목 */}
@@ -103,6 +128,8 @@ export default function Editor({
                 placeholder='오늘의 이야기...'
                 autoFocus
                 onKeyDown={(event) => {
+                  // 단축키 기능
+                  // ex. ctrl + b => 볼드체
                   for (const hotkey in HOTKEYS) {
                     if (isHotkey(hotkey, event as any)) {
                       event.preventDefault();

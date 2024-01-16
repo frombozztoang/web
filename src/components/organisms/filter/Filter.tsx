@@ -22,7 +22,7 @@ type TFilterProps = {
     }[];
   }[];
   onInputOn: boolean;
-  PlusSubBtn: (text: string, value: string) => void;
+  plusSubBtn: (text: string, value: string) => void;
 };
 
 const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
@@ -32,7 +32,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
   setActiveFilterIndex,
   subIsOn,
   filterTerms,
-  PlusSubBtn,
+  plusSubBtn,
   onInputOn,
   ...props
 }) => {
@@ -82,7 +82,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
                 styles='mr-10 mt-12 tablet:mt-15 desktop:mt-12'
                 text={data.text}
                 isOn={subIsOn.some((sub) => sub.text === data.text && sub.value === data.value)}
-                onClick={() => PlusSubBtn(data.text, data.value)}
+                onClick={() => plusSubBtn(data.text, data.value)}
               />
             );
           })}
@@ -108,7 +108,7 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
                   key={index}
                   styles='mr-10 mb-8 tablet:mb-10 desktop:mb-8'
                   text={data.text}
-                  toggleFn={() => PlusSubBtn(data.text, data.value)}
+                  toggleFn={() => plusSubBtn(data.text, data.value)}
                 />
               );
             })}

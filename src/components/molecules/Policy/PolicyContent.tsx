@@ -1,46 +1,46 @@
 'use client';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-type TPolicyContentProps = {
-  policyContents: string;
-  operatingPeriod: string;
-  applicationPeriod: string;
-  supportscale: string;
-  age: string;
-  residenceAndIncome: string;
-  academicAbillity: string;
-  major: string;
-  employmentStatus: string;
-  specializedFiedl: string;
-  additionalClues: string;
-  restiricitionsOnParticipation: string;
-  procedures: string;
-  audit: string;
-  site: string;
-  document: string;
+type TPolicy = {
+  sporCn: string;
+  bizPrdCn: string;
+  rqutPrdCn: string;
+  sporScvl: string;
+  ageInfo: string;
+  prcpCn: string;
+  accrRqisCn: string;
+  majrRquisCn: string;
+  empmSttsCn: string;
+  spizRlmRqisCn: string;
+  aditRscn: string;
+  prcpLmttTrgtCn: string;
+  rqutProcCn: string;
+  jdgnPresCn: string;
+  rqutUrla: string;
+  pstnPaprCn: string;
 };
-const PolicyContent: React.FC<TPolicyContentProps> = ({
-  policyContents,
-  operatingPeriod,
-  applicationPeriod,
-  supportscale,
-  age,
-  residenceAndIncome,
-  academicAbillity,
-  major,
-  employmentStatus,
-  specializedFiedl,
-  additionalClues,
-  restiricitionsOnParticipation,
-  procedures,
-  audit,
-  site,
-  document,
+const PolicyContent: React.FC<TPolicy> = ({
+  sporCn,
+  bizPrdCn,
+  rqutPrdCn,
+  sporScvl,
+  ageInfo,
+  prcpCn,
+  accrRqisCn,
+  majrRquisCn,
+  empmSttsCn,
+  spizRlmRqisCn,
+  aditRscn,
+  prcpLmttTrgtCn,
+  rqutProcCn,
+  jdgnPresCn,
+  rqutUrla,
+  pstnPaprCn,
 }) => {
   return (
     <div className='w-342 desktop:w-[855px] tablet:w-[438px]'>
       <div className='mb-39 tablet:mb-59'>
-        <div className='border-2 border-color-border01 rounded pt-80 text w-full dark:bg-[#383838] dark:border-[#383838]'>
+        <div className='border-2 border-border01 rounded pt-80 text w-full dark:bg-[#383838] dark:border-[#383838]'>
           <div className='p-15 mt-[-70px] '>
             <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:heading-medium w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
               정책 요약
@@ -53,7 +53,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium tablet:mx-10 marker:text-typoPrimary mr-20 whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {policyContents}
+                {sporCn}
               </div>
             </div>
 
@@ -65,7 +65,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium tablet:mx-10 marker:text-typoPrimary mr-20 whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {operatingPeriod}
+                {bizPrdCn}
               </div>
             </div>
             <div className='flex  py-10'>
@@ -76,7 +76,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium tablet:mx-10 marker:text-typoPrimary mr-20 whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {applicationPeriod}
+                {rqutPrdCn}
               </div>
             </div>
             <div className='flex  py-10'>
@@ -87,12 +87,12 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium tablet:mx-10 marker:text-typoPrimary mr-20 whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {supportscale}
+                {sporScvl}
               </div>
             </div>
           </div>
           <div className='p-15 my-10 '>
-            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:text-28 w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
+            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:heading-medium w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
               신청 자격
             </div>
             <div className='flex pb-10 '>
@@ -103,7 +103,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {age}
+                {ageInfo}
               </div>
             </div>
 
@@ -115,7 +115,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {residenceAndIncome}
+                {prcpCn}
               </div>
             </div>
             <div className='flex  py-10'>
@@ -126,7 +126,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {academicAbillity}
+                {accrRqisCn}
               </div>
             </div>
             <div className='flex  py-10'>
@@ -137,7 +137,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {major}
+                {majrRquisCn}
               </div>
             </div>
             <div className='flex  py-10'>
@@ -148,7 +148,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {employmentStatus}
+                {empmSttsCn}
               </div>
             </div>
             <div className='flex  py-10'>
@@ -159,7 +159,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {specializedFiedl}
+                {spizRlmRqisCn}
               </div>
             </div>
             <div className='flex  py-10'>
@@ -170,7 +170,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {additionalClues}
+                {aditRscn}
               </div>
             </div>
             <div className='flex  py-10'>
@@ -181,12 +181,12 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {restiricitionsOnParticipation}
+                {prcpLmttTrgtCn}
               </div>
             </div>
           </div>
           <div className='p-15 '>
-            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:text-28 w-307 font-bold border-b-[2px] text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
+            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:heading-medium w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
               신청 방법
             </div>
             <div className='flex pt-10'>
@@ -197,7 +197,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {procedures}
+                {rqutProcCn}
               </div>
             </div>
 
@@ -209,7 +209,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {audit}
+                {jdgnPresCn}
               </div>
             </div>
             <div className='flex py-10'>
@@ -220,7 +220,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                <Link href={site}>{site}</Link>
+                <Link href={rqutUrla}>{rqutUrla}</Link>
               </div>
             </div>
             <div className='flex  py-10'>
@@ -231,7 +231,7 @@ const PolicyContent: React.FC<TPolicyContentProps> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                {document}
+                {pstnPaprCn}
               </div>
             </div>
           </div>

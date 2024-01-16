@@ -22,7 +22,8 @@ const InputAmount: React.FC<TInputAmountProps & React.HTMLAttributes<HTMLButtonE
       />
       <button
         {...props}
-        className='flex w-308 px-57 py-7 justify-center items-center bg-typoSecondary rounded-10 gap-10 text-secondary dark:text-dark-secondary heading-medium tablet:w-394 tablet:px-73 tablet:py-8 tablet:rounded-12 tablet:heading-large desktop:w-auto desktop:px-57 desktop:rounded-10 desktop:heading-large'
+        disabled={!amount}
+        className='flex w-308 px-57 py-7 justify-center items-center bg-main disabled:bg-typoSecondary rounded-10 gap-10 text-secondary dark:text-dark-secondary heading-medium tablet:w-394 tablet:px-73 tablet:py-8 tablet:rounded-12 tablet:heading-large desktop:w-auto desktop:px-57 desktop:rounded-10 desktop:heading-large'
       >
         적용
       </button>

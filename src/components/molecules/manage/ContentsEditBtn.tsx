@@ -1,5 +1,6 @@
 import MainBtn from '@/components/atom/button/MainBtn';
 import Editor from '@/components/templates/editor/editor';
+import { TEditorUploadFn } from '@/types/editor/editorUploadFnType';
 import { useState } from 'react';
 
 export default function ContentsEditBtn({
@@ -9,7 +10,7 @@ export default function ContentsEditBtn({
 }: {
   title: string;
   content: string;
-  editFn: (title: string, content: string) => void;
+  editFn: TEditorUploadFn;
 }) {
   const [showEditor, setShowEditor] = useState(false);
 

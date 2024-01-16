@@ -1,8 +1,9 @@
 import MainBtn from '@/components/atom/button/MainBtn';
 import Editor from '@/components/templates/editor/editor';
+import { TEditorUploadFn } from '@/types/editor/editorUploadFnType';
 import { useState } from 'react';
 
-export default function ContentsCreateBtn({ createFn }: { createFn: (title: string, content: string) => void }) {
+export default function ContentsCreateBtn({ createFn }: { createFn: TEditorUploadFn }) {
   const [showEditor, setShowEditor] = useState(false);
 
   return (

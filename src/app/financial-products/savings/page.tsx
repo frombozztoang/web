@@ -15,13 +15,16 @@ import { getBankApi } from '@/api/financial-productsApi';
 import { getSavingsApi } from '@/api/savingsApi';
 import { TgetBankApiResponse, TgetDepositSavingResponse } from '@/types/financial-productsTypes';
 import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
+import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const WhatToDoPage = () => {
   const router = useRouter();
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [amountStr, setAmoutStr] = useState('');
 
+  const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
-  const [sort, setSort] = useState(true); //true:최고금리순, false:기본금리순
+  const [sort, setSort] = useState('MAX'); //MAX:최고금리순 DEFAULT:기본금리순
 
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
@@ -69,14 +72,11 @@ const WhatToDoPage = () => {
       filter: '상품 유형',
       sub: [
         { text: '누구나 가입', value: '&types=누구나 가입' },
-        { text: '특판', value: '&types=특판' },
         { text: '방문없이 가입', value: '&types=방문없이 가입' },
         { text: '청년적금', value: '&types=청년적금' },
-        { text: '군인적금', value: '&types=군인적금' },
         { text: '주택청약', value: '&types=주택청약' },
         { text: '자유적금', value: '&types=자유적금' },
         { text: '정기적금', value: '&types=정기적금' },
-        { text: '청년도약계좌', value: '&types=청년도약계좌' },
       ],
     },
   ];
@@ -98,7 +98,7 @@ const WhatToDoPage = () => {
 
   const bankListFetchData = async () => {
     try {
-      const data = await getSavingsApi(`size=10&page=${pageNum}${savValueFilter}${savSel}`);
+      const data = await getSavingsApi(`size=10&page=${pageNum}&interestRateType=${sort}${savValueFilter}${savSel}`);
       if (data) {
         setBankDataSaving(data.content);
         setPageTotalNum(data.totalPages);
@@ -112,7 +112,7 @@ const WhatToDoPage = () => {
   useEffect(() => {
     bankListFetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNum, savValueFilter, savSel]);
+  }, [pageNum, sort, savValueFilter, savSel]);
 
   const DepSelect = () => {
     const queryStringArray = savSelFin.map((bankName) => `&bankNames=${bankName}`);
@@ -124,6 +124,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     DepSelect();
+    setPageNum(0);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savSelFin, savSelSave]);
 
@@ -149,11 +150,12 @@ const WhatToDoPage = () => {
   };
 
   const onInputAmountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAmount(Number(event.target.value));
     const regex = /^[0-9\b]+$/;
     let inputValue = event.target.value.replace(/,/g, '');
     if (inputValue === '' || regex.test(inputValue)) {
       inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      setAmount(inputValue);
+      setAmoutStr(inputValue);
     }
   };
 
@@ -168,7 +170,7 @@ const WhatToDoPage = () => {
       if (apiResult !== undefined) {
         setBankDataSaving(bankDataSaving?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
       } else {
-        console.log('로그인 해주세요');
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
@@ -203,6 +205,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     SavValueFilter();
+    setPageNum(0);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savFilter]);
 
@@ -218,6 +221,13 @@ const WhatToDoPage = () => {
 
   return (
     <div className='flex flex-col justify-center items-center'>
+      {showModal && (
+        <WithLoginModal
+          closeFn={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
       <FinanceToggle activeToggle={2} toggleFn={toggleFn} />
       <div className='flex justify-between mt-10 w-330 tablet:w-438 tablet:mt-12 desktop:w-850 desktop:mt-10'>
         <div className='mt-13 relative tablet:mt-21 desktop:mt-45'>
@@ -237,13 +247,13 @@ const WhatToDoPage = () => {
         onClickBank={onClickBank}
       />
       <Filter
-        amount={amount}
+        amount={amountStr}
         onInputAmountHandler={onInputAmountHandler}
         activeFilterIndex={savFilterIndex}
         setActiveFilterIndex={setSavFilterIndex}
         subIsOn={savFilter}
         filterTerms={SAVINGS_FILTER}
-        PlusSubBtn={PlusSubBtn}
+        plusSubBtn={PlusSubBtn}
         onInputOn={true}
       />
       {totalElements && (
@@ -251,15 +261,15 @@ const WhatToDoPage = () => {
           <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:label-medium'>
             {totalElements}개
           </div>
-          {sort ? (
-            <button className='flex' onClick={() => setSort(!sort)}>
+          {sort === 'MAX' ? (
+            <button className='flex' onClick={() => setSort('DEFAULT')}>
               <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
                 최고 금리 순
               </span>
               <ArrowDown className='stroke-typoSecondary w-19 tablet:w-24' />
             </button>
           ) : (
-            <button className='flex' onClick={() => setSort(!sort)}>
+            <button className='flex' onClick={() => setSort('MAX')}>
               <span className='mr-3 paragraph-small text-typoSecondary tablet:paragraph-medium desktop:label-medium'>
                 기본 금리 순
               </span>

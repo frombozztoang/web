@@ -2,6 +2,7 @@
 
 import { postKakaoLogin } from '@/api/loginApi';
 import { user } from '@/class/user';
+import LOCALHOST_KEYS from '@/constants/localhostKeys';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -17,7 +18,9 @@ export default function KakaoCallback() {
         if (status === 200) {
           user.setAccessToken(accessToken);
           user.setIsAdmin(isAdmin);
-          router.push('/');
+          const redirectUrl = localStorage.getItem(LOCALHOST_KEYS.redirectUrl) || '/';
+          localStorage.removeItem(LOCALHOST_KEYS.redirectUrl);
+          router.push(redirectUrl);
         }
       })();
     } catch {

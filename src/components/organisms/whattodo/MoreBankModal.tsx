@@ -102,7 +102,7 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
               onClick={onAllClickBank}
             />
             <div className='mt-78 flex items-center justify-center w-full desktop:mt-57'>
-              <div className='grid overflow-x-hidden gap-x-30 gap-y-15 grid-cols-3 overflow-y-auto scrollbar-hide desktop:grid-cols-7 desktop:gap-13 desktop:max-h-195 desktop:overflow-y-auto scrollbar-hide'>
+              <div className='grid overflow-x-hidden gap-x-30 gap-y-15 grid-cols-3 overflow-y-auto scrollbar-color desktop:grid-cols-7 desktop:gap-13 desktop:max-h-195 desktop:overflow-y-auto'>
                 {bankInfo?.map((bank, index) => (
                   <BankIconBtn
                     key={index}
@@ -125,7 +125,7 @@ const MoreBankModal: React.FC<TMoreBankModalProps> = ({
               onClick={onAllClickBank}
             />
             <div className='mt-78 flex items-center justify-center w-full desktop:mt-57'>
-              <div className='grid overflow-x-hidden gap-x-30 gap-y-15 grid-cols-3 overflow-y-auto scrollbar-hide desktop:grid-cols-7 desktop:gap-13 desktop:max-h-195 desktop:overflow-y-auto scrollbar-hide'>
+              <div className='grid overflow-x-hidden gap-x-30 gap-y-15 grid-cols-3 overflow-y-auto scrollbar-color desktop:grid-cols-7 desktop:gap-13 desktop:max-h-195 desktop:overflow-y-auto'>
                 {bankInfo2?.map((bank, index) => (
                   <BankIconBtn
                     key={index}

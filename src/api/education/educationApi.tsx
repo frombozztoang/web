@@ -1,9 +1,9 @@
-import { TPolicyApiResponse } from '@/components/molecules/Policy/Policy';
+import { TEducationsApiResponse } from '@/components/molecules/Education/EducationList';
 
-export const getPolicysApi = async (params: string): Promise<TPolicyApiResponse | undefined> => {
+export const getEducationsData = async (params: string): Promise<TEducationsApiResponse | undefined> => {
+  const url = `https://api.finfellows.co.kr/api/learn/edu?${params}`;
   const accessToken =
     'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
-  const url = `https://api.finfellows.co.kr/policy-info?${params}`;
 
   try {
     const res = await fetch(url, {
@@ -16,22 +16,22 @@ export const getPolicysApi = async (params: string): Promise<TPolicyApiResponse 
 
     if (res.ok) {
       const data = await res.json();
-      console.log('[✅getPolicyssApi API Data]', data);
-      return data.data as TPolicyApiResponse;
+      console.log('[✅fetchEducationsData API Data]', data);
+      return data as TEducationsApiResponse;
     } else {
-      console.error('[💥getPolicyssApi API Error]', res.status, res.statusText);
+      console.error('[💥fetchEducationsData API Error]', res.status, res.statusText);
       return undefined;
     }
   } catch (error) {
-    console.error('[💥getPolicyssApi Error]', error);
+    console.error('[💥fetchEducationsData Error]', error);
     return undefined;
   }
 };
 
-export const postPolicyBookmarkApi = async (policyInfoId: number) => {
+export const postEducationBookmarkApi = async (id: number, contentType: 'EDU_CONTENT') => {
   const accessToken =
     'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
-  const url = `https://api.finfellows.co.kr/bookmarks/policy-info/${policyInfoId}`;
+  const url = `https://api.finfellows.co.kr/bookmarks/posts/${id}?contentType=${contentType}`;
 
   try {
     const res = await fetch(url, {
@@ -44,23 +44,22 @@ export const postPolicyBookmarkApi = async (policyInfoId: number) => {
 
     if (res.ok) {
       const data = await res.json();
-      console.log('[✅postPolicyBookmarkApi API Data]', data);
+      console.log('[✅posEducationBookmarkApi API Data]', data);
       return data.data;
     } else {
-      console.error('[💥postPolicyBookmarkApi API Error]', res.status, res.statusText);
+      console.error('[💥posEducationBookmarkApi API Error]', res.status, res.statusText);
       return undefined;
     }
   } catch (error) {
-    console.error('[💥postPolicyBookmarkApi Error]', error);
+    console.error('[💥posEducationBookmarkApi Error]', error);
     return undefined;
   }
 };
 
-export const deletePolicyBookmarkApi = async (policyInfoId: number) => {
+export const deleteEducationBookmarkApi = async (id: number, contentType: 'EDU_CONTENT') => {
   const accessToken =
     'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
-  const url = `https://api.finfellows.co.kr/bookmarks/policy-info/${policyInfoId}`;
-
+  const url = `https://api.finfellows.co.kr/bookmarks/posts/${id}?contentType=${contentType}`;
   try {
     const res = await fetch(url, {
       method: 'DELETE',
@@ -72,14 +71,14 @@ export const deletePolicyBookmarkApi = async (policyInfoId: number) => {
 
     if (res.ok) {
       const data = await res.json();
-      console.log('[✅deletePolicyBookmarkApi API Data]', data);
+      console.log('[✅deleteEducationBookmarkApi API Data]', data);
       return data.data;
     } else {
-      console.error('[💥deletePolicyBookmarkApi API Error]', res.status, res.statusText);
+      console.error('[💥deleteEducationBookmarkApi API Error]', res.status, res.statusText);
       return undefined;
     }
   } catch (error) {
-    console.error('[💥deletePolicyBookmarkApi Error]', error);
+    console.error('[💥deleteEducationBookmarkApi Error]', error);
     return undefined;
   }
 };

@@ -14,10 +14,12 @@ import { getBankApi } from '@/api/financial-productsApi';
 import { getCmasApi } from '@/api/cmaApi';
 import { TgetBankApiResponse, TgetCmaResponse } from '@/types/financial-productsTypes';
 import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
+import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const WhatToDoPage = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false); //true:더보기 모달창 open
+  const [showModal, setShowModal] = useState(false);
 
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
@@ -58,7 +60,7 @@ const WhatToDoPage = () => {
 
   const bankInfoFetchData = async () => {
     try {
-      const data = await getBankApi('020000'); //040000으로 수정 필요
+      const data = await getBankApi('040000');
       setBankCmaInfo(data);
     } catch (error) {
       console.error('Error fetching bankInfoFetchData:', error);
@@ -96,6 +98,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     DepSelect();
+    setPageNum(0);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cmaSelFin]);
 
@@ -121,7 +124,7 @@ const WhatToDoPage = () => {
       if (apiResult !== undefined) {
         setBankDataCma(bankDataCma?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
       } else {
-        console.log('로그인 해주세요');
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
@@ -148,6 +151,7 @@ const WhatToDoPage = () => {
 
   useEffect(() => {
     CmaValueFilter();
+    setPageNum(0);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cmaFilter]);
 
@@ -163,6 +167,13 @@ const WhatToDoPage = () => {
 
   return (
     <div className='flex flex-col justify-center items-center'>
+      {showModal && (
+        <WithLoginModal
+          closeFn={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
       <FinanceToggle activeToggle={3} toggleFn={toggleFn} />
       <div className='flex justify-between mt-10 w-330 tablet:w-438 tablet:mt-12 desktop:w-850 desktop:mt-10'>
         <div className='mt-13 relative tablet:mt-21 desktop:mt-45'>
@@ -184,7 +195,7 @@ const WhatToDoPage = () => {
         setActiveFilterIndex={setCmaFilterIndex}
         subIsOn={cmaFilter}
         filterTerms={CMA_FILTER}
-        PlusSubBtn={PlusSubBtn}
+        plusSubBtn={PlusSubBtn}
         onInputOn={false}
       />
       {totalElements && (
