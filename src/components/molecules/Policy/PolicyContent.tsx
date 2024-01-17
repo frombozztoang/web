@@ -220,7 +220,9 @@ const PolicyContent: React.FC<TPolicy> = ({
                 className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
                 style={{ width: '90%' }}
               >
-                <Link href={rqutUrla}>{rqutUrla}</Link>
+                <a href={rqutUrla} className='underline'>
+                  {rqutUrla}
+                </a>
               </div>
             </div>
             <div className='flex  py-10'>

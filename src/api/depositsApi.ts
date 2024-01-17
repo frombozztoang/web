@@ -1,4 +1,8 @@
-import { TgetDepositSavingApiResponse, TgetDepositSavingIdApiResponse } from '@/types/financial-productsTypes';
+import {
+  TgetDepositSavingApiResponse,
+  TgetDepositSavingIdApiResponse,
+  TgetDepositIdCalculateApiResponse,
+} from '@/types/financial-productsTypes';
 import { user } from '@/class/user';
 
 const accessToken = user.getAccessToken();
@@ -45,6 +49,35 @@ export const getDepositIdApi = async (id: number): Promise<TgetDepositSavingIdAp
       const data = await res.json();
       console.log('[✅getDepositIdApi API Data]', data);
       return data.data as TgetDepositSavingIdApiResponse;
+    } else {
+      console.error('[💥getDepositIdApi API Error]', res.status, res.statusText);
+      return undefined;
+    }
+  } catch (error) {
+    console.error('[💥getDepositIdApi Error]', error);
+    return undefined;
+  }
+};
+
+export const getDepositIdCalculateApi = async (
+  id: number,
+  params: string,
+): Promise<TgetDepositIdCalculateApiResponse | undefined> => {
+  const url = `https://api.finfellows.co.kr/financial-products/deposit/${id}/calculate?${params}`;
+
+  try {
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log('[✅getDepositIdApi API Data]', data);
+      return data.data as TgetDepositIdCalculateApiResponse;
     } else {
       console.error('[💥getDepositIdApi API Error]', res.status, res.statusText);
       return undefined;

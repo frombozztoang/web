@@ -7,6 +7,8 @@ import StudyToggle2 from '@/components/atom/toggle/StudyToggle2';
 import ManageBtns from '@/components/molecules/manage/ManageBtns';
 import ContentsCreateBtn from '@/components/molecules/manage/ContentsCreateBtn';
 import { testApiEditor } from '@/api/testApi';
+import useUser from '@/hooks/useUser';
+import { postEduApi } from '@/api/eduApi';
 
 const Educations: any = () => {
   const [activeToggle, setActiveToggle] = useState(0); // 초기 값을 0으로 설정
@@ -27,7 +29,7 @@ const Educations: any = () => {
         )}
         <ManageBtns>
           {/* TODO: 글 작성하는 api 연결 (createFn) */}
-          <ContentsCreateBtn createFn={testApiEditor} />
+          <ContentsCreateBtn createFn={postEduApi} />
         </ManageBtns>
       </div>
     </div>

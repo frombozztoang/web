@@ -11,8 +11,6 @@ import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const Des = ({ params }: { params: { id: number } }) => {
   const [savingInfo, setSavingInfo] = useState<TgetDepositSavingIdApiResponse | undefined>();
-  const [amount, setAmount] = useState(0);
-  const [amountStr, setAmoutStr] = useState('');
   const [isLiked, setIsLiked] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -32,20 +30,6 @@ const Des = ({ params }: { params: { id: number } }) => {
     savingFetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const onInputAmountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value));
-    const regex = /^[0-9\b]+$/;
-    let inputValue = event.target.value.replace(/,/g, '');
-    if (inputValue === '' || regex.test(inputValue)) {
-      inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      setAmoutStr(inputValue);
-    }
-  };
-
-  const AmountHandler = () => {
-    console.log(amount);
-  };
 
   const onHeartClick = async (id: number, isLiked: boolean) => {
     try {
@@ -92,12 +76,7 @@ const Des = ({ params }: { params: { id: number } }) => {
               joinMember={savingInfo.joinMember}
               etcNote={savingInfo.etcNote}
             />
-            <InterestRateGuide
-              amountStr={amountStr}
-              onInputAmountHandler={onInputAmountHandler}
-              AmountHandler={AmountHandler}
-              bankHomepageUrl={savingInfo.bankHomepageUrl}
-            />
+            <InterestRateGuide bankHomepageUrl={savingInfo.bankHomepageUrl} isOn={false} />
           </div>
         </>
       )}

@@ -106,3 +106,8 @@ export type TgetCmaIdApiResponse = {
   depositProtection: string;
   etcNote: string;
 };
+
+export type TgetDepositIdCalculateApiResponse = {
+  defaultInterestCalculation: number;
+  maxInterestCalculation: number;
+};

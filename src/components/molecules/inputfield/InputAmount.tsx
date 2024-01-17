@@ -3,11 +3,13 @@ import React from 'react';
 type TInputAmountProps = {
   amount?: string;
   onInputAmountHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocusAmountHandler?: () => void;
 };
 
 const InputAmount: React.FC<TInputAmountProps & React.HTMLAttributes<HTMLButtonElement>> = ({
   amount,
   onInputAmountHandler,
+  onFocusAmountHandler,
   ...props
 }) => {
   return (
@@ -18,6 +20,7 @@ const InputAmount: React.FC<TInputAmountProps & React.HTMLAttributes<HTMLButtonE
         type='text'
         value={amount}
         onInput={onInputAmountHandler}
+        onFocus={onFocusAmountHandler}
         spellCheck={false}
       />
       <button

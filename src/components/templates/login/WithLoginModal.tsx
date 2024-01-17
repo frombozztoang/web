@@ -22,6 +22,7 @@ export default function WithLoginModal({
   const [showModal, setShowModal] = useState(true);
   const pathname = usePathname();
 
+  // 카카오 로그인 띄우기
   const loginFn = () => {
     window.Kakao.Auth.authorize({
       redirectUri: process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY,

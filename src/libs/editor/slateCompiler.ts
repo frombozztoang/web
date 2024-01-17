@@ -67,9 +67,10 @@ class SlateCompiler {
         return children;
     }
   }
-}
 
-const codeBlockHtml = (children: string) =>
-  `<div><pre className='relative pt-30'><code data-language='python' data-theme='default' spellCheck='false' translate='no'>${children}</code></pre></div>`;
+  // toPlainText(node: Descendant[]) {
+  //   return node.map((n) => Node.string(n)).join('\n');
+  // }
+}
 
 export default SlateCompiler;

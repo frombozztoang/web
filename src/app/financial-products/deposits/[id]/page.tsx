@@ -5,14 +5,16 @@ import DepositSavingGuide from '../../_components/DepositSavingGuide';
 import ProductGuide from '../../_components/ProductGuide';
 import InterestRateGuide from '../../_components/InterestRateGuide';
 import { TgetDepositSavingIdApiResponse } from '@/types/financial-productsTypes';
-import { getDepositIdApi } from '@/api/depositsApi';
+import { getDepositIdApi, getDepositIdCalculateApi } from '@/api/depositsApi';
 import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
 import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const Des = ({ params }: { params: { id: number } }) => {
   const [depositInfo, setDepositInfo] = useState<TgetDepositSavingIdApiResponse | undefined>();
   const [amount, setAmount] = useState(0);
-  const [amountStr, setAmoutStr] = useState('');
+  const [amountStr, setAmountStr] = useState('');
+  const [defaultCal, setDefaultCal] = useState(0);
+  const [maxCal, setMaxCal] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -33,18 +35,32 @@ const Des = ({ params }: { params: { id: number } }) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const depositCalculateFetchData = async () => {
+    try {
+      const data = await getDepositIdCalculateApi(params.id, `amount=${amount}`);
+      if (data) {
+        setDefaultCal(data.defaultInterestCalculation);
+        setMaxCal(data.maxInterestCalculation);
+      }
+    } catch (error) {
+      console.error('Error fetching depositsFetchData:', error);
+    }
+  };
+
   const onInputAmountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value));
+    let inputValue = event.target.value;
     const regex = /^[0-9\b]+$/;
-    let inputValue = event.target.value.replace(/,/g, '');
-    if (inputValue === '' || regex.test(inputValue)) {
-      inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      setAmoutStr(inputValue);
+    let inputReplace = inputValue.replace(/,/g, '');
+
+    if (inputReplace === '' || regex.test(inputReplace)) {
+      setAmount(Number(inputReplace));
+      inputReplace = inputReplace.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      setAmountStr(inputReplace);
     }
   };
 
   const AmountHandler = () => {
-    console.log(amount);
+    depositCalculateFetchData();
   };
 
   const onHeartClick = async (id: number, isLiked: boolean) => {
@@ -96,7 +112,10 @@ const Des = ({ params }: { params: { id: number } }) => {
               amountStr={amountStr}
               onInputAmountHandler={onInputAmountHandler}
               AmountHandler={AmountHandler}
+              defaultInterestCalculation={defaultCal}
+              maxInterestCalculation={maxCal}
               bankHomepageUrl={depositInfo.bankHomepageUrl}
+              isOn={true}
             />
           </div>
         </>

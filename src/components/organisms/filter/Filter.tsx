@@ -8,6 +8,8 @@ import InputAmount from '@/components/molecules/inputfield/InputAmount';
 type TFilterProps = {
   amount?: string;
   onInputAmountHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocusAmountHandler?: () => void;
+  onButtonClickHandler?: () => void;
   activeFilterIndex: number | undefined;
   setActiveFilterIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   subIsOn: {
@@ -28,6 +30,8 @@ type TFilterProps = {
 const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
   amount,
   onInputAmountHandler,
+  onFocusAmountHandler,
+  onButtonClickHandler,
   activeFilterIndex,
   setActiveFilterIndex,
   subIsOn,
@@ -95,7 +99,12 @@ const Filter: React.FC<TFilterProps & React.HTMLAttributes<HTMLDivElement>> = ({
             subIsOn.length === 0 ? 'pt-12 tablet:pt-15 desktop:pt-12' : 'pb-8 tablet:pb-15 desktop:pb-8',
           )}
         >
-          <InputAmount amount={amount} onInputAmountHandler={onInputAmountHandler} />
+          <InputAmount
+            amount={amount}
+            onInputAmountHandler={onInputAmountHandler}
+            onFocusAmountHandler={onFocusAmountHandler}
+            onClick={onButtonClickHandler}
+          />
         </div>
       )}
       {!(subIsOn.length === 0) && (

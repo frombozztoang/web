@@ -6,6 +6,7 @@ import Heartclick from '@/public/icons/clickheart2.svg';
 import Link from 'next/link';
 import { deleteNewsBookmarkApi, getNewsListData, postNewsBookmarkApi } from '@/api/newslistapi/newslistapi';
 import Pagination from '@/components/molecules/pagination/Pagination';
+import useUser from '@/hooks/useUser';
 
 export type TNews = {
   id: number;
@@ -45,6 +46,7 @@ export type TNewsListApiResponse = {
   empty: boolean;
 };
 const NewsList = () => {
+  const { user } = useUser();
   const [NewsListData, setNewsListData] = useState<TNews[] | undefined>([]);
 
   //페이지

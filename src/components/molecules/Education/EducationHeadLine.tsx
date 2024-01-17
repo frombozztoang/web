@@ -23,7 +23,7 @@ const EducationHeadLine: React.FC<TEducationHeadLineProps> = ({ title, bookmarke
           {title}
         </div>
         <p
-          className='z-5 h-26 w-26 mr-5 pb-10 tablet:h-33 desktop:mt-10 tablet:w-33 desktop:h-37 desktop:w-37 desktop:mt-10'
+          className='z-5 h-26 w-26 mr-5 pb-10 tablet:h-33  tablet:w-33 desktop:h-37 desktop:w-37 desktop:mt-12'
           onClick={onHeartClick}
         >
           {bookmarked ? <Heartclick /> : <Heartdefault />}

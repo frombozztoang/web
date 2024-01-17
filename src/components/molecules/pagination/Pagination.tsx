@@ -18,7 +18,7 @@ const Pagination: React.FC<TPaginationProps> = ({ pageNum, pageTotalNum, setPage
     <div className='mt-15 tablet:mt-19 flex justify-center items-center'>
       {pageTotalNum > 5 && (
         <ArrowRight
-          className='mr-10 w-20 h-20 desktop:w-25 desktop:h-25 desktop:mr-25 cursor-pointer'
+          className='mr-23 w-18 h-18 tablet:w-24 tablet:h-24 desktop:w-25 desktop:h-25 desktop:mr-25 cursor-pointer'
           onClick={() => {
             if (groupPageNum > 0) {
               setGroupPageNum((prev: number) => Math.max(0, prev - 5));
@@ -34,7 +34,7 @@ const Pagination: React.FC<TPaginationProps> = ({ pageNum, pageTotalNum, setPage
             key={pageNumber}
             num={pageNumber + 1}
             isOn={pageNum === pageNumber}
-            styles='ml-3 mr-3 tablet:ml-4 tablet:mr-4 desktop:ml-5 desktop:mr-5'
+            styles='ml-3 mr-3 tablet:ml-5 tablet:mr-5 desktop:ml-5 desktop:mr-5'
             onClick={() => {
               setPageNum(pageNumber);
               window.scroll({ top: 0, behavior: 'smooth' });
@@ -44,7 +44,7 @@ const Pagination: React.FC<TPaginationProps> = ({ pageNum, pageTotalNum, setPage
       })}
       {pageTotalNum > 5 && (
         <ArrowLeft
-          className='ml-10 w-20 h-20 desktop:w-25 desktop:h-25 desktop:ml-25 cursor-pointer'
+          className='ml-23 w-18 h-18 tablet:w-24 tablet:h-24 desktop:w-25 desktop:h-25 desktop:ml-25 cursor-pointer'
           onClick={() => {
             if (groupPageNum + 5 < pageTotalNum) {
               setGroupPageNum((prev) => prev + 5);

@@ -1,16 +1,18 @@
 import MainBtn from '@/components/atom/button/MainBtn';
 import Editor from '@/components/templates/editor/editor';
-import { TEditorUploadFn } from '@/types/editor/editorUploadFnType';
+import { TEditorEditFn } from '@/types/editor/editorUploadFnType';
 import { useState } from 'react';
 
 export default function ContentsEditBtn({
+  id,
   title,
   content,
   editFn,
 }: {
+  id: number;
   title: string;
   content: string;
-  editFn: TEditorUploadFn;
+  editFn: TEditorEditFn;
 }) {
   const [showEditor, setShowEditor] = useState(false);
 
@@ -20,6 +22,7 @@ export default function ContentsEditBtn({
       {showEditor && (
         <Editor
           mode='edit'
+          id={id}
           title={title}
           content={content}
           closeEditor={() => setShowEditor(false)}

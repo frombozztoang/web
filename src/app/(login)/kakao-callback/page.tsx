@@ -11,6 +11,7 @@ export default function KakaoCallback() {
   const searchParams = useSearchParams();
 
   const code = searchParams.get('code') as string;
+  console.log(code);
   useEffect(() => {
     try {
       (async () => {

@@ -31,7 +31,7 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({
       <h1 className='heading-small tablet:heading-medium desktop:heading-xl text-typoPrimary dark:text-dark-typoPrimary'>
         주요 특징
       </h1>
-      <hr className='border-1/2 my-4 w-310 tablet:w-397 tablet:my-5 desktop:border border-border01 dark:border-dark-border02 desktop:w-766 desktop:my-10' />
+      <hr className='my-4 w-310 tablet:w-397 tablet:my-5 border-border01 dark:border-dark-border02 desktop:w-766 desktop:my-10' />
       <div className='mb-20 w-310 tablet:mb-25 tablet:w-397 desktop:w-776 desktop:mb-63'>
         {DUMMY_DATA1.map((item, index) => {
           return (
@@ -49,7 +49,7 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({
       <h1 className='heading-small tablet:heading-medium desktop:heading-xl text-typoPrimary dark:text-dark-typoPrimary'>
         수수료 혜택 안내
       </h1>
-      <hr className='border-1/2 my-4 w-310 tablet:w-397 tablet:my-5 desktop:border border-border01 dark:border-dark-border02 desktop:w-766 desktop:my-10' />
+      <hr className='my-4 w-310 tablet:w-397 tablet:my-5 border-border01 dark:border-dark-border02 desktop:w-766 desktop:my-10' />
       <div className='mb-25 w-310 tablet:mb-32 tablet:w-397 desktop:w-776 desktop:mb-63'>
         {etcNote !== 'null' &&
           etcNote.split('\r\n').map((item, index) => {

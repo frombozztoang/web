@@ -15,31 +15,39 @@ import BackDrop from '@/components/organisms/modal/backdrop';
 import ModalView from '@/components/organisms/modal/modalView';
 import { useMutation } from 'react-query';
 import { cls } from '@/utils/cls';
-import { TEditorUploadFn } from '@/types/editor/editorUploadFnType';
+import { TEditorEditFn, TEditorUploadFn } from '@/types/editor/editorUploadFnType';
 
 export default function Editor({
   mode,
   title,
   content,
+  id,
   closeEditor,
   uploadFn,
 }: {
   mode: 'edit' | 'create';
   title?: string;
   content?: string;
+  id?: number;
   closeEditor: () => void;
-  uploadFn: TEditorUploadFn;
+  uploadFn: TEditorUploadFn | TEditorEditFn;
 }) {
+  if (mode === 'edit' && (!title || !content || !id)) {
+    throw new Error('edit 모드에서는 title, content, id를 필수로 넘겨주세요');
+  }
+
   const initialValue: Descendant[] = [
     {
       type: 'paragraph',
-      children: [{ text: (mode === 'edit' ? content : '오늘의 이야기...') as string }],
+      children: [{ text: '오늘의 이야기...' as string }],
     },
   ];
   const renderElement = useCallback((props: any) => <SlateElement {...props} />, []);
   const renderLeaf = useCallback((props: any) => <SlateLeaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-  const [editorValue, setEditorValue] = useState<Descendant[]>(initialValue);
+  const [editorValue, setEditorValue] = useState<Descendant[]>(
+    mode === 'edit' ? JSON.parse(content as string) : initialValue,
+  );
   const [activatedPlugin, setActivatedPlugin] = useState<TPluginFormat | null>(null);
   const titleRef = React.useRef<HTMLInputElement>(null);
   const uploadMutation = useMutation(uploadFn);
@@ -60,19 +68,18 @@ export default function Editor({
     console.log('title', title);
     console.log('content', content);
 
-    uploadMutation.mutate(
-      { title, content },
-      {
-        onSuccess: () => {
-          alert('성공적으로 업로드 되었습니다');
-          closeEditor();
-        },
-        onError: (err) => {
-          alert('업로드에 실패하였습니다');
-          console.log(err);
-        },
+    const payload = mode === 'edit' ? { id, title, content } : { title, content };
+
+    uploadMutation.mutate(payload as any, {
+      onSuccess: () => {
+        alert('성공적으로 업로드 되었습니다');
+        closeEditor();
       },
-    );
+      onError: (err) => {
+        alert('업로드에 실패하였습니다');
+        console.log(err);
+      },
+    });
   }
 
   function handleCloseEditor() {
