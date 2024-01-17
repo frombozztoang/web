@@ -24,9 +24,10 @@ export default function WithLoginModal({
 
   // 카카오 로그인 띄우기
   const loginFn = () => {
-    window.Kakao.Auth.authorize({
-      redirectUri: process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY,
-    });
+    const redirectUri =
+      process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY;
+    console.log(redirectUri);
+    window.Kakao.Auth.authorize({ redirectUri });
   };
 
   const handleClose = () => {

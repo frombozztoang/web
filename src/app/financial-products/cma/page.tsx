@@ -13,7 +13,7 @@ import Pagination from '@/components/molecules/pagination/Pagination';
 import { getBankApi } from '@/api/financial-productsApi';
 import { getCmasApi } from '@/api/cmaApi';
 import { TgetBankApiResponse, TgetCmaResponse } from '@/types/financial-productsTypes';
-import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
+import { deleteCmaBankBookmarkApi, postCmaBankBookmarkApi } from '@/api/bookmarkApi';
 import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const WhatToDoPage = () => {
@@ -127,9 +127,9 @@ const WhatToDoPage = () => {
     try {
       let apiResult;
       if (isLiked) {
-        apiResult = await deleteBankBookmarkApi(id);
+        apiResult = await deleteCmaBankBookmarkApi(id);
       } else {
-        apiResult = await postBankBookmarkApi(id);
+        apiResult = await postCmaBankBookmarkApi(id);
       }
       if (apiResult !== undefined) {
         setBankDataCma(bankDataCma?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));

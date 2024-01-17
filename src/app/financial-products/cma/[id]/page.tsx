@@ -5,7 +5,7 @@ import CmaGuide from '../../_components/CmaGuide';
 import CmaInfoGuide from '../../_components/CmaInfoGuide';
 import { TgetCmaIdApiResponse } from '@/types/financial-productsTypes';
 import { getCmaIdApi } from '@/api/cmaApi';
-import { deleteBankBookmarkApi, postBankBookmarkApi } from '@/api/bookmarkApi';
+import { deleteCmaBankBookmarkApi, postCmaBankBookmarkApi } from '@/api/bookmarkApi';
 import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
 const Des = ({ params }: { params: { id: number } }) => {
@@ -34,9 +34,9 @@ const Des = ({ params }: { params: { id: number } }) => {
     try {
       let apiResult;
       if (isLiked) {
-        apiResult = await deleteBankBookmarkApi(id);
+        apiResult = await deleteCmaBankBookmarkApi(id);
       } else {
-        apiResult = await postBankBookmarkApi(id);
+        apiResult = await postCmaBankBookmarkApi(id);
       }
       if (apiResult !== undefined) {
         setIsLiked(!isLiked);
