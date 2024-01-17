@@ -66,7 +66,6 @@ const Education = () => {
     }
   };
 
-
   const fetchData = async () => {
     try {
       const data = await getEducationsData(`size=8&page=${pageNum}`);
@@ -122,7 +121,7 @@ const Education = () => {
                 className='h-29 w-29 tablet:h-32 tablet:w-32 desktop:h-37 desktop:w-37'
                 onClick={(event) => {
                   event.stopPropagation();
-                  onHeartClick(i.id, i.bookmarked);
+                  // onHeartClick(i.id, i.bookmarked);
                 }}
               >
                 {i.bookmarked ? <Clickheart2 /> : <Heartdefault />}
