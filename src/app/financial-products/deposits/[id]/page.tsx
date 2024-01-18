@@ -13,8 +13,8 @@ const Des = ({ params }: { params: { id: number } }) => {
   const [depositInfo, setDepositInfo] = useState<TgetDepositSavingIdApiResponse | undefined>();
   const [amount, setAmount] = useState(0);
   const [amountStr, setAmountStr] = useState('');
-  const [defaultCal, setDefaultCal] = useState(0);
-  const [maxCal, setMaxCal] = useState(0);
+  const [defaultCal, setDefaultCal] = useState('0');
+  const [maxCal, setMaxCal] = useState('0');
   const [isLiked, setIsLiked] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -39,8 +39,8 @@ const Des = ({ params }: { params: { id: number } }) => {
     try {
       const data = await getDepositIdCalculateApi(params.id, `amount=${amount}`);
       if (data) {
-        setDefaultCal(data.defaultInterestCalculation);
-        setMaxCal(data.maxInterestCalculation);
+        setDefaultCal(Number(data.defaultInterestCalculation).toLocaleString());
+        setMaxCal(Number(data.maxInterestCalculation).toLocaleString());
       }
     } catch (error) {
       console.error('Error fetching depositsFetchData:', error);

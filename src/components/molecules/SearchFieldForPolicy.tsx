@@ -1,38 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Search from '@/public/icons/search.svg';
-const SearchFieldForPolicy = ({
-  searchQuery,
-  setSearchQuery,
-}: {
-  searchQuery: string;
-  setSearchQuery: (value: string) => void;
-}) => {
-  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // 여기에 검색을 처리하는 로직을 추가할 수 있습니다.
-    // 예를 들어, API 호출을 통해 검색 결과를 가져오는 등의 작업을 할 수 있습니다.
-  };
 
+type TSearchFieldForPolicyProps = {
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+  setPageNum: (pageNum: number) => void;
+};
+
+const SearchFieldForPolicy: React.FC<TSearchFieldForPolicyProps> = ({ searchValue, setSearchValue, setPageNum }) => {
   return (
-    <form
-      onSubmit={handleSearchSubmit}
-      className='w-342 tablet:w-438 desktop:mb-39 desktop:w-884 border-[2px] rounded-[10px] dark:bg-[#343434] border-border02 dark:border-[#343434]'
-    >
-      <div className='flex items-center  '>
-        <input
-          className='ml-6 w-full px-20 py-18 placeholder:text-border04 desktop:ml-7 heading-small tablet:heading-medium desktop:label-large text-left outline-none dark:placeholder:text-[#6B6B6B] dark:bg-[#343434] '
-          type='text'
-          placeholder='궁금한 정책을 검색해보세요'
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button
-          className='w-[20px] h-[20px] mr-10 desktop:mr-45 tablet:mr-12 tablet:w-26 tablet:h-26 desktop:w-37 desktop:h-37'
-          type='submit'
-        >
-          <Search />
-        </button>
-      </div>
+    <form className='flex items-center w-342 tablet:w-438 desktop:mb-39 desktop:w-884 border desktop:border-2 rounded-10 bg-border00 border-border02 dark:bg-[#343434] dark:border-[#343434]'>
+      <input
+        className='w-full px-8 py-10 tablet:px-10 tablet:py-13 desktop:px-20 desktop:py-18 heading-small bg-transparent tablet:heading-medium desktop:label-large text-left outline-none placeholder:text-border04 dark:placeholder:text-[#6B6B6B]'
+        type='text'
+        placeholder='궁금한 정책을 검색해보세요'
+        value={searchValue}
+        onChange={(e) => {
+          setSearchValue(e.target.value);
+          setPageNum(0);
+        }}
+      />
+      <button
+        className='w-20 h-20 mr-10 desktop:mr-45 tablet:mr-12 tablet:w-26 tablet:h-26 desktop:w-37 desktop:h-37'
+        type='submit'
+      >
+        <Search />
+      </button>
     </form>
   );
 };

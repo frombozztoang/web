@@ -12,6 +12,7 @@ import {
   postBankBookmarkApi,
   postCmaBookmarkApi,
 } from '@/api/bookmarkApi';
+import CommonModal from '../modal/commonModal';
 
 type TBookmarks = {
   cma: TCmaBookmark[];
@@ -21,32 +22,43 @@ type TBookmarks = {
 
 const FinancialProducts = () => {
   const [bookmarks, setBookmarks] = useState<TBookmarks>({ cma: [], deposit: [], saving: [] });
+  const [showModal, setShowModal] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const onBankHeartClick = (id: number) => {
+    setShowModal(true);
+    setSelectedId(id);
+  };
 
-  const onBankHeartClick = async (id: number, isLiked: boolean) => {
+  const deleteBankBookmark = async (id: number, isLiked: boolean) => {
     try {
       if (isLiked) {
         await deleteBankBookmarkApi(id);
+        console.log('예금적금 삭제 ', id);
       } else {
         await postBankBookmarkApi(id);
       }
+      setShowModal(false);
       fetchData();
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }
   };
 
-  const onCmaHeartClick = async (id: number, isLiked: boolean) => {
+  const deleteCmaBookmark = async (id: number, isLiked: boolean) => {
     try {
       if (isLiked) {
         await deleteCmaBookmarkApi(id);
       } else {
         await postCmaBookmarkApi(id);
       }
+      setShowModal(false);
       fetchData();
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }
   };
+
+  const onCmaHeartClick = async (id: number, isLiked: boolean) => {};
 
   const fetchData = async () => {
     try {
@@ -77,34 +89,60 @@ const FinancialProducts = () => {
       let onHeartClick: () => void;
       if ('cmaId' in item) {
         id = item.cmaId;
-        link = 'cma';
+        link = '/financial-products/cma';
         isLiked = item.isLiked;
-        onHeartClick = () => onCmaHeartClick(id, isLiked);
       } else {
         id = item.financialProductId;
-        item.financialProductType === 'DEPOSIT' ? (link = 'deposits') : (link = 'savings');
+        item.financialProductType === 'DEPOSIT'
+          ? (link = '/financial-products/deposits')
+          : (link = '/financial-products/savings');
         isLiked = item.isLiked;
-        onHeartClick = () => onBankHeartClick(id, isLiked);
       }
       return (
-        <PolicyItem
-          key={index}
-          img={''}
-          name={item.productName}
-          id={id}
-          link={link}
-          description={item.companyName}
-          onClick={onHeartClick}
-          like={isLiked}
-          maxInterestRate={item.maximumPreferredInterestRate}
-          interestRate={
-            productType === 'CMA'
-              ? (item as TCmaBookmark).specialCondition
-              : (item as TFinancialProductBookmark).interestRate
-          }
-        />
+        <ul key={index}>
+          {showModal && (
+            <CommonModal
+              desText={'즐겨찾기를 삭제하시겠습니까?'}
+              yesText={'예'}
+              noText={'아니오'}
+              yesClickFn={
+                'cmaId' in item
+                  ? () => {
+                      if (selectedId !== null) {
+                        deleteCmaBookmark(selectedId, isLiked);
+                      }
+                    }
+                  : () => {
+                      if (selectedId !== null) {
+                        deleteBankBookmark(selectedId, isLiked);
+                      }
+                    }
+              }
+              closeFn={() => {
+                setShowModal(false);
+              }}
+            />
+          )}
+          <PolicyItem
+            key={index}
+            img={item.bankLogoUrl}
+            name={item.productName}
+            id={id}
+            link={link}
+            description={item.companyName}
+            onClick={() => onBankHeartClick(id)}
+            like={isLiked}
+            maxInterestRate={item.maximumPreferredInterestRate}
+            interestRate={
+              productType === 'CMA'
+                ? (item as TCmaBookmark).specialCondition
+                : (item as TFinancialProductBookmark).interestRate
+            }
+          />
+        </ul>
       );
     });
+
   return (
     <div>
       <ul className='mb-23 tablet:mb-39 '>

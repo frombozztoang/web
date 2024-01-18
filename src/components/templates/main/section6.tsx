@@ -51,7 +51,9 @@ const Section6 = () => {
 
             <div className='flex items-end justify-between object-contain'>
               <Image
-                className='desktop:mr-150 w-auto h-auto object-contain '
+                width={390}
+                height={558}
+                className='desktop:mr-150  object-contain '
                 src={mockImage}
                 alt='section6Mock'
                 priority

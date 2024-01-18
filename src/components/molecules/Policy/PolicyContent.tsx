@@ -1,7 +1,4 @@
-'use client';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-type TPolicy = {
+type TPolicyProps = {
   sporCn: string;
   bizPrdCn: string;
   rqutPrdCn: string;
@@ -19,7 +16,8 @@ type TPolicy = {
   rqutUrla: string;
   pstnPaprCn: string;
 };
-const PolicyContent: React.FC<TPolicy> = ({
+
+const PolicyContent: React.FC<TPolicyProps> = ({
   sporCn,
   bizPrdCn,
   rqutPrdCn,
@@ -37,208 +35,81 @@ const PolicyContent: React.FC<TPolicy> = ({
   rqutUrla,
   pstnPaprCn,
 }) => {
+  const POLICY_DATA1 = [
+    { title: '지원 내용', content: sporCn },
+    { title: '운영 기간', content: bizPrdCn },
+    { title: '신청 기간', content: rqutPrdCn },
+    { title: '지원 규모', content: sporScvl },
+  ];
+
+  const POLICY_DATA2 = [
+    { title: '연령', content: ageInfo },
+    { title: '거주지 및 소득', content: prcpCn },
+    { title: '학력', content: accrRqisCn },
+    { title: '전공', content: majrRquisCn },
+    { title: '취업 상태', content: empmSttsCn },
+    { title: '특화 분야', content: spizRlmRqisCn },
+    { title: '추가 단서 사항', content: aditRscn },
+    { title: '참여 제한 대상', content: prcpLmttTrgtCn },
+  ];
+
+  const POLICY_DATA3 = [
+    { title: '신청 절차', content: rqutProcCn },
+    { title: '심사 및 발표', content: jdgnPresCn },
+    { title: '신청 사이트', content: rqutUrla },
+    { title: '제출 서류', content: pstnPaprCn },
+  ];
+
   return (
-    <div className='w-342 desktop:w-[855px] tablet:w-[438px]'>
-      <div className='mb-39 tablet:mb-59'>
-        <div className='border-2 border-border01 rounded pt-80 text w-full dark:bg-[#383838] dark:border-[#383838]'>
-          <div className='p-15 mt-[-70px] '>
-            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:heading-medium w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
-              정책 요약
+    <div className='w-342 tablet:w-438 desktop:w-855 p-17 tablet:p-22 desktop:p-44 border border-border01 rounded-4 tablet:rounded-5 desktop:rounded-10 desktop:border-2 dark:bg-[#383838] dark:border-[#383838]'>
+      <h1 className='heading-small tablet:heading-medium desktop:heading-xl text-typoPrimary dark:text-dark-typoPrimary'>
+        정책 요약
+      </h1>
+      <hr className='border-border02 mt-4 tablet:mt-5 desktop:mt-10' />
+      {POLICY_DATA1.map((item, index) => {
+        return (
+          <div className='mt-10 flex' key={index}>
+            <div className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium desktop:w-100 text-typoSecondary flex-shrink-0'>
+              {item.title}
             </div>
-            <div className='flex pb-10 '>
-              <div className='paragraph-small tablet:paragraph-medium w-75 tablet:w-85 desktop:paragraph-medium desktop:w-[70px] text-typoSecondary'>
-                지원 내용
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium tablet:mx-10 marker:text-typoPrimary mr-20 whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {sporCn}
-              </div>
-            </div>
-
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium w-75 tablet:w-85 desktop:paragraph-medium desktop:w-[70px] text-typoSecondary'>
-                운영 기간
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium tablet:mx-10 marker:text-typoPrimary mr-20 whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {bizPrdCn}
-              </div>
-            </div>
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium w-75 tablet:w-85 desktop:paragraph-medium desktop:w-[70px] text-typoSecondary'>
-                신청 기간
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium tablet:mx-10 marker:text-typoPrimary mr-20 whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {rqutPrdCn}
-              </div>
-            </div>
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium w-75 tablet:w-85 desktop:paragraph-medium desktop:w-[70px] text-typoSecondary'>
-                지원 규모
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium tablet:mx-10 marker:text-typoPrimary mr-20 whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {sporScvl}
-              </div>
+            <div className='ml-19 tablet:ml-24 desktop:ml-20 paragraph-small tablet:paragraph-medium desktop:paragraph-medium text-typoPrimary whitespace-pre-line dark:text-dark-typoPrimary'>
+              {item.content}
             </div>
           </div>
-          <div className='p-15 my-10 '>
-            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:heading-medium w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
-              신청 자격
+        );
+      })}
+      <h1 className='mt-25 tablet:mt-32 desktop:mt-63 heading-small tablet:heading-medium desktop:heading-xl text-typoPrimary dark:text-dark-typoPrimary'>
+        신청 자격
+      </h1>
+      <hr className='border-border02 mt-4 tablet:mt-5 desktop:mt-10' />
+      {POLICY_DATA2.map((item, index) => {
+        return (
+          <div className='mt-10 flex' key={index}>
+            <div className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium w-77 tablet:w-105 desktop:w-100 text-typoSecondary flex-shrink-0'>
+              {item.title}
             </div>
-            <div className='flex pb-10 '>
-              <div className='paragraph-small tablet:paragraph-medium tablet:w-130 desktop:paragraph-medium  w-[110px]  desktop:w-[100px] text-typoSecondary'>
-                연령
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {ageInfo}
-              </div>
-            </div>
-
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium tablet:w-130 desktop:paragraph-medium  w-[110px]  desktop:w-[100px] text-typoSecondary'>
-                거주지 및 소득
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {prcpCn}
-              </div>
-            </div>
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium tablet:w-130 desktop:paragraph-medium  w-[110px]  desktop:w-[100px] text-typoSecondary'>
-                학력
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {accrRqisCn}
-              </div>
-            </div>
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium tablet:w-130 desktop:paragraph-medium  w-[110px]  desktop:w-[100px] text-typoSecondary'>
-                전공
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {majrRquisCn}
-              </div>
-            </div>
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium tablet:w-130 desktop:paragraph-medium  w-[110px]  desktop:w-[100px] text-typoSecondary'>
-                취업 상태
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {empmSttsCn}
-              </div>
-            </div>
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium tablet:w-130 desktop:paragraph-medium  w-[110px]  desktop:w-[100px] text-typoSecondary'>
-                특화 분야
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {spizRlmRqisCn}
-              </div>
-            </div>
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium tablet:w-130 desktop:paragraph-medium  w-[110px]  desktop:w-[100px] text-typoSecondary'>
-                추가 단서 사항
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {aditRscn}
-              </div>
-            </div>
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium tablet:w-130 desktop:paragraph-medium  w-[110px]  desktop:w-[100px] text-typoSecondary'>
-                참여 제한 대상
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {prcpLmttTrgtCn}
-              </div>
+            <div className='desktop:ml-20 paragraph-small tablet:paragraph-medium desktop:paragraph-medium text-typoPrimary whitespace-pre-line dark:text-dark-typoPrimary'>
+              {item.content}
             </div>
           </div>
-          <div className='p-15 '>
-            <div className='desktop:heading-xl desktop:w-[767px] heading-small tablet:w-[393px] tablet:heading-medium w-307 font-bold border-b-[2px] mb-10 text-typoPrimary border-color-border02 dark:text-[#D6D6D6]'>
-              신청 방법
+        );
+      })}
+      <h1 className='mt-25 tablet:mt-32 desktop:mt-63 heading-small tablet:heading-medium desktop:heading-xl text-typoPrimary dark:text-dark-typoPrimary'>
+        신청 방법
+      </h1>
+      <hr className='border-border02 mt-4 tablet:mt-5 desktop:mt-10' />
+      {POLICY_DATA3.map((item, index) => {
+        return (
+          <div className='mt-10 flex' key={index}>
+            <div className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium w-66 tablet:w-90 desktop:w-100 text-typoSecondary flex-shrink-0'>
+              {item.title}
             </div>
-            <div className='flex pt-10'>
-              <div className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium  w-[110px]  desktop:w-[90px] text-typoSecondary '>
-                신청 절차
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {rqutProcCn}
-              </div>
-            </div>
-
-            <div className='flex py-10'>
-              <div className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium  w-[110px]  desktop:w-[90px] text-typoSecondary'>
-                심사 및 발표
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {jdgnPresCn}
-              </div>
-            </div>
-            <div className='flex py-10'>
-              <div className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium  w-[110px]  desktop:w-[90px] text-typoSecondary'>
-                신청 사이트
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                <a href={rqutUrla} className='underline'>
-                  {rqutUrla}
-                </a>
-              </div>
-            </div>
-            <div className='flex  py-10'>
-              <div className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium  w-[110px]  desktop:w-[90px] text-typoSecondary'>
-                제출 서류
-              </div>
-              <div
-                className='paragraph-small tablet:paragraph-medium  desktop:paragraph-medium tablet:mx-20 marker:text-typoPrimary mr-20  whitespace-pre-line text-justify dark:text-[#D6D6D6]'
-                style={{ width: '90%' }}
-              >
-                {pstnPaprCn}
-              </div>
+            <div className='desktop:ml-20 paragraph-small tablet:paragraph-medium desktop:paragraph-medium text-typoPrimary whitespace-pre-line overflow-auto scrollbar-hide dark:text-dark-typoPrimary'>
+              {item.content}
             </div>
           </div>
-        </div>
-      </div>
+        );
+      })}
     </div>
   );
 };

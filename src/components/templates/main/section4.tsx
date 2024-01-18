@@ -16,7 +16,7 @@ const Section4 = () => {
   const isDarkMode = useThemeCheck();
 
   const mockImage = isDarkMode ? section4MockD : section4Mock;
-  const mobileMockImage = section4MockMD ? section4MockD : section4MockM;
+  const mobileMockImage = isDarkMode ? section4MockMD : section4MockM;
 
   return (
     <div className='mt-200 tablet:mt-[450px] min-h-screen label-small  tablet:text-20 desktop:label-xl whitespace-nowrap text-primary dark:text-dark-primary text-center'>
@@ -48,7 +48,7 @@ const Section4 = () => {
             <h1>안전 자산에 속하는 예금, 적금, CMA를 조건별로</h1>
             <h1>쉽게 이율을 비교할 수 있습니다.</h1>
             <div className='flex items-end justify-between object-contain'>
-              <Image className='desktop:mr-150 w-auto h-auto' src={mockImage} alt='section4Mock' priority />
+              <Image width={390} height={558} className='desktop:mr-150 ' src={mockImage} alt='section4Mock' priority />
               <Image
                 width={800}
                 height={700}

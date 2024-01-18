@@ -2,35 +2,18 @@
 
 import PolicyHeadLine from '@/components/molecules/Policy/PolicyHeadLine';
 import PolicyContent from '@/components/molecules/Policy/PolicyContent';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getPolicydetailApi } from '@/api/policylistapi/policydetail';
-import { deletePolicyBookmarkApi, postPolicyBookmarkApi } from '@/api/policylistapi/policylistapi';
-export type TPolicy = {
-  isLiked: boolean;
-  polyBizSjNm: string;
-  polyItcnCn: string;
-  sporCn: string;
-  bizPrdCn: string;
-  rqutPrdCn: string;
-  sporScvl: string;
-  ageInfo: string;
-  prcpCn: string;
-  accrRqisCn: string;
-  majrRquisCn: string;
-  empmSttsCn: string;
-  spizRlmRqisCn: string;
-  aditRscn: string;
-  prcpLmttTrgtCn: string;
-  rqutProcCn: string;
-  jdgnPresCn: string;
-  rqutUrla: string;
-  pstnPaprCn: string;
-};
+import { getPolicydetailApi } from '@/api/policyApi';
+import { postPolicyBookmarkApi, deletePolicyBookmarkApi } from '@/api/bookmarkApi';
+import { TPolicy } from '@/types/policyTypes';
+import WithLoginModal from '@/components/templates/login/WithLoginModal';
+
 const Policy = ({ params }: { params: { id: number } }) => {
   const [policyInfo, setpoliyInfo] = useState<TPolicy | undefined>();
   const [isLiked, setIsLiked] = useState(false);
-  const fetchData = async () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const policyDetailFetchData = async () => {
     try {
       const data = await getPolicydetailApi(params.id);
       if (data) {
@@ -41,9 +24,9 @@ const Policy = ({ params }: { params: { id: number } }) => {
       console.error('Error fetching depositsFetchData:', error);
     }
   };
+
   useEffect(() => {
-    console.log('useEffect is running');
-    fetchData();
+    policyDetailFetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -58,15 +41,22 @@ const Policy = ({ params }: { params: { id: number } }) => {
       if (apiResult !== undefined) {
         setIsLiked(!isLiked);
       } else {
-        console.log('로그인 해주세요');
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }
   };
-  console.log(params.id);
+
   return (
-    <div className='w-auto h-full flex flex-col items-center justify-center desktop:mt-[-70px]'>
+    <div className='flex flex-col items-center desktop:-mt-70'>
+      {showModal && (
+        <WithLoginModal
+          closeFn={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
       <div>
         {policyInfo && (
           <PolicyHeadLine
@@ -99,9 +89,10 @@ const Policy = ({ params }: { params: { id: number } }) => {
           />
         )}
       </div>
-      <p className='paragraph-small mb-39 w-380 tablet:mb-56 tablet:-mt-25 tablet:text-15 tablet:w-470 desktop:block desktop:paragraph-medium text-center desktop:w-500 whitespace-normal  desktop:mb-200 dark:text-[#D6D6D6]'>
-        해당 내용은 온통청년(https://www.youthcenter.go.kr/) 에서 가져왔습니다. 자세한 정보는 신청 사이트를
-        참고해주세요.
+      <p className='paragraph-xs mt-25 tablet:paragraph-sm tablet:mt-32 desktop:paragraph-medium desktop:mt-35 text-center dark:text-dark-typoPrimary'>
+        해당 내용은 온통청년(https://www.youthcenter.go.kr/) 에서 가져왔습니다.
+        <br />
+        자세한 정보는 신청 사이트를 참고해주세요.
       </p>
     </div>
   );

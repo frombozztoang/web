@@ -1,7 +1,7 @@
 'use client';
 import Heartclick from '@/public/icons/clickheart2.svg';
 import { useState } from 'react';
-import Heartdefault from '../../../public/icons/grayheart2.svg';
+import Heartdefault from '@/public/icons/heart.svg';
 import { useSearchParams } from 'next/navigation';
 import Glasses_goldtorihalf from '../../../public/icons/glasses_goldtorihalf.svg';
 type TNewsHeadLineProps = {

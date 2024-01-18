@@ -8,7 +8,6 @@ import ManageBtns from '@/components/molecules/manage/ManageBtns';
 import { TEducation } from '@/components/molecules/Education/EducationList';
 import { useEffect, useState } from 'react';
 import { getEducationIdApi } from '@/api/education/educationDetailApi';
-import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/education/educationApi';
 
 import { testApi, testApiEditor } from '@/api/testApi';
 import useEduDetail from '@/hooks/useEduDetail';

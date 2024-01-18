@@ -98,7 +98,7 @@ const Education = () => {
               }}
             >
               <div className='flex-wrap  w-full flex h-[163px] tablet:h-180 desktop:h-[210px] bg-mainLevel300 border-mainLevel300 hover:bg-mainLevel500 dark:bg-[#383838] dark:hover:bg-[#6B6B6B]'>
-                <h2 className='text-[26px] mr-[140px] tablet:text-[29px] tablet:p-20 desktop:text-[34px] text-typoTertiary font-bold p-10 desktop:p-[15px] flex-wrap desktop:mr-[170px]'>
+                <h2 className='heading-large desktop:text-29 tablet:text-29 tablet:w-260 desktop:w-260 text-typoTertiary font-bold p-[10px] flex-wrap w-200'>
                   {i.title}
                 </h2>
                 <div className='absolute w-168 h-135 ml-[170px] tablet:w-186 tablet:h-150 tablet:ml-[195px] tablet:mt-[48.5px] mt-[44.3px] desktop:ml-[220px] desktop:mt-[58px] desktop:w-216 desktop:h-173'>

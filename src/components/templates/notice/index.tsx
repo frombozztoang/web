@@ -51,12 +51,13 @@ const Notice = () => {
             </ul>
           );
         })}
+        {totalPages && <Pagination pageNum={pageNum} pageTotalNum={totalPages} setPageNum={setPageNum} />}
+        <div className='mt-43'>
+          <ManageBtns>
+            <ContentsCreateBtn createFn={postNoticeApi} />
+          </ManageBtns>
+        </div>
       </div>
-
-      {totalPages && <Pagination pageNum={pageNum} pageTotalNum={totalPages} setPageNum={setPageNum} />}
-      <ManageBtns>
-        <ContentsCreateBtn createFn={postNoticeApi} />
-      </ManageBtns>
     </>
   );
 };

@@ -10,17 +10,15 @@ interface FooterLinkProps {
   href: string;
   iconSrc: StaticImageData;
   text: string;
-  withUnderline?: boolean;
+  isDEPthLogo?: boolean;
 }
 
-const FooterLink = ({ href, iconSrc, text, withUnderline = false }: FooterLinkProps) => {
+const FooterLink = ({ href, iconSrc, text, isDEPthLogo = false }: FooterLinkProps) => {
   return (
     <Link
       href={href}
       target='_blank'
-      className={`min-w-max  mr-[58.5px] tablet:mr-50 flex items-center ${
-        withUnderline ? 'underline' : ''
-      } tablet:flex`}
+      className={`min-w-max  mr-[58.5px] tablet:mr-50 flex items-center  tablet:flex`}
       passHref
     >
       <div className='tablet:flex'>
@@ -28,10 +26,10 @@ const FooterLink = ({ href, iconSrc, text, withUnderline = false }: FooterLinkPr
           className='mr-10 mb-2 tablet:mb-0 object-contain'
           src={iconSrc}
           alt={text}
-          width={withUnderline ? 61 : 16}
-          height={withUnderline ? 11 : 16}
+          width={isDEPthLogo ? 61 : 16}
+          height={isDEPthLogo ? 11 : 16}
         />
-        <div>{text}</div>
+        <div className='paragraph-small tablet:paragraph-medium'>{text}</div>
       </div>
     </Link>
   );
@@ -39,12 +37,18 @@ const FooterLink = ({ href, iconSrc, text, withUnderline = false }: FooterLinkPr
 
 const Footer = () => {
   return (
-    <div className='bottom-0 bg-mainFooter w-full py-12 px-24 tablet:p-64 paragraph-small'>
-      <Image src={logoLight} alt='Logo Light' className='w-71 h-24 tablet:w-auto tablet:h-auto object-contain' />
+    <div className='bottom-0 bg-mainFooter w-full py-24 px-24 tablet:p-64 paragraph-small'>
+      <Image
+        src={logoLight}
+        width={109}
+        height={32}
+        alt='Logo Light'
+        className='w-71 h-24 tablet:w-auto tablet:h-auto object-contain'
+      />
       <div className='mt-10 tablet:mt-32 flex'>
         <FooterLink href='https://www.google.com' iconSrc={mail} text='메일 보내기' />
         <FooterLink href='https://www.google.com' iconSrc={instagram} text='금융원정대 인스타그램' />
-        <FooterLink href='https://www.google.com' iconSrc={depthLogo} text='뎁스 홈페이지' withUnderline />
+        <FooterLink href='https://www.google.com' iconSrc={depthLogo} text='뎁스 홈페이지' isDEPthLogo />
       </div>
     </div>
   );

@@ -57,7 +57,7 @@ const Section5 = () => {
                 alt='section5Logo'
                 priority
               />
-              <Image className='w-auto h-auto' src={mockImage} alt='section5Mock' priority />
+              <Image width={390} height={558} className='object-contain' src={mockImage} alt='section5Mock' priority />
             </div>
           </div>
         )}

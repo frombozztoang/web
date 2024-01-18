@@ -1,52 +1,22 @@
 // Policy 컴포넌트
 'use client';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Heartdefault from '../../../public/icons/grayheart2.svg';
 import Heartclick from '@/public/icons/clickheart2.svg';
 import SearchFieldForPolicy from '../SearchFieldForPolicy';
 import Default_goldtoriv1 from '@/public/icons/default_goldtoriv1.svg';
-import { getPolicysApi, postPolicyBookmarkApi, deletePolicyBookmarkApi } from '@/api/policylistapi/policylistapi';
-import { getPolicydetailApi } from '@/api/policylistapi/policydetail';
+import { getPolicysApi } from '@/api/policyApi';
+import { postPolicyBookmarkApi, deletePolicyBookmarkApi } from '@/api/bookmarkApi';
 import Pagination from '@/components/molecules/pagination/Pagination';
+import { TPolicyResponse } from '@/types/policyTypes';
+import WithLoginModal from '@/components/templates/login/WithLoginModal';
 
-type TPolicyResponse = {
-  id: number;
-  policyName: string;
-  policyContent: string;
-  isLiked: boolean;
-};
-
-export type TPolicyApiResponse = {
-  content: TPolicyResponse[];
-  pageable: {
-    pageNumber: number;
-    pageSize: number;
-    sort: {
-      empty: boolean;
-      sorted: boolean;
-      unsorted: boolean;
-    };
-    offset: number;
-    paged: boolean;
-    unpaged: boolean;
-  };
-  totalElements: number;
-  totalPages: number;
-  last: boolean;
-  size: number;
-  number: number;
-  sort: {
-    empty: boolean;
-    sorted: boolean;
-    unsorted: boolean;
-  };
-  numberOfElements: number;
-  first: true;
-  empty: false;
-};
 const Policy = () => {
+  const router = useRouter();
   const [policyData, setPolicyData] = useState<TPolicyResponse[] | undefined>([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   //페이지
   const [pageNum, setPageNum] = useState(0); //현재 페이지
@@ -61,21 +31,18 @@ const Policy = () => {
         apiResult = await postPolicyBookmarkApi(id);
       }
       if (apiResult !== undefined) {
-        setPolicyData(policyData?.map((item) => (item.id === id ? { ...item, isLiked: !isLiked } : item)));
+        setPolicyData(policyData?.map((item) => (item.policyInfoId === id ? { ...item, isLiked: !isLiked } : item)));
       } else {
-        console.log('로그인 해주세요');
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Error fetching bankBookmark:', error);
     }
   };
-  const handleClick = (policyInfoId: number) => {
-    // 클릭한 콘테이너의 policyInfoId 값을 fetchPolicyDetail 함수에 전달합니다.
-    getPolicydetailApi(policyInfoId);
-  };
+
   const fetchData = async () => {
     try {
-      const data = await getPolicysApi(`size=8&page=${pageNum}`);
+      const data = await getPolicysApi(`size=8&page=${pageNum}&searchKeyword=${searchValue}`);
       if (data) {
         setPageTotalNum(data.totalPages);
         setPolicyData(data.content);
@@ -84,63 +51,58 @@ const Policy = () => {
       console.error('Error fetching Financial Products:', error);
     }
   };
+
   useEffect(() => {
     fetchData();
-  }, [pageNum]);
-
-  // 검색어로 필터링된 컨텐츠 가져오기
-  const [searchQuery, setSearchQuery] = useState('');
-  const filteredContents = policyData ? policyData.filter((item) => item.policyName.includes(searchQuery)) : [];
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNum, searchValue]);
 
   return (
-    <div className='flex-col mb-[30px] w-[342px] tablet:w-438 desktop:w-884 '>
-      <SearchFieldForPolicy searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <div className='border-b-[3px] border-typoPrimary my-20 pb-5 tablet:my-25 heading-medium desktop:heading-large font-bold  w-full dark:text-[#D6D6D6] dark:border-[#383838] '>
+    <div className='flex-col w-342 tablet:w-438 desktop:w-884 '>
+      {showModal && (
+        <WithLoginModal
+          closeFn={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
+      <SearchFieldForPolicy searchValue={searchValue} setSearchValue={setSearchValue} setPageNum={setPageNum} />
+      <h1 className='mt-20 tablet:mt-25 desktop:mt-39 heading-medium desktop:heading-large border-typoPrimary dark:text-[#D6D6D6] dark:border-[#383838] '>
         청년 금융 정책
-      </div>
-      <div className='flex justify-start flex-wrap w-full gap-[28px] my-15 desktop:gap-24 '>
-        {filteredContents.map((item: any, id: number) => (
+      </h1>
+      <hr className='mt-3 mb-20 tablet:mb-25 desktop:mt-10 desktop:mb-20' />
+      <div className='flex justify-start flex-wrap gap-12 tablet:gap-15 desktop:gap-x-24 desktop:gap-y-10 mb-30 desktop:mb-39'>
+        {policyData?.map((item, index) => (
           <div
-            key={id}
-            className='flex-col w-342 desktop:w-[430px]  tablet:w-full border-mainLevel100 border-1 rounded-lg dark:bg-[#383838] dark:border-[#383838]'
+            key={index}
+            className='w-342 tablet:w-full desktop:w-430'
+            onClick={() => router.push(`/policies/${item.policyInfoId}`)}
           >
-            <Link
-              key={id}
-              href={{
-                pathname: `/policies/${item.policyInfoId}`,
-              }}
-              onClick={() => handleClick(item.policyInfoId)}
-            >
-              <div className='flex-wrap flex w-full rounded-t-lg h-166  tablet:h-212 desktop:h-[208px] bg-mainLevel300 border-mainLevel300 hover:bg-mainLevel500 dark:bg-[#383838] dark:hover:bg-[#6B6B6B] dark:border-[#383838] '>
-                <h2 className='heading-xl desktop:text-[34px] tablet:text-34 tablet:w-220 desktop:w-230 text-typoTertiary font-bold p-[10px] flex-wrap w-190'>
-                  {item.policyName}
-                </h2>
-                <div className='absolute h-171 w-171 ml-[180px] mt-[35.5px]  tablet:ml-[230px] tablet:mt-[44.7px] tablet:w-219 tablet:h-219 desktop:ml-[225px] desktop:mt-[44px] desktop:w-215 desktop:h-215'>
-                  <Default_goldtoriv1 />
-                </div>
+            <div className='flex justify-between rounded-t-lg h-166 tablet:h-212 desktop:h-208 bg-mainLevel300 hover:bg-mainLevel500 dark:bg-[#383838] dark:hover:bg-[#6B6B6B] dark:border-[#383838]'>
+              <h2 className='heading-large desktop:text-29 tablet:text-29 w-230 tablet:w-260 desktop:w-260 text-typoTertiary font-bold pt-18 pl-18 tablet:pt-18 tablet:pl-18 desktop:pt-22 desktop:pl-22'>
+                {item.policyName}
+              </h2>
+              <div className='w-171 h-166 tablet:w-219 tablet:h-212 desktop:w-215 desktop:h-208 items-end flex'>
+                <Default_goldtoriv1 />
               </div>
-            </Link>
-            <div className='-z-10 flex bg-mainLevel100 h-[73px] pt-20 px-11 desktop:h-94 tablet:py-11 tablet:px-12 gap-[25px] desktop:gap-20 desktop:px-8 desktop:py-20 rounded-b-lg dark:bg-[#343434] dark:border-[#383838]'>
-              <Link
-                key={id}
-                href={{
-                  pathname: `/policies/${item.policyInfoId}`,
-                }}
-                onClick={() => handleClick(item.policyInfoId)}
-              >
-                <p className='-z-10 w-[250px] text-left paragraph-small desktop: tablet:h-53 tablet:w-350 tablet:paragraph-medium h-[40px] desktop:h-[50px] desktop:w-[350px] desktop:paragraph-medium text-typoPrimary overflow-hidden text-ellipsis line-clamp-2 dark:text-[#D6D6D6]'>
-                  {item.policyContent}
-                </p>
-              </Link>
-              <div
-                className='z-0 w-29 h-29 ml-15 mt-2 tablet:w-[32px] tablet:h-32 tablet:ml-[1px] tablet:mt-8 desktop:w-37 desktop:h-37 desktop:mt-6'
+            </div>
+            <div className='flex justify-between items-center h-73 desktop:h-94 gap-25 desktop:gap-20 rounded-b-lg bg-mainLevel100 dark:bg-[#343434]'>
+              <p className='ml-11 tablet:ml-14 w-277 paragraph-small tablet:w-355 tablet:paragraph-medium desktop:w-349 desktop:paragraph-medium text-typoPrimary overflow-hidden text-ellipsis line-clamp-2 dark:text-[#D6D6D6]'>
+                {item.policyContent}
+              </p>
+              <button
+                className='mr-9 tablet:mr-11'
                 onClick={(event) => {
                   event.stopPropagation();
-                  onHeartClick(item.id, item.isLiked);
+                  onHeartClick(item.policyInfoId, item.isLiked);
                 }}
               >
-                {item.isLiked ? <Heartclick /> : <Heartdefault />}
-              </div>
+                {item.isLiked ? (
+                  <Heartclick className='w-29 h-29 tablet:w-32 tablet:h-32 desktop:w-37 desktop:h-37' />
+                ) : (
+                  <Heartdefault className='w-29 h-29 tablet:w-32 tablet:h-32 desktop:w-37 desktop:h-37' />
+                )}
+              </button>
             </div>
           </div>
         ))}

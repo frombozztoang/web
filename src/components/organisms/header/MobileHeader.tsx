@@ -62,21 +62,27 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
   //   });
   // };
   return (
-    <div className='z-mobileHeader'>
+    <div className='z-mobileHeader '>
       <List onClick={handleMenuOpen} className=' hover:cursor-pointer' />
 
       {isOpened && (
-        <div className='fixed w-full h-full left-0 top-0 flex items-center justify-center z-modal bg-bgBlind'>
+        <div className='fixed w-full h-full left-0 top-0 flex items-center justify-center z-modal bg-bgBlind '>
           <div
             ref={mobileHeaderRef}
             className={cls(
-              'flex flex-col justify-between transition-all translate-x-10 fixed right-0 top-0  w-200 tablet:w-256 bg-secondary  min-h-screen pt-11 pl-20',
+              'flex flex-col justify-between transition-all translate-x-10 fixed right-0 top-0  w-200 tablet:w-256 bg-secondary dark:bg-dark-secondary  min-h-screen pt-11 pl-20',
               isOpened ? 'block ' : 'hidden',
             )}
           >
-            <div className='flex flex-col justify-start'>
+            <div className='flex flex-col justify-start '>
               <Close stroke='#000000' className='w-25 h-25 mb-21 ' onClick={handleMenuOpen} />
-              <Image className='mb-21 pb-[5.13]  border-b-1 border-black' src={Logo} alt='logo' />
+              <Image
+                width={115}
+                height={39}
+                className='mb-21 pb-[5.13]  border-b-1 border-black'
+                src={Logo}
+                alt='logo'
+              />
 
               {menuItems.map((menuItem) => (
                 <MenuItem
@@ -88,7 +94,7 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
                   pathname={pathname}
                 />
               ))}
-              <div className='text-22 tablet:text-28 hover:text-main'>
+              <div className='text-22 tablet:text-28 hover:text-main dark:hover:text-dark-primary'>
                 <Link href='/mypage' className='text-center '>
                   MY
                 </Link>

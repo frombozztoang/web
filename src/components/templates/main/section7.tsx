@@ -41,7 +41,14 @@ const Section7 = () => {
         ) : (
           <div className='flex justify-center items-center'>
             <div className=' mr-50 flex items-center justify-between'>
-              <Image className='desktop:mr-66 w-auto h-auto' src={mockImage} alt='section7Mock' priority />
+              <Image
+                width={437}
+                height={720}
+                className='desktop:mr-66 w-auto h-auto'
+                src={mockImage}
+                alt='section7Mock'
+                priority
+              />
               <Image className='w-auto h-auto' src={logoImage} alt='section7Logo' priority />
             </div>
             <div className='mb-42 text-left'>

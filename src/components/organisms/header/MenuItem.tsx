@@ -36,7 +36,7 @@ const MenuItem = ({
         <div
           {...props}
           className={
-            ' mr-20 text-center text-black dark:text-dark-secondary transition-all relative active:text-main hover:text-main z-header'
+            ' mr-20 text-center text-black dark:text-dark-secondary transition-all relative active:text-main hover:text-main  z-header'
           }
           onMouseEnter={() => handleMenuHover && handleMenuHover(menuItem.name)}
           onMouseLeave={handleMenuLeave && (() => handleMenuLeave())}
@@ -54,7 +54,7 @@ const MenuItem = ({
             <ul className=' shadow-lg rounded-tl-0 rounded-xl w-120 absolute  left-0 px-10 pt-10 pb-5 text-center font-pretendard bg-white'>
               {menuItem.subMenu.map((subItem) => (
                 <li
-                  className=' mb-10  box-border flex-nowrap gap-10 text-16 text-primary font-semibold '
+                  className='transition-all mb-10 hover:text-main  box-border flex-nowrap gap-10 text-16 text-primary font-semibold '
                   key={subItem.name}
                 >
                   <Link href={subItem.href}>{subItem.name}</Link>
@@ -66,8 +66,8 @@ const MenuItem = ({
       ) : (
         <div>
           <div
-            className={`text-18 tablet:text-23 mb-20 min-w-max whitespace-nowrap hover:cursor-pointer ${
-              isCurrentPage ? 'text-main' : ''
+            className={`transition-all text-18 tablet:text-23  mb-20 min-w-max whitespace-nowrap hover:cursor-pointer dark:hover:text-dark-primary ${
+              isCurrentPage ? 'text-main dark:text-dark-primary' : ''
             }`}
             onClick={handleSubMenuToggle}
           >
@@ -78,7 +78,7 @@ const MenuItem = ({
             <ul className='text-left font-pretendard '>
               {menuItem.subMenu.map((subItem) => (
                 <li
-                  className='hover:cursor-pointer mb-20 flex-nowrap label-medium tablet:text-20 font-pretendard text-primary font-semibold '
+                  className=' transition-all dark:hover:text-dark-primary hover:cursor-pointer mb-20 flex-nowrap label-medium tablet:text-20 font-pretendard text-primary font-semibold '
                   key={subItem.name}
                 >
                   <Link href={subItem.href}>{subItem.name}</Link>

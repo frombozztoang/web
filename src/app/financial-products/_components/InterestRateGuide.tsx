@@ -8,8 +8,8 @@ type TInterestRateGuideProps = {
   amountStr?: string;
   onInputAmountHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   AmountHandler?: () => void;
-  maxInterestCalculation?: number;
-  defaultInterestCalculation?: number;
+  maxInterestCalculation?: string;
+  defaultInterestCalculation?: string;
   bankHomepageUrl: string;
   isOn: boolean;
 };
@@ -37,22 +37,22 @@ const InterestRateGuide: React.FC<TInterestRateGuideProps> = ({
           <InputAmount amount={amountStr} onInputAmountHandler={onInputAmountHandler} onClick={AmountHandler} />
           <div className='w-310 tablet:w-397 rounded-7 mt-15 py-6 tablet:mt-20 tablet:py-8 bg-mainLevel200 desktop:rounded-10 desktop:py-17 desktop:mt-39 desktop:w-775'>
             <div className='flex justify-between'>
-              <div className='paragraph-small ml-12 tablet:paragraph-medium tablet:ml-15 desktop:ml-13 desktop:label-medium text-dark-typoSecondary'>
+              <div className='mr-10 paragraph-small ml-12 tablet:paragraph-medium tablet:ml-15 desktop:ml-13 desktop:label-medium text-dark-typoSecondary whitespace-nowrap'>
                 기본 세후 수령액
                 <span className='paragraph-xs tablet:paragraph-small desktop:label-small'>(12개월 만기)</span>
               </div>
-              <div className='mr-10 paragraph-small tablet:mr-15 tablet:paragraph-medium desktop:mr-23 desktop:label-medium text-dark-typoSecondary'>
-                {defaultInterestCalculation}원
+              <div className='mr-10 paragraph-small tablet:mr-15 tablet:paragraph-medium desktop:mr-23 desktop:label-medium text-dark-typoSecondary overflow-x-auto scrollbar-hide'>
+                <span className='whitespace-nowrap'>{defaultInterestCalculation}원</span>
               </div>
             </div>
             <hr className='w-300 my-3 ml-5 tablet:ml-6 tablet:my-5 tablet:w-385 desktop:w-751 desktop:my-10 desktop:ml-12 border-bgBlind' />
             <div className='flex justify-between'>
-              <div className='paragraph-small ml-12 tablet:paragraph-medium tablet:ml-15 desktop:ml-13 desktop:label-medium text-dark-typoSecondary'>
+              <div className='mr-10 paragraph-small ml-12 tablet:paragraph-medium tablet:ml-15 desktop:ml-13 desktop:label-medium text-dark-typoSecondary whitespace-nowrap'>
                 최고 세후 수령액
                 <span className='paragraph-xs tablet:paragraph-small desktop:label-small'>(12개월 만기)</span>
               </div>
-              <div className='mr-10 paragraph-small tablet:mr-15 tablet:paragraph-medium desktop:mr-23 desktop:label-medium text-dark-typoSecondary'>
-                {maxInterestCalculation}원
+              <div className='mr-10 paragraph-small tablet:mr-15 tablet:paragraph-medium desktop:mr-23 desktop:label-medium text-dark-typoSecondary overflow-x-auto scrollbar-hide'>
+                <span className='whitespace-nowrap'>{maxInterestCalculation}원</span>
               </div>
             </div>
           </div>

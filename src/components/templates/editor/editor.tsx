@@ -35,6 +35,8 @@ export default function Editor({
   if (mode === 'edit' && (!title || !content || !id)) {
     throw new Error('edit 모드에서는 title, content, id를 필수로 넘겨주세요');
   }
+  console.log('제목이다.', title);
+  console.log('내용이다.', content);
 
   const initialValue: Descendant[] = [
     {

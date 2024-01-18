@@ -36,7 +36,7 @@ export const postEduApi = async ({ title, content }: { title: string; content: s
 
   if (res.ok) {
     const data = await res.json();
-    console.log('[✅postNoticeApi API Data]', data);
+    console.log('[✅postEduApi API Data]', data);
   }
 
   return res;

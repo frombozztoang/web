@@ -3,19 +3,31 @@
 import NewsHeadLine from '@/components/molecules/News/NewsHeadLine';
 import NewsContent from '@/components/molecules/News/NewsContent';
 import { useSearchParams } from 'next/navigation';
-import { getNewsIdApi } from '@/api/newslistapi/newsdetail';
 import { useEffect, useState } from 'react';
-import { TNews } from '@/components/molecules/News/NewsList';
-import { postNewsBookmarkApi, deleteNewsBookmarkApi } from '@/api/newslistapi/newslistapi';
+
+import { deleteNewsApi, getNewsIdApi, patchNewsApi } from '@/api/newsApi';
+import { TNews } from '@/types/newsTypes';
+import WithLoginModal from '@/components/templates/login/WithLoginModal';
+import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/bookmarkApi';
+import ManageBtns from '@/components/molecules/manage/ManageBtns';
+import ContentsDeleteBtn from '@/components/molecules/manage/ContentsDeleteBtn';
+import ContentsEditBtn from '@/components/molecules/manage/ContentsEditBtn';
+
 const News = ({ params }: { params: { id: number } }) => {
   const [NewsInfo, setNewsInfo] = useState<TNews | undefined>();
-  const [bookmarked, setbookmarked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const fetchdata = async () => {
     try {
       const data = await getNewsIdApi(params.id);
       if (data) {
+        let date = new Date(data.created_at);
+        let dateOnly = date.toISOString().split('T')[0];
+        data.created_at = dateOnly;
         setNewsInfo(data);
-        setbookmarked(data.bookmarked);
+
+        setIsLiked(data.bookmarked);
+        console.log(isLiked);
       }
     } catch (error) {
       console.error('Error fetching savingFetchData:', error);
@@ -24,20 +36,21 @@ const News = ({ params }: { params: { id: number } }) => {
 
   useEffect(() => {
     fetchdata();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onHeartClick = async (id: number, bookmarked: boolean, contentType: 'NEWS_CONTENT') => {
+  const onHeartClick = async (id: number, bookmarked: boolean) => {
     try {
       let apiResult;
       if (bookmarked) {
-        apiResult = await deleteNewsBookmarkApi(id, 'NEWS_CONTENT');
+        apiResult = await deleteEducationBookmarkApi(id, 'NEWS_CONTENT');
       } else {
-        apiResult = await postNewsBookmarkApi(id, 'NEWS_CONTENT');
+        apiResult = await postEducationBookmarkApi(id, 'NEWS_CONTENT');
       }
       if (apiResult !== undefined) {
-        setbookmarked(!bookmarked);
+        setIsLiked(!bookmarked);
       } else {
-        console.log('로그인 해주세요');
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Error fetching NewsBookmark:', error);
@@ -46,17 +59,30 @@ const News = ({ params }: { params: { id: number } }) => {
 
   return (
     <div className='w-auto h-full flex flex-col items-center justify-center mt-[-10px]'>
-      <div className=''>
-        {NewsInfo && (
+      {showModal && (
+        <WithLoginModal
+          closeFn={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
+
+      {NewsInfo && (
+        <div>
           <NewsHeadLine
-            bookmarked={bookmarked}
+            bookmarked={NewsInfo.bookmarked}
             title={NewsInfo.title}
             created_at={NewsInfo.created_at}
-            onHeartClick={() => onHeartClick(params.id, NewsInfo.bookmarked, 'NEWS_CONTENT')}
+            onHeartClick={() => onHeartClick(params.id, NewsInfo.bookmarked)}
           />
-        )}
-      </div>
-      <div>{NewsInfo && <NewsContent content={NewsInfo.content} />}</div>
+
+          <div className='desktop:mb-[-150px] mb-0'>{NewsInfo && <NewsContent content={NewsInfo.content} />}</div>
+          <ManageBtns>
+            <ContentsEditBtn id={NewsInfo.id} title={NewsInfo.title} content={NewsInfo.content} editFn={patchNewsApi} />
+            <ContentsDeleteBtn deleteFn={() => deleteNewsApi(params.id)} />
+          </ManageBtns>
+        </div>
+      )}
     </div>
   );
 };

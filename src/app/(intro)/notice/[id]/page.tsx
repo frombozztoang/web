@@ -9,6 +9,7 @@ import { deletePostApi, getNoticeApi, patchPostApi } from '@/api/noticeApi';
 import ContentsDeleteBtn from '@/components/molecules/manage/ContentsDeleteBtn';
 import ContentsEditBtn from '@/components/molecules/manage/ContentsEditBtn';
 import ManageBtns from '@/components/molecules/manage/ManageBtns';
+import EditorRenderer from '@/components/templates/editor/EditorRenderer';
 
 const Page = ({ params }: { params: { id: number } }) => {
   const [notice, setNotice] = useState<TNoticeProps | undefined>();
@@ -32,19 +33,21 @@ const Page = ({ params }: { params: { id: number } }) => {
 
   return notice ? (
     <>
-      <div className='w-full flex  flex-col justify-center items-center'>
+      <div className='flex flex-col justify-center items-center mt-[-70px]'>
         <div className='mb-10 tablet:mb-30 flex flex-col items-end'>
           <ModifiedTori className='w-68 h-53 tablet:w-144 tablet:h-132 desktop:w-178 desktop:h-153 object-contain' />
           <NoticeList id={notice.id} title={notice.title} created_at={notice.created_at} content={notice.content} />
-        </div>
-        <div className='dark:bg-dark-secondary dark:border-dark-secondary dark:text-dark-typoPrimary w-[342px] tablet:w-[438px] desktop:w-[855px]  p-16 tablet:p-35 desktop:p-44  box-border h-auto min-h-422 tablet:min-h-[600px] desktop:min-h-[1056px] rounded-8 bg-secondary border-[0.8px] border-border02 '>
-          <div className='tablet:text-15 text-12  desktop:text-16 '>{notice.content}</div>
+          <div className='mt-10 tablet:mt-30 mb-39  dark:bg-dark-secondary dark:border-dark-secondary dark:text-dark-typoPrimary w-[342px] tablet:w-[438px] desktop:w-[855px]  p-16 tablet:p-35 desktop:p-44  box-border h-auto min-h-422 tablet:min-h-[600px] desktop:min-h-[1056px] rounded-8 bg-secondary border-[0.8px] border-border02 '>
+            <div className='tablet:text-15 text-12  desktop:text-16 '>
+              <EditorRenderer contents={notice.content} />
+            </div>
+          </div>
+          <ManageBtns>
+            <ContentsEditBtn id={notice.id} title={notice.title} content={notice.content} editFn={patchPostApi} />
+            <ContentsDeleteBtn deleteFn={() => deletePostApi(params.id)} />
+          </ManageBtns>
         </div>
       </div>
-      <ManageBtns>
-        {/* <ContentsEditBtn title={''} content={''} editFn={() => patchPostApi(params.id)} /> */}
-        <ContentsDeleteBtn deleteFn={() => deletePostApi(params.id)} />
-      </ManageBtns>
     </>
   ) : (
     <div>등록된 공지사항이 없습니다.</div>

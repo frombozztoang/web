@@ -6,6 +6,7 @@ export type TFinancialProductBookmark = {
   productName: string;
   interestRate: string;
   maximumPreferredInterestRate: string;
+  bankLogoUrl: string;
 };
 
 export type TCmaBookmark = {
@@ -16,6 +17,7 @@ export type TCmaBookmark = {
   cmaType: string;
   maximumPreferredInterestRate: string;
   specialCondition: string;
+  bankLogoUrl: string;
 };
 
 export type TFinancialProductsBookmarkApiResponse = {
@@ -24,12 +26,21 @@ export type TFinancialProductsBookmarkApiResponse = {
 };
 
 export type TEducationBookmarkApiResponse = {
-  TEducationBookmark: TEducationBookmark[];
+  eduContentBookmarks: TEduBookmark[];
+  newsContentBookmarks: TNewsBookmark[];
 };
 
-export type TEducationBookmark = {
+export type TEduBookmark = {
   isLiked: boolean;
   educationInfoId: number;
+  title: string;
+  content: string;
+  contentType: string;
+};
+
+export type TNewsBookmark = {
+  isLiked: boolean;
+  newsContentId: number;
   title: string;
   content: string;
   contentType: string;
