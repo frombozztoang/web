@@ -75,18 +75,18 @@ const Policy = () => {
         {policyData?.map((item, index) => (
           <div
             key={index}
-            className='w-342 tablet:w-full desktop:w-430'
+            className='w-342 tablet:w-full desktop:w-430 cursor-pointer'
             onClick={() => router.push(`/policies/${item.policyInfoId}`)}
           >
             <div className='flex justify-between rounded-t-lg h-166 tablet:h-212 desktop:h-208 bg-mainLevel300 hover:bg-mainLevel500 dark:bg-[#383838] dark:hover:bg-[#6B6B6B] dark:border-[#383838]'>
-              <h2 className='heading-large desktop:text-29 tablet:text-29 w-230 tablet:w-260 desktop:w-260 text-typoTertiary font-bold pt-18 pl-18 tablet:pt-18 tablet:pl-18 desktop:pt-22 desktop:pl-22'>
+              <h2 className='heading-large desktop:text-29 tablet:text-29 w-200 tablet:w-255 text-typoTertiary font-bold pt-18 pl-18 tablet:pt-18 tablet:pl-18 desktop:pt-22 desktop:pl-22'>
                 {item.policyName}
               </h2>
-              <div className='w-171 h-166 tablet:w-219 tablet:h-212 desktop:w-215 desktop:h-208 items-end flex'>
-                <Default_goldtoriv1 />
+              <div className='items-end flex relative'>
+                <Default_goldtoriv1 className='absolute top-18 -right-8 tablet:top-22 tablet:-right-10 w-171 h-166 tablet:w-219 tablet:h-212 desktop:w-215 desktop:h-208' />
               </div>
             </div>
-            <div className='flex justify-between items-center h-73 desktop:h-94 gap-25 desktop:gap-20 rounded-b-lg bg-mainLevel100 dark:bg-[#343434]'>
+            <div className='flex justify-between relative z-toggle items-center h-73 desktop:h-94 gap-25 desktop:gap-20 rounded-b-lg bg-mainLevel100 dark:bg-[#343434]'>
               <p className='ml-11 tablet:ml-14 w-277 paragraph-small tablet:w-355 tablet:paragraph-medium desktop:w-349 desktop:paragraph-medium text-typoPrimary overflow-hidden text-ellipsis line-clamp-2 dark:text-[#D6D6D6]'>
                 {item.policyContent}
               </p>

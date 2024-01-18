@@ -66,7 +66,7 @@ const Des = ({ params }: { params: { id: number } }) => {
             productName={cmaInfo.productName}
             bankName={cmaInfo.bankName}
             rate={cmaInfo.maturityInterestRate}
-            onHeartClick={() => onHeartClick(params.id, cmaInfo.isLiked)}
+            onHeartClick={() => onHeartClick(params.id, isLiked)}
           />
           <div className='mt-25 px-15 py-17 w-342 gap-20 border rounded-8 tablet:w-438 tablet:py-22 tablet:px-20 tablet:rounded-10 tablet:mt-32 desktop:mt-63 desktop:py-44 desktop:px-40 desktop:w-855 desktop:gap-63 desktop:rounded-20 desktop:border-2 border-border02 dark:border-dark-border02 bg-secondary dark:bg-dark-secondary'>
             <CmaInfoGuide

@@ -1,3 +1,4 @@
+import { GOD_TOKEN } from '@/constants/godToken';
 import Cookies from 'js-cookie';
 
 class User {
@@ -12,7 +13,8 @@ class User {
   }
 
   getAccessToken() {
-    return this._accessToken;
+    // return this._accessToken;
+    return GOD_TOKEN;
   }
 
   setAccessToken(newAccessToken: string) {

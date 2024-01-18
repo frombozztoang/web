@@ -57,43 +57,47 @@ const Policy = ({ params }: { params: { id: number } }) => {
           }}
         />
       )}
-      <div>
-        {policyInfo && (
-          <PolicyHeadLine
-            polyBizSjNm={policyInfo.polyBizSjNm}
-            polyItcnCn={policyInfo.polyItcnCn}
-            isLiked={isLiked}
-            onHeartClick={() => onHeartClick(params.id, policyInfo.isLiked)}
-          />
-        )}
-      </div>
-      <div>
-        {policyInfo && (
-          <PolicyContent
-            sporCn={policyInfo.sporCn}
-            bizPrdCn={policyInfo.bizPrdCn}
-            rqutPrdCn={policyInfo.rqutPrdCn}
-            sporScvl={policyInfo.sporScvl}
-            ageInfo={policyInfo.ageInfo}
-            prcpCn={policyInfo.prcpCn}
-            accrRqisCn={policyInfo.accrRqisCn}
-            majrRquisCn={policyInfo.majrRquisCn}
-            empmSttsCn={policyInfo.empmSttsCn}
-            spizRlmRqisCn={policyInfo.spizRlmRqisCn}
-            aditRscn={policyInfo.aditRscn}
-            prcpLmttTrgtCn={policyInfo.prcpLmttTrgtCn}
-            rqutProcCn={policyInfo.rqutProcCn}
-            jdgnPresCn={policyInfo.jdgnPresCn}
-            rqutUrla={policyInfo.rqutUrla}
-            pstnPaprCn={policyInfo.pstnPaprCn}
-          />
-        )}
-      </div>
-      <p className='paragraph-xs mt-25 tablet:paragraph-sm tablet:mt-32 desktop:paragraph-medium desktop:mt-35 text-center dark:text-dark-typoPrimary'>
-        해당 내용은 온통청년(https://www.youthcenter.go.kr/) 에서 가져왔습니다.
-        <br />
-        자세한 정보는 신청 사이트를 참고해주세요.
-      </p>
+      {policyInfo && (
+        <>
+          <div>
+            {policyInfo && (
+              <PolicyHeadLine
+                polyBizSjNm={policyInfo.polyBizSjNm}
+                polyItcnCn={policyInfo.polyItcnCn}
+                isLiked={isLiked}
+                onHeartClick={() => onHeartClick(params.id, isLiked)}
+              />
+            )}
+          </div>
+          <div>
+            {policyInfo && (
+              <PolicyContent
+                sporCn={policyInfo.sporCn}
+                bizPrdCn={policyInfo.bizPrdCn}
+                rqutPrdCn={policyInfo.rqutPrdCn}
+                sporScvl={policyInfo.sporScvl}
+                ageInfo={policyInfo.ageInfo}
+                prcpCn={policyInfo.prcpCn}
+                accrRqisCn={policyInfo.accrRqisCn}
+                majrRquisCn={policyInfo.majrRquisCn}
+                empmSttsCn={policyInfo.empmSttsCn}
+                spizRlmRqisCn={policyInfo.spizRlmRqisCn}
+                aditRscn={policyInfo.aditRscn}
+                prcpLmttTrgtCn={policyInfo.prcpLmttTrgtCn}
+                rqutProcCn={policyInfo.rqutProcCn}
+                jdgnPresCn={policyInfo.jdgnPresCn}
+                rqutUrla={policyInfo.rqutUrla}
+                pstnPaprCn={policyInfo.pstnPaprCn}
+              />
+            )}
+          </div>
+          <p className='paragraph-xs mt-25 tablet:paragraph-sm tablet:mt-32 desktop:paragraph-medium desktop:mt-35 text-center dark:text-dark-typoPrimary'>
+            해당 내용은 온통청년(https://www.youthcenter.go.kr/) 에서 가져왔습니다.
+            <br />
+            자세한 정보는 신청 사이트를 참고해주세요.
+          </p>
+        </>
+      )}
     </div>
   );
 };

@@ -33,6 +33,14 @@
     line-height: 160%; /* 25.6px */
   }
 
+  .paragraph-sm {
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 22.95px */
+  }
+
   .paragraph-small {
     font-family: Pretendard;
     font-size: 12.003px;

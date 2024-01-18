@@ -1,3 +1,6 @@
+import { cls } from '@/utils/cls';
+import { title } from 'process';
+
 type TPolicyProps = {
   sporCn: string;
   bizPrdCn: string;
@@ -104,7 +107,17 @@ const PolicyContent: React.FC<TPolicyProps> = ({
             <div className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium w-66 tablet:w-90 desktop:w-100 text-typoSecondary flex-shrink-0'>
               {item.title}
             </div>
-            <div className='desktop:ml-20 paragraph-small tablet:paragraph-medium desktop:paragraph-medium text-typoPrimary whitespace-pre-line overflow-auto scrollbar-hide dark:text-dark-typoPrimary'>
+            <div
+              className={cls(
+                'desktop:ml-20 paragraph-small tablet:paragraph-medium desktop:paragraph-medium text-typoPrimary whitespace-pre-line overflow-auto scrollbar-hide dark:text-dark-typoPrimary',
+                item.title === '신청 사이트' ? 'cursor-pointer' : 'cursor-auto',
+              )}
+              onClick={() => {
+                if (item.title === '신청 사이트') {
+                  window.open(item.content);
+                }
+              }}
+            >
               {item.content}
             </div>
           </div>

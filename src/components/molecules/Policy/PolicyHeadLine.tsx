@@ -13,7 +13,7 @@ const PolicyHeadLine: React.FC<TPolicyHeadLineProps> = ({ polyBizSjNm, polyItcnC
   return (
     <div className='w-342 tablet:w-438 desktop:w-855 mb-8 tablet:mb-10 desktop:mb-20'>
       <Default_goldtoriv2 className='w-79 h-58 tablet:w-101 tablet:h-74 desktop:w-197 desktop:h-144 ml-auto' />
-      <div className='flex justify-between relative z-toggle -mt-11 items-center border border-border01 rounded-4 tablet:rounded-5 desktop:rounded-10 desktop:border-2 px-13 py-17 desktop:px-33 desktop:py-44 bg-secondary dark:bg-dark-secondary dark:border-dark-secondary'>
+      <div className='flex justify-between relative z-toggle -mt-3 tablet:-mt-5 desktop:-mt-11 items-center border border-border01 rounded-4 tablet:rounded-5 desktop:rounded-10 desktop:border-2 px-13 py-17 desktop:px-33 desktop:py-44 bg-secondary dark:bg-dark-secondary dark:border-dark-secondary'>
         <div className='flex-col'>
           <div className='text-typoPrimary dark:text-dark-typoPrimary heading-medium whitespace-pre-line tablet:heading-large desktop:heading-xl'>
             {polyBizSjNm}

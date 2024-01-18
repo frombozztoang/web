@@ -4,6 +4,7 @@ import Footer from '@/components/organisms/footer/Footer';
 import Header from '@/components/organisms/header/Header';
 import Chatbot from '@/components/templates/chatbot';
 import QueryProvider from '@/components/queryProvider';
+import Head from 'next/head';
 
 declare global {
   interface Window {
@@ -30,9 +31,26 @@ const renderMobileHeaderDiv = () => {
   return null;
 };
 
+const GA_ID = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko'>
+      <Head>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}', {
+            page_path: window.location.pathname,
+          });
+        `,
+          }}
+        />
+      </Head>
       {/* h-full -> scroll to top */}
       <body className='h-full bg-bg dark:bg-dark-bg'>
         <QueryProvider>

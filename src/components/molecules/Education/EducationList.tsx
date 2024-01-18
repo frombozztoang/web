@@ -7,6 +7,8 @@ import ModifiedGlasses_goldtori from '../../../public/icons/modifiedglasses_gold
 import Clickheart2 from '@/public/icons/clickheart2.svg';
 import { getEducationsData } from '@/api/education/educationApi';
 import Pagination from '@/components/molecules/pagination/Pagination';
+import { deleteEducationBookmarkApi, postEducationBookmarkApi } from '@/api/bookmarkApi';
+
 import useUser from '@/hooks/useUser';
 import SlateCompiler from '@/libs/editor/slateCompiler';
 import { user } from '@/class/user';

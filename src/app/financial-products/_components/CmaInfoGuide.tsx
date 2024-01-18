@@ -72,7 +72,9 @@ const CmaInfoGuide: React.FC<TCmaInfoGuideProps> = ({
               </div>
             );
           })}
-        <div>자세한 내용은 홈페이지 참고 바랍니다.</div>
+        <div className='paragraph-small tablet:paragraph-medium desktop:paragraph-medium'>
+          자세한 내용은 홈페이지 참고 바랍니다.
+        </div>
       </div>
       <div className='flex justify-center'>
         <DefaultBtn onClick={() => window.open(bankHomepageUrl)} />

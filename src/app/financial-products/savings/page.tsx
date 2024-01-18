@@ -114,6 +114,11 @@ const WhatToDoPage = () => {
           setTotalElements(data.totalElements);
           setDataNull(false);
         }
+      } else {
+        setBankDataSaving([]);
+        setPageTotalNum(0);
+        setTotalElements(null);
+        setDataNull(true);
       }
     } catch (error) {
       console.error('Error fetching bankListFetchData:', error);
