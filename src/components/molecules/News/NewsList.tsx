@@ -15,9 +15,11 @@ import { postNoticeApi } from '@/api/noticeApi';
 import ContentsCreateBtn from '../manage/ContentsCreateBtn';
 import ManageBtns from '../manage/ManageBtns';
 import EditorRenderer from '@/components/templates/editor/EditorRenderer';
+import SlateCompiler from '@/libs/editor/slateCompiler';
+import truncateText from '@/utils/truncateText';
 
 const NewsList = () => {
-  const { user } = useUser();
+  const slateCompiler = new SlateCompiler();
   const [NewsListData, setNewsListData] = useState<TNews[] | undefined>([]);
   const [showModal, setShowModal] = useState(false);
   //페이지
@@ -67,53 +69,40 @@ const NewsList = () => {
             setShowModal(false);
           }}
         />
-      )}{' '}
+      )}
       {NewsListData?.map((i, index) => {
         let date = new Date(i.created_at);
         let dateOnly = date.toISOString().split('T')[0];
         return (
-          <div
-            key={i.id}
-            className='flex w-full mb-10 border-2 border-color-[#D6D6D6] rounded-[10px] border-border02 hover:border-main hover:border-2 dark:bg-[#343434] dark:border-[#383838]'
+          <Link
+            key={index}
+            href={{
+              pathname: `news/${i.id}`,
+            }}
+            className='flex w-full mb-10 border-2 border-color-[#D6D6D6] rounded-[10px] border-border02 hover:border-main hover:border-2 dark:bg-[#343434] dark:border-[#383838] cursor-pointer'
           >
-            <Link
-              key={i.id}
-              href={{
-                pathname: `news/${i.id}`,
-              }}
-            >
-              <div className='bg-[#6C6C6C] w-87 h-full tablet:w-[112px] desktop:w-[167px] border-border-02 rounded-l-[10px]  '></div>
-            </Link>
-            <div className='flex justify-evenly '>
-              <Link
-                key={i.id}
-                href={{
-                  pathname: `/news/${i.id}`,
-                }}
-              >
-                <div className='flex-col bg-secondary px-12 w-[210px] tablet:w-[300px] desktop:w-[630px] dark:bg-[#343434]'>
-                  <h2 className='heading-small tablet:heading-medium desktop:heading-xl font-bold mt-[5px] pb-14 dark:text-[#D6D6D6]'>
-                    {i.title}
-                  </h2>
-                  <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
-                    <div className='w-150 tablet:w-180 tablet:h-26 desktop:h-29 desktop:w-600 overflow-hidden text-ellipsis whitespace-nowrap'>
-                      <EditorRenderer contents={i.content} />
-                    </div>
-                    <div className='pb-10'>{dateOnly}</div>
-                  </div>
+            <div className='flex justify-between w-full items-center'>
+              <div className='flex-col px-12  dark:bg-[#343434]'>
+                <h2 className='whitespace-pre-line w-330 desktop:w-750 heading-small tablet:heading-medium desktop:heading-xl font-bold mt-[5px] pb-14 dark:text-[#D6D6D6]'>
+                  {i.title}
+                </h2>
+                <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
+                  {truncateText(slateCompiler.toPlainText(JSON.parse(i.content)), 28)}
+
+                  <div className='pb-10'>{dateOnly}</div>
                 </div>
-              </Link>
-              <p
-                className='mt-28 h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 tablet:ml-[-15px] tablet:mt-35 desktop:h-37 desktop:mt-[50px]'
+              </div>
+              <button
+                className='mr-5 h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 desktop:h-37'
                 onClick={(event) => {
                   event.stopPropagation();
                   onHeartClick(i.id, i.bookmarked);
                 }}
               >
                 {i.bookmarked ? <Heartclick /> : <Heartdefault />}
-              </p>
+              </button>
             </div>
-          </div>
+          </Link>
         );
       })}
       <Pagination pageNum={pageNum} pageTotalNum={pageTotalNum} setPageNum={setPageNum} />

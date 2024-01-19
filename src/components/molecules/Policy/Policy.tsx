@@ -79,7 +79,7 @@ const Policy = () => {
             onClick={() => router.push(`/policies/${item.policyInfoId}`)}
           >
             <div className='flex justify-between rounded-t-lg h-166 tablet:h-212 desktop:h-208 bg-mainLevel300 hover:bg-mainLevel500 dark:bg-[#383838] dark:hover:bg-[#6B6B6B] dark:border-[#383838]'>
-              <h2 className='heading-large desktop:text-29 tablet:text-29 w-200 tablet:w-255 text-typoTertiary font-bold pt-18 pl-18 tablet:pt-18 tablet:pl-18 desktop:pt-22 desktop:pl-22'>
+              <h2 className='heading-large desktop:text-29 tablet:text-29 w-200 tablet:w-255 text-typoTertiary font-bold pt-18 pl-18 desktop:pt-22 desktop:pl-22'>
                 {item.policyName}
               </h2>
               <div className='items-end flex relative'>

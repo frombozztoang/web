@@ -1,6 +1,8 @@
 import { user } from '@/class/user';
 
-const accessToken = user.getAccessToken();
+// const accessToken = user.getAccessToken();
+const accessToken =
+  'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
 
 export const postBankBookmarkApi = async (financial_product_id: number) => {
   const url = `https://api.finfellows.co.kr/bookmarks/financial-products/${financial_product_id}`;

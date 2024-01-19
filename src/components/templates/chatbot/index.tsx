@@ -39,7 +39,7 @@ export default function Chatbot() {
     return (
       <button
         onClick={() => setShowChatbot(false)}
-        className='fixed z-chatbot right-25 bottom-25 flex justify-center items-center border-2 border-solid border-main rounded-full bg-white w-40 h-40 tablet:w-62 tablet:h-62'
+        className='fixed z-chatbot right-25 bottom-25 flex justify-center items-center border-2 border-solid border-main rounded-full bg-white w-40 h-40 tablet:w-56 tablet:h-56 desktop:w-62 desktop:h-62 dark:bg-dark-secondary'
       >
         <CloseIcon width={'43'} height={closeIconSize} />
       </button>
@@ -57,7 +57,7 @@ export default function Chatbot() {
       {!showChatbot && (
         <button
           onClick={() => setShowChatbot(true)}
-          className='fixed right-25 bottom-25 outline-none border-2 border-solid border-main rounded-full bg-white w-40 h-40 tablet:w-62 tablet:h-62'
+          className='fixed right-25 bottom-25 outline-none border-2 border-solid border-main rounded-full bg-white w-40 h-40 tablet:w-56 tablet:h-56 desktop:w-62 desktop:h-62 dark:bg-dark-secondary'
         >
           <Image src={GoldtoriIcon} alt='금토리 아이콘' fill sizes='62px' />
         </button>

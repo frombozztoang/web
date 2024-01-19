@@ -35,11 +35,9 @@ export const postEduApi = async ({ title, content }: { title: string; content: s
   });
 
   if (res.ok) {
-    const data = await res.json();
-    console.log('[✅postEduApi API Data]', data);
+    return res;
   }
-
-  return res;
+  throw new Error('postEduApi error');
 };
 
 export const deleteEduApi = async (id: number): Promise<Response> => {

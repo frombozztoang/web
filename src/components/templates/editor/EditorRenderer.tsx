@@ -12,7 +12,7 @@ export default function EditorRenderer({
     <div
       dangerouslySetInnerHTML={{ __html: html }}
       {...props}
-      className={cls(props.className ?? '', 'prose max-w-full')}
+      className={cls(props.className ?? '', 'prose max-w-full dark:prose-invert')}
     >
       {props.children}
     </div>

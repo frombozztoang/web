@@ -1,7 +1,9 @@
 import { user } from '@/class/user';
 import { TNewsListApiResponse, TNews } from '@/types/newsTypes';
 
-const accessToken = user.getAccessToken();
+// const accessToken = user.getAccessToken();
+const accessToken =
+  'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA0NjEwMTMzLCJleHAiOjE3MDU4MTk3MzMsInJvbGUiOiJVU0VSIn0.de5EdIfB3WSm9d5bkBJGx9VQ5tjwcCCjQcT0IgejVhI_DmpfYRNo8p669QvxwgEOnIGOLPwB8QI7JTa_k1rRdg';
 
 export const getNewsListData = async (params: string): Promise<TNewsListApiResponse | undefined> => {
   const url = `https://api.finfellows.co.kr/api/learn/news?${params}`;
