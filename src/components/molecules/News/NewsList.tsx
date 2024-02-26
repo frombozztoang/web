@@ -62,7 +62,7 @@ const NewsList = () => {
   };
 
   return (
-    <div className='desktop:py-39 tablet:py-46 py-20 w-342 tablet:w-[438px] desktop:w-[855px] '>
+    <div className='desktop:py-39 tablet:py-46 py-20 w-342 tablet:w-438 desktop:w-855'>
       {showModal && (
         <WithLoginModal
           closeFn={() => {
@@ -79,21 +79,20 @@ const NewsList = () => {
             href={{
               pathname: `news/${i.id}`,
             }}
-            className='flex w-full mb-10 border-2 border-color-[#D6D6D6] rounded-[10px] border-border02 hover:border-main hover:border-2 dark:bg-[#343434] dark:border-[#383838] cursor-pointer'
+            className='p-11 tablet:p-15 desktop:px-20 flex w-full mb-10 border-2 border-color-[#D6D6D6] rounded-10 border-border02 hover:border-main hover:border-2 dark:bg-[#343434] dark:border-[#383838] cursor-pointer'
           >
             <div className='flex justify-between w-full items-center'>
-              <div className='flex-col px-12  dark:bg-[#343434]'>
-                <h2 className='whitespace-pre-line w-330 desktop:w-750 heading-small tablet:heading-medium desktop:heading-xl font-bold mt-[5px] pb-14 dark:text-[#D6D6D6]'>
+              <div className='flex-col rounded-10 dark:bg-[#343434]'>
+                <h2 className='whitespace-pre-line w-280 tablet:w-365 desktop:w-760 heading-small tablet:heading-medium desktop:heading-xl font-bold pb-5 desktop:pb-10 dark:text-[#D6D6D6]'>
                   {i.title}
                 </h2>
                 <div className='text-typoSecondary paragraph-small tablet:paragraph-medium desktop:paragraph-large'>
                   {truncateText(slateCompiler.toPlainText(JSON.parse(i.content)), 28)}
-
-                  <div className='pb-10'>{dateOnly}</div>
+                  <div>{dateOnly}</div>
                 </div>
               </div>
               <button
-                className='mr-5 h-[26px] w-[26px] tablet:h-33 tablet:w-33 desktop:w-37 desktop:h-37'
+                className='h-26 w-26 tablet:h-33 tablet:w-33 desktop:w-37 desktop:h-37'
                 onClick={(event) => {
                   event.stopPropagation();
                   onHeartClick(i.id, i.bookmarked);

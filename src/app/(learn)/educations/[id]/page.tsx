@@ -63,4 +63,3 @@ const Education = ({ params }: { params: { id: number } }) => {
 };
 
 export default Education;
-// 디자인 만든거

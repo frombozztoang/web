@@ -5,7 +5,7 @@ import Policy from '@/components/molecules/Policy/Policy';
 
 const ThankYouPage = () => {
   return (
-    <div className='flex flex-col items-center justify-center mb-[-60px]'>
+    <div className='flex flex-col items-center justify-center -mb-60'>
       <div className='flex flex-col justify-center items-center'>
         <Policy />
       </div>

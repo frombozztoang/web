@@ -97,6 +97,14 @@
     line-height: 150%; /* 18.005px */
   }
 
+  .label-xs {
+    font-family: Pretendard;
+    font-size: 10.5px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 18.005px */
+  }
+
   .heading-xxxl {
     font-family: Pretendard;
     font-size: 47.23px;

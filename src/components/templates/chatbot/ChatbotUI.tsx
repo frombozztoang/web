@@ -66,18 +66,18 @@ export default function ChatbotUI({
   return (
     <div className='fixed z-chatbot right-25 bottom-100 w-275 max-h-450 h-full rounded-12 overflow-hidden desktop:w-430 desktop:max-h-600'>
       {/* header */}
-      <div className=' w-full flex justify-center items-center text-white text-13 font-bold py-10 bg-mainLevel400 desktop:text-21'>
+      <div className='w-full flex justify-center items-center text-white text-13 font-bold py-10 bg-mainLevel400 desktop:text-21'>
         금토리에게 물어봐
       </div>
       {/* body */}
-      <div className='pt-18 pb-10 bg-mainLevel100 h-[calc(100%-50px)] flex flex-col justify-between'>
+      <div className='rounded-b-12 pb-10 bg-mainLevel100 h-[calc(100%-50px)] flex flex-col justify-between'>
         {/* chat */}
-        <div className='flex flex-col-reverse px-13 pb-40 overflow-scroll'>
+        <div className='pt-18 flex flex-col-reverse px-13 desktop:px-20 pb-16 overflow-scroll scrollbar-hide'>
           {chatDataWithMargin(chatData)
             .toReversed()
             .map(({ profile, text, marginBottom }, i) =>
               profile === 'bot' ? (
-                <div key={i} className='flex justify-start gap-7 desktop:gap-10'>
+                <div key={i} className='flex justify-start items-start gap-7 desktop:gap-10'>
                   <ChatbotProfile />
                   <ChatBubble profile={profile} marginBottom={marginBottom}>
                     {text}
@@ -111,6 +111,10 @@ export default function ChatbotUI({
           ></AutoResizableTextarea>
           <button
             disabled={isSubmitLoading || !textareaValue.trim().length}
+            onClick={(e) => {
+              e.preventDefault();
+              handleChatbotSubmit(e as any);
+            }}
             className='flex justify-center items-center shrink-0 bg-darkComponent text-white text-10 py-7 px-13 rounded-6 h-30 disabled:opacity-50 disabled:cursor-not-allowed desktop:label-medium desktop:py-23 desktop:px-21'
           >
             {isSubmitLoading ? '전송중...' : '전송'}
@@ -122,12 +126,10 @@ export default function ChatbotUI({
 }
 
 function ChatbotProfile() {
-  const { isDesktop } = useFinMediaQuery();
-  const iconSize = isDesktop ? 50 : 32;
   return (
     <div className='flex justify-center items-center shrink-0 w-32 h-32 bg-white rounded-full overflow-hidden desktop:w-50 desktop:h-50'>
-      <div style={{ transform: 'scaleX(-1)' }} className='mt-15'>
-        <GoldToriIcon width={iconSize} height={iconSize} />
+      <div style={{ transform: 'scaleX(-1)' }} className='mt-12 desktop:mt-18'>
+        <GoldToriIcon className='w-38 desktop:w-58' />
       </div>
     </div>
   );
@@ -137,7 +139,7 @@ function chatDataWithMargin(chatData: TChatData[]) {
   return chatData.map((chat, i) => {
     if (i === chatData.length - 1) return { ...chat, marginBottom: 0 };
     if (chatData[i].profile === chatData[i + 1].profile) {
-      return { ...chat, marginBottom: 6 };
+      return { ...chat, marginBottom: 12 };
     } else {
       return { ...chat, marginBottom: 18 };
     }

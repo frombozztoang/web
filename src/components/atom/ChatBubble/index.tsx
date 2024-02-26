@@ -11,7 +11,7 @@ export default function ChatBubble({
     <div
       {...props}
       className={cls(
-        'text-10 desktop:label-medium rounded-7 p-6 whitespace-pre-wrap desktop:p-11',
+        'label-xs desktop:label-medium rounded-7 desktop:rounded-12 px-8 py-6 whitespace-pre-wrap desktop:p-10 flex items-center mt-2',
         profile === 'me' ? ' bg-mainLevel400 text-white' : 'bg-white text-darkComponent',
       )}
       style={{ marginBottom }}

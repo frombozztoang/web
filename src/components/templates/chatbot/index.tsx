@@ -5,7 +5,6 @@ import ChatbotUI from './ChatbotUI';
 import CloseIcon from '@/public/icons/close2.svg';
 import Image from 'next/image';
 import GoldtoriIcon from '@/public/icons/think_goldtori.png';
-import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 import useChatbotMemory from '@/hooks/useChatMemory';
 import { useQueryClient } from 'react-query';
 import QUERY_KEYS from '@/constants/queryKeys';
@@ -22,8 +21,6 @@ export default function Chatbot() {
   const [chatData, setChatData] = useState<TChatData[]>(
     chatbotMemory ?? [{ profile: 'bot', text: '안녕! 나는 금토리야. 도움이 필요하다면 편하게 말해줘.' }],
   );
-  const { isDesktop } = useFinMediaQuery();
-  const closeIconSize = isDesktop ? 43 : 30; // 닫기 아이콘 사이즈
 
   useEffect(() => {
     if (chatbotMemory) {
@@ -35,33 +32,19 @@ export default function Chatbot() {
     queryClient.invalidateQueries(QUERY_KEYS.GET_CHATBOT_MEMORY);
   }, [showChatbot, queryClient]);
 
-  function CloseBtn() {
-    return (
-      <button
-        onClick={() => setShowChatbot(false)}
-        className='fixed z-chatbot right-25 bottom-25 flex justify-center items-center border-2 border-solid border-main rounded-full bg-white w-40 h-40 tablet:w-56 tablet:h-56 desktop:w-62 desktop:h-62 dark:bg-dark-secondary'
-      >
-        <CloseIcon width={'43'} height={closeIconSize} />
-      </button>
-    );
-  }
-
   return (
     <>
-      {showChatbot && (
-        <>
-          <ChatbotUI chatData={chatData} setChatData={setChatData} />
-          <CloseBtn />
-        </>
-      )}
-      {!showChatbot && (
-        <button
-          onClick={() => setShowChatbot(true)}
-          className='fixed right-25 bottom-25 outline-none border-2 border-solid border-main rounded-full bg-white w-40 h-40 tablet:w-56 tablet:h-56 desktop:w-62 desktop:h-62 dark:bg-dark-secondary'
-        >
-          <Image src={GoldtoriIcon} alt='금토리 아이콘' fill sizes='62px' />
-        </button>
-      )}
+      {showChatbot && <ChatbotUI chatData={chatData} setChatData={setChatData} />}
+      <button
+        onClick={() => setShowChatbot(!showChatbot)}
+        className='fixed z-chatbot overflow-hidden right-25 bottom-25 flex justify-center items-center border-2 border-solid border-main rounded-full bg-white w-43 h-43 tablet:w-56 tablet:h-56 desktop:w-62 desktop:h-62 dark:bg-dark-secondary'
+      >
+        {showChatbot ? (
+          <CloseIcon className='w-30 h-30 tablet:w-35 tablet:h-35 desktop:w-40 desktop:h-40' />
+        ) : (
+          <Image src={GoldtoriIcon} alt='금토리' className='absolute scale-[133%] right-5 top-11' />
+        )}
+      </button>
     </>
   );
 }

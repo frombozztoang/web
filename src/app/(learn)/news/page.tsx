@@ -14,7 +14,7 @@ const LearnWithUs: any = () => {
 
   return (
     <div className='w-auto h-full flex flex-col items-center justify-center'>
-      <StudyToggle2 activeToggle={activeToggle} toggleFn={handleToggleChange} href={''} />
+      <StudyToggle2 activeToggle={activeToggle} toggleFn={handleToggleChange} />
       {activeToggle === 0 ? <Education /> : <NewsList />}
     </div>
   );

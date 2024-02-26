@@ -110,7 +110,7 @@ const Education = () => {
             className='flex-col tablet:ml-20 w-336 my-12 desktop:w-425 tablet:w-371 desktop:my-10 rounded-lg cursor-pointer'
           >
             <div className='flex-wrap rounded-t-lg w-full flex h-163 tablet:h-180 desktop:h-210 bg-mainLevel300 hover:bg-mainLevel500 dark:bg-[#383838] dark:hover:bg-[#6B6B6B]'>
-              <h2 className='heading-large desktop:text-29 tablet:text-29 tablet:w-260 desktop:w-260 text-typoTertiary font-bold flex-wrap w-200 p-18 desktop:p-22'>
+              <h2 className='heading-large desktop:text-29 tablet:text-29 tablet:w-240 desktop:w-255 text-typoTertiary font-bold flex-wrap w-220 p-18 desktop:p-22'>
                 {i.title}
               </h2>
               <div className='absolute w-168 h-135 ml-170 tablet:w-186 tablet:h-150 tablet:ml-195 tablet:mt-48 mt-44 desktop:ml-220 desktop:mt-58 desktop:w-216 desktop:h-173'>

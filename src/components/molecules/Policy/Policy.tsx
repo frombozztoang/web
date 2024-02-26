@@ -86,7 +86,7 @@ const Policy = () => {
                 <Default_goldtoriv1 className='absolute top-18 -right-8 tablet:top-22 tablet:-right-10 w-171 h-166 tablet:w-219 tablet:h-212 desktop:w-215 desktop:h-208' />
               </div>
             </div>
-            <div className='flex justify-between relative z-toggle items-center h-73 desktop:h-94 gap-25 desktop:gap-20 rounded-b-lg bg-mainLevel100 dark:bg-[#343434]'>
+            <div className='flex justify-between relative z-1 items-center h-73 desktop:h-94 gap-25 desktop:gap-20 rounded-b-lg bg-mainLevel100 dark:bg-[#343434]'>
               <p className='ml-11 tablet:ml-14 w-277 paragraph-small tablet:w-355 tablet:paragraph-medium desktop:w-349 desktop:paragraph-medium text-typoPrimary overflow-hidden text-ellipsis line-clamp-2 dark:text-[#D6D6D6]'>
                 {item.policyContent}
               </p>

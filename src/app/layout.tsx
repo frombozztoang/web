@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   title: '금융원정대',
   description: '금융원정대',
   icons: { icon: '/favicon.ico' },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 const renderMobileHeaderDiv = () => {

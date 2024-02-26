@@ -16,8 +16,8 @@ const Educations: any = () => {
 
   return (
     <div className='w-auto h-full flex items-center justify-center'>
-      <div className='flex flex-col items-center justify-center '>
-        <StudyToggle2 activeToggle={activeToggle} toggleFn={handleToggleChange} href={''} />
+      <div className='flex flex-col items-center justify-center'>
+        <StudyToggle2 activeToggle={activeToggle} toggleFn={handleToggleChange} />
         {activeToggle === 0 ? <Education /> : <NewsList />}
         <ManageBtns>
           {/* TODO: 글 작성하는 api 연결 (createFn) */}
