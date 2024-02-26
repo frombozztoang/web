@@ -37,10 +37,10 @@ export default function Chatbot() {
       {showChatbot && <ChatbotUI chatData={chatData} setChatData={setChatData} />}
       <button
         onClick={() => setShowChatbot(!showChatbot)}
-        className='fixed z-chatbot overflow-hidden right-25 bottom-25 flex justify-center items-center border-2 border-solid border-main rounded-full bg-white w-43 h-43 tablet:w-56 tablet:h-56 desktop:w-62 desktop:h-62 dark:bg-dark-secondary'
+        className='fixed z-chatbot overflow-hidden right-25 bottom-25 flex justify-center items-center border-2 border-solid border-main rounded-full bg-white w-56 h-56 desktop:w-62 desktop:h-62 dark:bg-dark-secondary'
       >
         {showChatbot ? (
-          <CloseIcon className='w-30 h-30 tablet:w-35 tablet:h-35 desktop:w-40 desktop:h-40' />
+          <CloseIcon className='w-35 h-35 desktop:w-40 desktop:h-40' />
         ) : (
           <Image src={GoldtoriIcon} alt='금토리' className='absolute scale-[133%] right-5 top-11' />
         )}

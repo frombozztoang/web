@@ -64,7 +64,7 @@ export default function ChatbotUI({
     setIsSubmitLoading(false);
   }
   return (
-    <div className='fixed z-chatbot right-25 bottom-100 w-275 max-h-450 h-full rounded-12 overflow-hidden desktop:w-430 desktop:max-h-600'>
+    <div className='fixed z-chatbot right-25 bottom-90 desktop:bottom-100 w-275 max-h-450 h-full rounded-12 overflow-hidden desktop:w-430 desktop:max-h-600'>
       {/* header */}
       <div className='w-full flex justify-center items-center text-white text-13 font-bold py-10 bg-mainLevel400 desktop:text-21'>
         금토리에게 물어봐
