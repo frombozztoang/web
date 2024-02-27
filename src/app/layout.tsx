@@ -5,6 +5,7 @@ import Header from '@/components/organisms/header/Header';
 import Chatbot from '@/components/templates/chatbot';
 import QueryProvider from '@/components/queryProvider';
 import Head from 'next/head';
+import NextThemeProvider from './ThemeProvider';
 
 declare global {
   interface Window {
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('js', new Date());
           gtag('config', '${GA_ID}', {
             page_path: window.location.pathname,
+            
           });
         `,
           }}
@@ -58,17 +60,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </Head>
       {/* h-full -> scroll to top */}
       <body className='h-full bg-bg dark:bg-dark-bg'>
-        <QueryProvider>
-          <Header />
-          <main className='mt-100 tablet:mt-110 desktop:mt-200 min-h-screen px-24 tablet:px-0 box-border'>
-            {children}
-          </main>
-          <Chatbot />
-          <footer className='relative  w-full mt-200'>
-            <Footer />
-          </footer>
-          <Chatbot />
-        </QueryProvider>
+        <NextThemeProvider>
+          <QueryProvider>
+            <Header />
+            <main className='mt-100 tablet:mt-110 desktop:mt-200 min-h-screen px-24 tablet:px-0 box-border'>
+              {children}
+            </main>
+            <Chatbot />
+            <footer className='relative w-screen  mt-200'>
+              <Footer />
+            </footer>
+            <Chatbot />
+          </QueryProvider>
+        </NextThemeProvider>
       </body>
     </html>
   );

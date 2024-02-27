@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import logoLight from '@/public/logos/logo_light.png';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import MenuItem, { menuItems } from './MenuItem';
 import HeaderSwitch from '@/components/atom/header/HeaderSwitch';
 import MobileHeader from './MobileHeader';
@@ -11,30 +11,7 @@ import { usePathname } from 'next/navigation';
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [darkMode, setDarkMode] = useState(false);
   const pathname = usePathname();
-  // darkMode 변경 시 확인 및 초기화
-  useEffect(() => {
-    themeCheck();
-  }, [darkMode]);
-
-  // component mount 할 때 마다 테마 확인
-  useEffect(() => {
-    themeCheck();
-  }, []);
-
-  const themeCheck = () => {
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-      setDarkMode(true);
-    } else {
-      document.documentElement.classList.remove('dark');
-      setDarkMode(false);
-    }
-  };
 
   const handleMenuHover = (menuName: string) => {
     setActiveMenu(menuName);
@@ -80,7 +57,7 @@ const Header = () => {
         </div>
         <div className='flex  items-center'>
           <li className='hidden desktop:flex mr-26'>
-            <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
+            <HeaderSwitch />
           </li>
           <li className='mr-12 text-main text-22 pt-10  '>
             <Link href='/mypage' className='text-center '>
@@ -88,7 +65,7 @@ const Header = () => {
             </Link>
           </li>
           <li className='w-full h-full  flex desktop:hidden '>
-            <MobileHeader darkMode={darkMode} setDarkMode={setDarkMode} />
+            <MobileHeader />
           </li>
         </div>
       </ul>

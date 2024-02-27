@@ -13,7 +13,7 @@ import useFinMediaQuery from '@/hooks/useFinMediaQuery';
 
 const Section5 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
-  const isDarkMode = useThemeCheck();
+  const { isDarkMode } = useThemeCheck();
 
   const mockImage = isDarkMode ? section5MockD : section5Mock;
   const mobileMockImage = isDarkMode ? section5MockMD : section5MockM;

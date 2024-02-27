@@ -13,7 +13,7 @@ import useThemeCheck from '@/hooks/useThemeCheck';
 
 const Section4 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
-  const isDarkMode = useThemeCheck();
+  const { isDarkMode } = useThemeCheck();
 
   const mockImage = isDarkMode ? section4MockD : section4Mock;
   const mobileMockImage = isDarkMode ? section4MockMD : section4MockM;

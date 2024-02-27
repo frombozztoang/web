@@ -11,7 +11,7 @@ import useThemeCheck from '@/hooks/useThemeCheck';
 
 const Section8 = () => {
   const { isDesktop, isTablet, isMobile } = useFinMediaQuery();
-  const isDarkMode = useThemeCheck();
+  const { isDarkMode } = useThemeCheck();
 
   const LogoImage = isDarkMode ? section8LogoD : section8Logo;
 

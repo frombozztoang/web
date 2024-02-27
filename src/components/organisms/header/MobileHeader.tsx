@@ -6,12 +6,12 @@ import MenuItem, { menuItems } from './MenuItem';
 import Image from 'next/image';
 import Logo from '@/public/logos/logo_light.png';
 import Close from '@/public/icons/close.svg';
-import HeaderSwitch, { THeaderSwitchProps } from '@/components/atom/header/HeaderSwitch';
+import HeaderSwitch from '@/components/atom/header/HeaderSwitch';
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
+const MobileHeader = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isOpened, setIsOpened] = useState(false);
   const mobileHeaderRef = useRef<HTMLDivElement>(null);
@@ -54,13 +54,7 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
   const handleMenuLeave = () => {
     setActiveMenu(null);
   };
-  // const toggleTheme = () => {
-  //   window.dispatchEvent(new Event('darkModeToggle'));
-  //   setIsOpened((prevIsOpened) => {
-  //     setIsOpened(!prevIsOpened);
-  //     return !prevIsOpened;
-  //   });
-  // };
+
   return (
     <div className='z-mobileHeader '>
       <List onClick={handleMenuOpen} className=' hover:cursor-pointer' />
@@ -102,7 +96,7 @@ const MobileHeader = ({ darkMode, setDarkMode }: THeaderSwitchProps) => {
             </div>
 
             <div className='pb-30 tablet:pb-25 desktop:pb-15'>
-              <HeaderSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
+              <HeaderSwitch />
             </div>
           </div>
         </div>

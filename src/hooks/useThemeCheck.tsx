@@ -1,34 +1,50 @@
 'use client';
+import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
 const UseThemeCheck = () => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
-  const toggleTheme = () => {
-    const theme = localStorage.getItem('theme');
-
-    setIsDarkMode(!isDarkMode);
-  };
+  const { theme, setTheme } = useTheme();
+  const [isDarkMode, setIsDarkMode] = useState(theme === 'dark');
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem('theme');
+    setIsDarkMode(theme === 'dark');
+  }, [theme]);
 
-    if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setIsDarkMode(true);
-    } else {
-      setIsDarkMode(false);
-    }
+  const toggleTheme = () => {
+    setTheme(isDarkMode ? 'light' : 'dark');
+  };
 
-    // 추가: 다크모드 토글 이벤트 리스너 등록
-    window.addEventListener('darkModeToggle', toggleTheme);
+  return {
+    isDarkMode,
+    toggleTheme,
+  };
+  // const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
-    return () => {
-      // 클린업: 컴포넌트 언마운트 시 리스너 제거
-      window.removeEventListener('darkModeToggle', toggleTheme);
-    };
-  }, [isDarkMode]);
+  // const toggleTheme = () => {
+  //   const theme = localStorage.getItem('theme');
 
-  return isDarkMode;
+  //   setIsDarkMode(!isDarkMode);
+  // };
+
+  // useEffect(() => {
+  //   const storedTheme = localStorage.getItem('theme');
+
+  //   if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  //     setIsDarkMode(true);
+  //   } else {
+  //     setIsDarkMode(false);
+  //   }
+
+  //   // 추가: 다크모드 토글 이벤트 리스너 등록
+  //   window.addEventListener('darkModeToggle', toggleTheme);
+
+  //   return () => {
+  //     // 클린업: 컴포넌트 언마운트 시 리스너 제거
+  //     window.removeEventListener('darkModeToggle', toggleTheme);
+  //   };
+  // }, [isDarkMode]);
+
+  // return isDarkMode;
 };
 
 export default UseThemeCheck;
